@@ -21,8 +21,6 @@ models:
     silver:
       +schema: silver
       +materialized: table
-      cuarentena:
-        +materialized: incremental
     gold:
       +schema: gold
       +materialized: table

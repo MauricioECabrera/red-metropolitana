@@ -2,7 +2,6 @@
 =====================================================================
   dim_hora  ·  Dimension conformada de hora del dia
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 =====================================================================
 #}
 

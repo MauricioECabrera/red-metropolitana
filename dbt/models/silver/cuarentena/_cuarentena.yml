@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: cuarentena
+    description: Registros rechazados de todas las fuentes con el motivo. Un registro aparece una vez por cada proceso que lo rechaza. Nada se descarta en silencio.
+    columns:
+      - name: fuente
+        description: Operador de origen.
+        tests: [not_null]
+      - name: proceso
+        description: Proceso que rechaza el registro, abordaje o trayecto.
+        tests: [not_null]
+      - name: motivo_rechazo
+        description: Regla de calidad que fallo.
+        tests: [not_null]
+      - name: payload_original
+        description: Registro tal como llego en Bronze, en texto.
+      - name: _hash_fila
+        description: Hash del registro en Bronze, permite volver al archivo crudo.
+        tests: [not_null]

@@ -2,7 +2,6 @@
 =====================================================================
   dim_modo  ·  Dimension conformada de modo de transporte
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 =====================================================================
 #}
 

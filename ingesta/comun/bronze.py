@@ -2,7 +2,6 @@
 =====================================================================
   bronze.py  ·  Contrato de escritura a la capa Bronze
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 
   Toda fuente que entra a Bronze pasa por la funcion cargar().
   Garantiza el mismo formato, las mismas columnas de metadata y la

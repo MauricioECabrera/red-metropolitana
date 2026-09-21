@@ -2,7 +2,6 @@
 =====================================================================
   dim_estacion_parada  ·  Dimension conformada de puntos de abordaje
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 =====================================================================
 #}
 

@@ -2,7 +2,6 @@
 =====================================================================
   cargar_catalogos.py  ·  Ingesta batch de catalogos a Bronze
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 
   Carga los cuatro catalogos de estaciones y paradas.
   Via batch: los catalogos cambian rara vez y llegan completos.

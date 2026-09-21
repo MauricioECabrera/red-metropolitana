@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: mr_viajes_evaluado
+    description: Todos los registros de Bronze de MetroRiel, tipados y evaluados contra las reglas de calidad. No se consume desde Gold. Es la fuente de slv_mr_abordajes, slv_mr_trayectos y de la cuarentena de MetroRiel.
+    columns:
+      - name: _hash_fila
+        description: Hash del registro original en Bronze.
+        tests: [not_null]
+      - name: motivo_rechazo_abordaje
+        description: Primera regla de calidad que falla para el proceso abordaje. Nulo si el abordaje es valido.
+      - name: motivo_rechazo_trayecto
+        description: Primera regla de calidad que falla para el proceso trayecto. Hereda el rechazo del abordaje. Nulo si el trayecto es valido.
+
+  - name: slv_mr_abordajes
+    description: Un abordaje valido de MetroRiel por fila, la entrada de cada viaje. Contrato comun de abordajes, mismas columnas que los abordajes de Transmetro, Transurbano y Aerometro. Incluye los viajes sin salida, porque la entrada si ocurrio.
+    columns:
+      - name: abordaje_id
+        description: Identificador unico del abordaje, MR dos puntos trip_id.
+        tests: [unique, not_null]
+      - name: modo_codigo
+        description: Siempre MR.
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002. P seguido de la parte numerica de la tarjeta a 8 digitos.
+        tests: [not_null]
+      - name: tarjeta_origen
+        description: Tarjeta tal como la entrega MetroRiel. Se elimina antes de Gold.
+      - name: estacion_key
+        description: Estacion de entrada, referencia a dim_estacion_parada.
+        tests: [not_null]
+      - name: zona_key
+        description: Zona de la estacion de entrada.
+        tests: [not_null]
+      - name: abordaje_ts
+        description: Fecha y hora local de la entrada. MetroRiel entrega ISO 8601 en hora local.
+        tests: [not_null]
+      - name: fecha_key
+        description: Referencia a dim_fecha.
+        tests: [not_null]
+      - name: hora_key
+        description: Referencia a dim_hora.
+        tests: [not_null]
+      - name: tipo_abordaje
+        description: Siempre ENTRADA para MetroRiel.
+      - name: monto_q
+        description: Tarifa del viaje en quetzales. MetroRiel cobra al entrar.
+        tests: [not_null]
+
+  - name: slv_mr_trayectos
+    description: Un trayecto completo de MetroRiel por fila, con entrada y salida validadas. Excluye los viajes sin salida, que van a cuarentena con proceso trayecto.
+    columns:
+      - name: trayecto_id
+        description: Identificador unico del trayecto, MR dos puntos trip_id.
+        tests: [unique, not_null]
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002.
+        tests: [not_null]
+      - name: zona_origen_key
+        description: Zona de la estacion de entrada.
+        tests: [not_null]
+      - name: zona_destino_key
+        description: Zona de la estacion de salida.
+        tests: [not_null]
+      - name: duracion_s
+        description: Segundos entre entrada y salida, recalculado desde las marcas de tiempo.
+        tests: [not_null]
+      - name: distancia_km
+        description: Distancia sobre el trazado entre las dos estaciones, desde km_trazado de dim_estacion_parada.
+        tests: [not_null]
+      - name: monto_q
+        description: Tarifa del viaje en quetzales. No se suma junto con el monto de slv_mr_abordajes, es el mismo cobro.

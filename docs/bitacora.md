@@ -170,3 +170,29 @@ reporta sobre personas identificables, excluyendo la llave centinela.
 Transmetro: 06–08 concentra 26.0% y 16–18 concentra 23.5%. Las horas
 contiguas caen a 2.0% (05) y 3.4% (19). Seis horas acumulan 49.5% de la
 demanda.
+
+
+---
+
+## D-009 · Patrón de cuarentena
+**Estado:** cerrada · **Responsable:** A
+
+**Decisión.** Cada fuente tiene un modelo `<fuente>_evaluado` con todas las
+filas de Bronze y una columna `motivo_rechazo_<proceso>` por cada proceso que
+alimenta. Nula si la fila es válida para ese proceso; si no, la primera regla
+que falla. Los modelos Silver limpios filtran `motivo_rechazo is null`. La
+tabla `cuarentena` une los rechazados de todas las fuentes.
+
+**Invariante.** Para cada fuente y proceso, filas de Bronze = filas de Silver
++ filas en cuarentena. Se verifica con un test de conservación por fuente;
+si falla, un registro desapareció en silencio y el build se detiene.
+
+**Cuarentena por proceso.** Un viaje de MetroRiel sin salida es un abordaje
+válido y un trayecto inválido. Aparece en `slv_mr_abordajes` y en cuarentena
+con proceso trayecto, nunca se pierde de ninguno de los dos.
+
+**Fecha futura.** Un evento es futuro si su marca de tiempo es posterior a la
+`_ingesta_ts` de su lote. La regla no depende de una fecha fija en el código.
+
+**Resultado MetroRiel.** 299,100 en Bronze; 299,100 abordajes válidos;
+295,511 trayectos válidos; 3,589 en cuarentena por `viaje_sin_salida`.

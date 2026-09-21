@@ -2,7 +2,6 @@
 =====================================================================
   dim_fecha  ·  Dimension conformada de calendario
   Proyecto 1  ·  Ciencia de Datos  ·  Red Metropolitana
-  Autor: Miguel Eduardo Cabrera Giron
 =====================================================================
 #}
 

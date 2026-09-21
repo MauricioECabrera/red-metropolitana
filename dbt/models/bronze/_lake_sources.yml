@@ -15,3 +15,5 @@ sources:
         description: Catalogo de estaciones de MetroRiel. Origen datos_red/mr_estaciones.csv, via batch.
       - name: am_estaciones
         description: Catalogo de torres de Aerometro. Origen datos_red/am_estaciones.csv, via batch.
+      - name: metroriel_viajes
+        description: Viajes de MetroRiel, un registro por trayecto completo. Origen datos_red/metroriel_viajes.jsonl, via batch. Columna payload con el JSON original sin aplanar.        
