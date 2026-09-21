@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: lake
+    description: Capa Bronze. Archivos Parquet en lake/bronze, un archivo por lote, particionados por fecha de ingesta. Contenido tal como llego del operador mas cinco columnas de metadata.
+    config:
+      meta:
+        external_location: "read_parquet('../lake/bronze/{name}/*/*.parquet', hive_partitioning = true, union_by_name = true)"
+    tables:
+      - name: tm_estaciones
+        description: Catalogo de estaciones de Transmetro. Origen datos_red/tm_estaciones.csv, via batch.
+      - name: tu_paradas
+        description: Catalogo de paradas de Transurbano. Origen datos_red/tu_paradas.csv, via batch.
+      - name: mr_estaciones
+        description: Catalogo de estaciones de MetroRiel. Origen datos_red/mr_estaciones.csv, via batch.
+      - name: am_estaciones
+        description: Catalogo de torres de Aerometro. Origen datos_red/am_estaciones.csv, via batch.

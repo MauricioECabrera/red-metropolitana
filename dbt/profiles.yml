@@ -5,5 +5,3 @@ red_metropolitana:
       type: duckdb
       path: ../warehouse/red_metropolitana.duckdb
       threads: 4
-      extensions:
-        - json

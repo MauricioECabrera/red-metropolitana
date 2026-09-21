@@ -39,20 +39,6 @@ models:
         description: Verdadero en las franjas pico, sin considerar el dia.
         tests: [not_null]
 
-  - name: dim_zona
-    description: Dimension conformada de zona, construida desde seed_dim_zona. Todas las variantes textuales de los operadores resuelven a esta llave mediante seed_zona_alias. Dueno del dominio zona, rol A.
-    columns:
-      - name: zona_key
-        description: Llave estable de la zona.
-        tests: [unique, not_null]
-      - name: zona_nombre
-        description: Nombre canonico mostrado en el tablero.
-        tests: [not_null]
-      - name: tipo_division
-        description: zona_capitalina o municipio.
-      - name: municipio
-        description: Municipio al que pertenece la division.
-
   - name: dim_modo
     description: Los cuatro modos de transporte integrados en la red. Dueno del dominio modo, rol A.
     columns:
@@ -68,3 +54,70 @@ models:
         description: Lo que representa una fila en el archivo de origen, abordaje o trayecto.
       - name: formato_origen
         description: Formato del archivo entregado por el operador.
+
+  - name: map_zona_alias
+    description: Tabla de resolucion de zona. Una fila por texto de zona normalizado. Todo modelo Silver que resuelva una zona hace join contra esta tabla usando upper(trim(columna)) = alias_normalizado. Nunca contra el seed directamente, porque el seed tiene varias variantes crudas por alias normalizado.
+    columns:
+      - name: alias_normalizado
+        description: Texto de zona en mayusculas y sin espacios extremos.
+        tests: [unique, not_null]
+      - name: zona_key
+        description: Zona canonica a la que resuelve.
+        tests: [not_null]
+
+  - name: dim_estacion_parada
+    description: Todos los puntos de abordaje de los cuatro operadores con su zona conformada. Se construye con el lote mas reciente de cada catalogo en Bronze. Dueno del dominio estacion, rol A.
+    columns:
+      - name: estacion_key
+        description: Llave compuesta modo_codigo dos puntos codigo_origen. Ejemplos TM:TM-L1-01, TU:R-101-1, MR:12, AM:AM11.
+        tests: [unique, not_null]
+      - name: modo_key
+        description: Llave del modo al que pertenece el punto.
+        tests: [not_null]
+      - name: modo_codigo
+        description: Codigo corto del modo.
+      - name: codigo_origen
+        description: Codigo del punto tal como lo entrega el operador. Es la llave con la que los archivos de operacion hacen referencia al punto.
+        tests: [not_null]
+      - name: nombre_punto
+        description: Nombre de la estacion, parada o torre segun el operador.
+      - name: linea_ruta
+        description: Linea de Transmetro, ruta de Transurbano, eje de Aerometro, o MetroRiel.
+      - name: zona_key
+        description: Zona conformada, resuelta mediante map_zona_alias. Si un catalogo trae una zona desconocida este test falla.
+        tests: [not_null]
+      - name: zona_origen
+        description: Texto de zona tal como llego del catalogo del operador.
+      - name: latitud
+        description: Solo disponible para Transmetro.
+      - name: longitud
+        description: Solo disponible para Transmetro.
+      - name: km_trazado
+        description: Distancia en kilometros desde el origen del trazado. Solo MetroRiel.
+      - name: lote_origen
+        description: lote_id del archivo Bronze del que proviene la fila. Permite rastrear hasta el archivo crudo.
+
+  - name: dim_zona
+    description: Dimension conformada de zona con indicadores de cobertura calculados desde dim_estacion_parada. Dueno del dominio zona, rol A.
+    columns:
+      - name: zona_key
+        description: Llave estable de la zona.
+        tests: [unique, not_null]
+      - name: zona_nombre
+        description: Nombre canonico mostrado en el tablero.
+        tests: [not_null]
+      - name: tipo_division
+        description: zona_capitalina o municipio.
+      - name: municipio
+        description: Municipio al que pertenece la division.
+      - name: puntos_de_abordaje
+        description: Cantidad de estaciones, paradas y torres de cualquier modo ubicadas en la zona.
+        tests: [not_null]
+      - name: modos_con_servicio
+        description: Cantidad de modos distintos con al menos un punto de abordaje en la zona.
+        tests: [not_null]
+      - name: modos_lista
+        description: Codigos de los modos con servicio, o Sin servicio.
+      - name: tiene_servicio
+        description: Verdadero si al menos un modo tiene un punto de abordaje en la zona.
+        tests: [not_null]
