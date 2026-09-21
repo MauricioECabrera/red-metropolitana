@@ -43,6 +43,7 @@ def _ruta(variable, defecto):
 
 DATOS_CRUDOS = _ruta("RUTA_DATOS_CRUDOS", "datos_red")
 LAKE_BRONZE = _ruta("RUTA_LAKE_BRONZE", "lake/bronze")
+STAGING = _ruta("RUTA_STAGING", "lake/staging")
 BITACORA_CARGAS = LAKE_BRONZE / "_control" / "bitacora_cargas.csv"
 COLUMNAS_BITACORA = ["ejecucion_ts", "fuente", "archivo_origen", "lote_id", "filas", "accion", "particion"]
 
@@ -74,8 +75,8 @@ def _registrar(fila):
         escritor.writerow(fila)
 
 
-def cargar(fuente, archivo, lector=lector_csv):
-    ruta = DATOS_CRUDOS / archivo
+def cargar(fuente, archivo, lector=lector_csv, directorio=None):
+    ruta = (pathlib.Path(directorio) if directorio else DATOS_CRUDOS) / archivo
     lote_id = huella_archivo(ruta)
     ahora = datetime.datetime.now().replace(microsecond=0)
     con = duckdb.connect()

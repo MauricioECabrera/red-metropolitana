@@ -7,18 +7,15 @@
   vehiculo o estacion, en cualquiera de los cuatro modos.
   Bitacora D-001.
 
-  Para integrar una fuente nueva se agrega su modelo Silver de
-  abordajes a la lista fuentes_abordaje. El modelo debe cumplir el
-  contrato de columnas de slv_mr_abordajes.
+  Las fuentes se declaran en la macro fuentes_abordaje. Cada modelo
+  debe cumplir el contrato de columnas de slv_mr_abordajes.
 =====================================================================
 #}
 
-{% set fuentes_abordaje = [
-    'slv_mr_abordajes',
-] %}
+
 
 with abordajes as (
-    {% for fuente in fuentes_abordaje %}
+    {% for fuente in fuentes_abordaje() %}
     select
         abordaje_id,
         modo_codigo,

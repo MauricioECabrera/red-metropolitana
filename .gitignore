@@ -2,6 +2,7 @@ datos_red/*
 !datos_red/.gitkeep
 lake/bronze/*
 !lake/bronze/.gitkeep
+lake/staging/
 warehouse/*
 !warehouse/.gitkeep
 *.duckdb

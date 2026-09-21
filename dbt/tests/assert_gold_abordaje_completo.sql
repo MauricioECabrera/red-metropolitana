@@ -1,5 +1,11 @@
 with silver as (
-    select count(*) as filas from {{ ref('slv_mr_abordajes') }}
+    select sum(filas) as filas
+    from (
+        {% for fuente in fuentes_abordaje() %}
+        select count(*) as filas from {{ ref(fuente) }}
+        {% if not loop.last %}union all{% endif %}
+        {% endfor %}
+    )
 ),
 
 gold as (
