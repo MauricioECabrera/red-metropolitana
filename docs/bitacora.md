@@ -89,7 +89,38 @@ MetroRiel; 36,827 usan dos o más de esos sistemas.
 ---
 
 ## D-003 · Bronze en lake o en warehouse
-**Estado:** pendiente · **Responsable:** A
+**Estado:** cerrada · **Responsable:** A
+
+**Decisión.** Bronze vive en el lake: archivos Parquet en
+`lake/bronze/<fuente>/fecha_ingesta=AAAA-MM-DD/<lote_id>.parquet`.
+Silver y Gold viven en el warehouse DuckDB.
+
+**Justificación.**
+- MetroRiel llega como JSON anidado. En el lake se guarda como tipo JSON
+  nativo, exactamente como llegó, sin aplanar. En una tabla del warehouse
+  habría que aplanarlo (transformar en Bronze) o guardarlo como texto.
+- Bronze solo se acumula y nunca lo consulta Gold. No necesita motor de
+  base de datos, solo almacenamiento barato. MetroRiel pasa de 53 MB en
+  JSONL a 13 MB en Parquet comprimido.
+- Todas las columnas se guardan como texto (`all_varchar`). Bronze no
+  interpreta tipos: una fecha inválida llega a Silver tal como vino y ahí
+  se decide si va a cuarentena.
+
+**Particionado por fecha de ingesta, no por fecha del evento.** Bronze
+registra cuándo llegó el dato. Particionar por fecha del evento obligaría
+a interpretar la fecha en Bronze, y Transurbano trae 817 fechas del futuro
+que crearían particiones de 2027.
+
+**Idempotencia.** Cada archivo cargado se nombra con la huella SHA-256 de
+su contenido (normalizando fin de línea). Si la huella ya existe en el
+lake, la carga se omite. Correr el flujo N veces produce el mismo lake.
+
+**Hash por fila.** `_hash_fila` se calcula sobre el contenido parseado,
+nunca sobre la línea cruda: el mismo registro da el mismo hash en Windows
+(CRLF) y en Linux o Mac (LF).
+
+**Evidencia.** Bitácora de cargas en `lake/bronze/_control/bitacora_cargas.csv`:
+primera corrida CARGADO, segunda OMITIDO, conteos idénticos.
 
 ## D-004 · Vía de ingesta de Transurbano
 **Estado:** pendiente · **Responsable:** C
