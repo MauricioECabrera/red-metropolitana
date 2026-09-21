@@ -308,3 +308,38 @@ verifica que las activas del último día coinciden con el padrón vigente.
 | duracion_s | fct_trayecto_od | aditiva en suma; su promedio es no aditivo |
 | tarjetas_activas, cantidad_personas | fct_estado_padron_diario | semi-aditiva |
 | personas distintas, proporción en hora pico, duración promedio | derivadas | no aditivas |
+
+---
+
+## D-012 · Orquestación y demostración de idempotencia
+**Estado:** cerrada · **Responsable:** A
+
+**Orquestador.** Prefect, la opción recomendada del curso: corre sin
+servidor dedicado y el flujo es código Python versionado. Un solo comando,
+`python -m orquestacion.flujo`, corre todas las etapas en orden: catálogos,
+MetroRiel, Transurbano, padrón CDC, productor y consumidor de Kafka,
+`dbt build`, publicación de Gold y exportación del modelo.
+
+**Etapas de otros roles.** Si el módulo de una etapa todavía no existe en
+el repositorio, la etapa se registra como `OMITIDA` y el flujo continúa.
+Cuando el rol correspondiente integra su código, la etapa se activa sola.
+
+**Reintentos.** Las etapas de ingesta reintentan dos veces con 5 segundos
+de espera. `dbt build` no reintenta: es determinista, y si falla, falla
+por un error que hay que corregir.
+
+**Bitácora de ejecución.** Cada etapa de cada corrida queda en
+`lake/bronze/_control/ejecuciones.csv` con estado y duración. Es la fuente
+de las métricas de rendimiento.
+
+**Por qué el flujo es idempotente.** Cada etapa lo es por construcción:
+las cargas a Bronze se identifican por la huella del contenido del archivo
+y se omiten si ya existen; Silver y Gold se reconstruyen completos desde
+Bronze; el SCD Tipo 2 se deriva del log y no de la hora de ejecución; y
+ningún modelo usa la fecha actual.
+
+**Demostración.** `python -m orquestacion.verificar_idempotencia` corre el
+flujo dos veces seguidas y compara todas las tablas de todas las capas por
+cantidad de filas y por una huella de contenido (XOR del hash de cada fila,
+independiente del orden). Resultado en `docs/evidencias/idempotencia.md`.
+El mismo comando se corre en vivo el día de la presentación.
