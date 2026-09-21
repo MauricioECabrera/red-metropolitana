@@ -52,7 +52,12 @@ models:
         tests: [unique, not_null]
       - name: persona_sk
         description: Identificador seudonimizado de la persona. SHA-256 truncado de la sal secreta y la persona_key de Silver. Estable para la misma persona, no reversible sin la sal. Bitacora D-007.
-        tests: [not_null]
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_persona')
+                field: persona_sk
       - name: modo_key
         description: Modo de transporte. Fuente modo_codigo de Silver resuelto contra dim_modo.
         tests:
@@ -155,3 +160,67 @@ models:
         description: Kilometros sobre el trazado entre origen y destino. Medida aditiva.
       - name: monto_q
         description: Tarifa en quetzales. Es el mismo cobro que el abordaje de entrada en fct_abordaje; no se suman entre ambos hechos.
+
+  - name: gold_dim_persona
+    description: Una fila por persona conocida por la red. Fuente silver.dim_persona, construida desde los abordajes de todas las fuentes integradas y la version vigente del padron SCD Tipo 2. La persona se identifica solo con persona_sk. Bitacora D-002, D-007 y D-011.
+    columns:
+      - name: persona_sk
+        description: Identificador seudonimizado. Mismo valor que en los hechos para la misma persona.
+        tests: [unique, not_null]
+      - name: tipo_identidad
+        description: vinculada si la persona se identifica por la parte numerica de su tarjeta de Transmetro, Transurbano o MetroRiel; solo_aerometro si solo se conoce su hash de Aerometro.
+        tests: [not_null]
+      - name: en_padron
+        description: Verdadero si la persona aparece en el log CDC del padron.
+      - name: estado_padron
+        description: ACTIVA o INACTIVA segun la version vigente del padron, o SIN_REGISTRO si la persona no esta en el padron.
+        tests: [not_null]
+      - name: perfil_vigente
+        description: Perfil en la version vigente del padron. estudiante, trabajador, adulto_mayor o general.
+      - name: zona_residencia_key
+        description: Zona de residencia en la version vigente del padron. Dimension de rol sobre dim_zona.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+      - name: formato_llave_padron
+        description: Operador cuyo formato de tarjeta uso el padron para la persona, TM, TU o MR.
+      - name: versiones_padron
+        description: Cantidad de versiones de la persona en el historial SCD Tipo 2.
+
+  - name: fct_estado_padron_diario
+    description: Foto diaria del padron. Una persona del padron por dia calendario, con su estado, perfil y zona de residencia vigentes al cierre del dia. Fuente silver.slv_padron_scd2. Bitacora D-011.
+    columns:
+      - name: fecha_key
+        description: Dia de la foto.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_fecha')
+                field: fecha_key
+      - name: persona_sk
+        description: Identificador seudonimizado de la persona.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_persona')
+                field: persona_sk
+      - name: zona_residencia_key
+        description: Zona de residencia vigente al cierre del dia. Dimension de rol sobre dim_zona.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+      - name: perfil
+        description: Perfil vigente al cierre del dia.
+      - name: estado
+        description: ACTIVA o INACTIVA al cierre del dia.
+        tests: [not_null]
+      - name: cantidad_personas
+        description: Siempre 1. Semi-aditiva, se suma dentro de un mismo dia.
+      - name: tarjetas_activas
+        description: 1 si la tarjeta esta activa al cierre del dia. Medida semi-aditiva, se suma entre zonas y perfiles de un mismo dia y nunca entre dias; entre dias se usa el valor del ultimo dia o el promedio.

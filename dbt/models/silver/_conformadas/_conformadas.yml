@@ -121,3 +121,16 @@ models:
       - name: tiene_servicio
         description: Verdadero si al menos un modo tiene un punto de abordaje en la zona.
         tests: [not_null]
+
+  - name: dim_persona
+    description: Una fila por persona conocida por la red, desde los abordajes de las fuentes integradas y el padron. Atributos del padron tomados de la version vigente del SCD Tipo 2. Dueno del dominio persona, rol A.
+    columns:
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002.
+        tests: [unique, not_null]
+      - name: tipo_identidad
+        description: vinculada o solo_aerometro.
+        tests: [not_null]
+      - name: estado_padron
+        description: ACTIVA, INACTIVA o SIN_REGISTRO.
+        tests: [not_null]

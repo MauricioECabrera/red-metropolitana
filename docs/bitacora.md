@@ -266,3 +266,45 @@ cuyo `commit_ts` es anterior al del evento previo de la misma persona.
 | Activas después de aplicar las bajas | 19,110 |
 | Inactivas después | 3,352 |
 | Versiones en el historial | 27,428 |
+
+---
+
+## D-011 · Dimensión de persona y foto diaria del padrón
+**Estado:** cerrada · **Responsable:** A
+
+**Dimensión de persona.** `dim_persona` tiene una fila por cada persona
+conocida por la red: toda persona con al menos un abordaje en las fuentes
+integradas, más toda persona del padrón aunque no haya viajado. Los
+atributos del padrón (perfil, zona de residencia, estado) son los de la
+versión vigente del SCD Tipo 2. Las personas que viajan pero no están en
+el padrón quedan con estado `SIN_REGISTRO`. En Gold se publica solo con
+`persona_sk`.
+
+**Tercer hecho: `fct_estado_padron_diario`.** Grano: una persona del
+padrón por día calendario, con la versión vigente al cierre del día. Una
+persona aparece desde el día de su primer evento en el log. 559,718 filas
+en 45 días.
+
+**Por qué existe.** Es el único proceso del modelo con una medida
+semi-aditiva real. `tarjetas_activas` se suma entre zonas y perfiles de un
+mismo día, pero no entre días:
+
+| Día | Tarjetas activas |
+|---|---|
+| 2026-06-01 | 539 |
+| 2026-06-30 | 13,924 |
+| 2026-07-15 | 19,110 |
+| Suma de los 45 días (sin sentido) | 479,760 |
+
+Entre días se reporta el valor del último día o el promedio. Un test
+verifica que las activas del último día coinciden con el padrón vigente.
+
+**Clasificación de medidas completa del modelo.**
+
+| Medida | Hecho | Tipo |
+|---|---|---|
+| cantidad_abordajes, monto_q | fct_abordaje | aditiva |
+| cantidad_trayectos, distancia_km, monto_q | fct_trayecto_od | aditiva |
+| duracion_s | fct_trayecto_od | aditiva en suma; su promedio es no aditivo |
+| tarjetas_activas, cantidad_personas | fct_estado_padron_diario | semi-aditiva |
+| personas distintas, proporción en hora pico, duración promedio | derivadas | no aditivas |
