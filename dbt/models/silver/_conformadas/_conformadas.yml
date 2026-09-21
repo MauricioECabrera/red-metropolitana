@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: dim_fecha
+    description: Calendario de 2026-01-01 a 2027-12-31. Rango amplio para que las fechas fuera de periodo lleguen a cuarentena por regla de calidad y no por falta de llave. Dueno del dominio tiempo, rol A.
+    columns:
+      - name: fecha_key
+        description: Llave entera en formato AAAAMMDD.
+        tests: [unique, not_null]
+      - name: fecha
+        description: Fecha calendario en hora local de Guatemala.
+        tests: [unique, not_null]
+      - name: nombre_mes
+        description: Nombre del mes en español.
+      - name: dia_semana_num
+        description: Dia de la semana ISO, 1 lunes a 7 domingo.
+      - name: nombre_dia
+        description: Nombre del dia en español.
+      - name: semana_iso
+        description: Numero de semana ISO del año.
+      - name: es_dia_habil
+        description: Verdadero de lunes a viernes. Definicion oficial en bitacora D-008.
+        tests: [not_null]
+      - name: es_fin_de_semana
+        description: Verdadero sabado y domingo.
+
+  - name: dim_hora
+    description: Una fila por hora del dia. La hora pico efectiva de un abordaje se calcula en la tabla de hechos como es_franja_pico y es_dia_habil, segun bitacora D-008.
+    columns:
+      - name: hora_key
+        description: Hora del dia de 0 a 23, hora local.
+        tests: [unique, not_null]
+      - name: hora_etiqueta
+        description: Hora en formato HH:00 para el tablero.
+      - name: franja_horaria
+        description: Pico mañana 06-08, Pico tarde 16-18, Valle 09-15, Extremo el resto.
+        tests: [not_null]
+      - name: es_franja_pico
+        description: Verdadero en las franjas pico, sin considerar el dia.
+        tests: [not_null]
+
+  - name: dim_zona
+    description: Dimension conformada de zona, construida desde seed_dim_zona. Todas las variantes textuales de los operadores resuelven a esta llave mediante seed_zona_alias. Dueno del dominio zona, rol A.
+    columns:
+      - name: zona_key
+        description: Llave estable de la zona.
+        tests: [unique, not_null]
+      - name: zona_nombre
+        description: Nombre canonico mostrado en el tablero.
+        tests: [not_null]
+      - name: tipo_division
+        description: zona_capitalina o municipio.
+      - name: municipio
+        description: Municipio al que pertenece la division.
+
+  - name: dim_modo
+    description: Los cuatro modos de transporte integrados en la red. Dueno del dominio modo, rol A.
+    columns:
+      - name: modo_key
+        description: Llave entera del modo.
+        tests: [unique, not_null]
+      - name: modo_codigo
+        description: Codigo corto TM, TU, MR o AM.
+        tests: [unique, not_null]
+      - name: modo_nombre
+        description: Nombre del sistema.
+      - name: unidad_registro
+        description: Lo que representa una fila en el archivo de origen, abordaje o trayecto.
+      - name: formato_origen
+        description: Formato del archivo entregado por el operador.
