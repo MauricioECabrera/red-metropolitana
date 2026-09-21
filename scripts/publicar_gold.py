@@ -67,11 +67,11 @@ def main():
         sys.exit(1)
 
     print()
-    print(f"{'tabla':<22}{'filas':>12}")
-    print("-" * 34)
+    print(f"{'tabla':<28}{'filas':>12}")
+    print("-" * 40)
     for tabla, filas in conteos:
-        print(f"{tabla:<22}{filas:>12,}")
-    print("-" * 34)
+        print(f"{tabla:<28}{filas:>12,}")
+    print("-" * 40)
     print(f"Publicado en {TABLERO.relative_to(RAIZ)} en {time.perf_counter() - inicio:.1f} s")
     print()
 
