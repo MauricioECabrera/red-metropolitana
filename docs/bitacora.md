@@ -153,7 +153,29 @@ reporta sobre personas identificables, excluyendo la llave centinela.
 **Estado:** pendiente · **Responsable:** C
 
 ## D-007 · Estrategia de seudonimización antes de Gold
-**Estado:** pendiente · **Responsable:** A
+**Estado:** cerrada · **Responsable:** A
+
+**Decisión.** Gold nunca contiene la tarjeta original ni la `persona_key`.
+Contiene `persona_sk`: los primeros 16 caracteres del SHA-256 de una sal
+secreta concatenada con la `persona_key` de Silver.
+
+**Por qué con sal.** Sin sal, cualquiera puede calcular el hash de las 60,000
+tarjetas posibles y revertirlo en segundos. Aerómetro entrega justamente un
+hash sin sal de 12 caracteres, y se verificó que el 100% de sus 14,496 valores
+se revierte con un diccionario. La sal convierte ese ataque en inviable.
+
+**Dónde vive la sal.** En `.env`, que no se versiona. El repositorio solo
+tiene `.env.example` con un valor de ejemplo. La macro `seudonimizar` detiene
+la compilación de Gold si la sal falta o es la de ejemplo. El equipo comparte
+la misma sal por un canal privado para que la misma persona tenga el mismo
+`persona_sk` en todas las máquinas.
+
+**Qué se preserva.** El tablero puede contar personas distintas y seguir a la
+misma persona entre modos, sin saber qué tarjeta es.
+
+**Límite.** Quien tenga la sal y Silver puede revertir la seudonimización.
+El acceso a Silver y a la sal queda restringido según el documento de
+seguridad (sección 3.3).
 
 ---
 

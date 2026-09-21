@@ -1,0 +1,157 @@
+version: 2
+
+models:
+  - name: gold_dim_fecha
+    description: Calendario publicado para el tablero. Fuente silver.dim_fecha, sin transformacion adicional.
+    columns:
+      - name: fecha_key
+        description: Llave entera AAAAMMDD.
+        tests: [unique, not_null]
+
+  - name: gold_dim_hora
+    description: Horas del dia publicadas para el tablero. Fuente silver.dim_hora, sin transformacion adicional.
+    columns:
+      - name: hora_key
+        description: Hora local de 0 a 23.
+        tests: [unique, not_null]
+
+  - name: gold_dim_zona
+    description: Zonas con indicadores de cobertura. Fuente silver.dim_zona, construida desde seed_dim_zona y dim_estacion_parada.
+    columns:
+      - name: zona_key
+        description: Llave estable de la zona.
+        tests: [unique, not_null]
+
+  - name: gold_dim_modo
+    description: Los cuatro modos de transporte. Fuente silver.dim_modo.
+    columns:
+      - name: modo_key
+        description: Llave entera del modo.
+        tests: [unique, not_null]
+
+  - name: gold_dim_estacion
+    description: Estaciones, paradas y torres de los cuatro operadores. Fuente silver.dim_estacion_parada, sin la columna de lote de carga.
+    columns:
+      - name: estacion_key
+        description: Llave compuesta modo dos puntos codigo del operador.
+        tests: [unique, not_null]
+      - name: zona_key
+        description: Zona conformada del punto de abordaje.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+
+  - name: fct_abordaje
+    description: Hecho principal. Una validacion exitosa de una tarjeta al ingresar a un vehiculo o estacion, en cualquiera de los cuatro modos. Union de los modelos Silver de abordajes de cada operador. Bitacora D-001.
+    columns:
+      - name: abordaje_id
+        description: Identificador del abordaje, codigo de modo dos puntos identificador del operador. Permite rastrear la fila hasta Silver y Bronze.
+        tests: [unique, not_null]
+      - name: persona_sk
+        description: Identificador seudonimizado de la persona. SHA-256 truncado de la sal secreta y la persona_key de Silver. Estable para la misma persona, no reversible sin la sal. Bitacora D-007.
+        tests: [not_null]
+      - name: modo_key
+        description: Modo de transporte. Fuente modo_codigo de Silver resuelto contra dim_modo.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_modo')
+                field: modo_key
+      - name: estacion_key
+        description: Punto de abordaje.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_estacion')
+                field: estacion_key
+      - name: zona_key
+        description: Zona del punto de abordaje, resuelta en Silver mediante map_zona_alias.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+      - name: fecha_key
+        description: Fecha local del abordaje.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_fecha')
+                field: fecha_key
+      - name: hora_key
+        description: Hora local del abordaje.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('gold_dim_hora')
+                field: hora_key
+      - name: tipo_abordaje
+        description: ENTRADA o TRANSBORDO segun el operador. Atributo degenerado.
+      - name: es_hora_pico
+        description: Verdadero si la hora cae en franja pico y el dia es habil. Bitacora D-008.
+        tests: [not_null]
+      - name: cantidad_abordajes
+        description: Siempre 1. Medida aditiva en todas las dimensiones.
+      - name: monto_q
+        description: Monto cobrado en quetzales. Transurbano se convierte de centavos en Silver. Medida aditiva.
+        tests: [not_null]
+
+  - name: fct_trayecto_od
+    description: Un trayecto de MetroRiel con entrada y salida validadas. Fuente slv_mr_trayectos. Bitacora D-001.
+    columns:
+      - name: trayecto_id
+        description: Identificador del trayecto, MR dos puntos trip_id.
+        tests: [unique, not_null]
+      - name: persona_sk
+        description: Identificador seudonimizado de la persona. Mismo valor que en fct_abordaje para la misma persona.
+        tests: [not_null]
+      - name: estacion_origen_key
+        description: Estacion de entrada. Dimension de rol sobre dim_estacion.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_estacion')
+                field: estacion_key
+      - name: estacion_destino_key
+        description: Estacion de salida. Dimension de rol sobre dim_estacion.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_estacion')
+                field: estacion_key
+      - name: zona_origen_key
+        description: Zona de la estacion de entrada. Dimension de rol sobre dim_zona.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+      - name: zona_destino_key
+        description: Zona de la estacion de salida. Dimension de rol sobre dim_zona.
+        tests:
+          - relationships:
+              arguments:
+                to: ref('gold_dim_zona')
+                field: zona_key
+      - name: fecha_key
+        description: Fecha local de la entrada.
+      - name: hora_key
+        description: Hora local de la entrada.
+      - name: es_hora_pico
+        description: Verdadero si la entrada cae en franja pico y el dia es habil.
+      - name: cantidad_trayectos
+        description: Siempre 1. Medida aditiva.
+      - name: duracion_s
+        description: Segundos entre entrada y salida. Aditiva en suma; el promedio es no aditivo y se calcula en el tablero como suma de duracion entre suma de trayectos.
+      - name: distancia_km
+        description: Kilometros sobre el trazado entre origen y destino. Medida aditiva.
+      - name: monto_q
+        description: Tarifa en quetzales. Es el mismo cobro que el abordaje de entrada en fct_abordaje; no se suman entre ambos hechos.
