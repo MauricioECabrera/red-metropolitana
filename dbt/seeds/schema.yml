@@ -1,0 +1,29 @@
+version: 2
+
+seeds:
+  - name: seed_dim_zona
+    description: Catalogo maestro de las 16 divisiones territoriales del area metropolitana. Dimension conformada. Dueno del dominio zona.
+    columns:
+      - name: zona_key
+        description: Llave surrogate estable de la zona. Unica llave valida para unir zonas entre operadores.
+        tests: [unique, not_null]
+      - name: zona_nombre
+        description: Nombre canonico de la zona tal como se muestra en el tablero.
+        tests: [not_null]
+      - name: tipo_division
+        description: Clasificacion territorial, zona_capitalina o municipio.
+      - name: municipio
+        description: Municipio al que pertenece la division.
+
+  - name: seed_zona_alias
+    description: Mapeo de cada variante textual de zona entregada por los cuatro operadores hacia la zona_key canonica.
+    columns:
+      - name: alias_crudo
+        description: Texto de zona tal como llega en el archivo de origen.
+        tests: [unique, not_null]
+      - name: alias_normalizado
+        description: Alias en mayusculas y sin espacios extremos, usado como llave de union.
+        tests: [not_null]
+      - name: zona_key
+        description: Zona canonica a la que resuelve el alias.
+        tests: [not_null]

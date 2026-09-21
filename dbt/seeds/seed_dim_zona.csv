@@ -1,0 +1,17 @@
+zona_key,zona_nombre,tipo_division,municipio
+Z01,Zona 1,zona_capitalina,Guatemala
+Z04,Zona 4,zona_capitalina,Guatemala
+Z06,Zona 6,zona_capitalina,Guatemala
+Z07,Zona 7,zona_capitalina,Guatemala
+Z08,Zona 8,zona_capitalina,Guatemala
+Z09,Zona 9,zona_capitalina,Guatemala
+Z10,Zona 10,zona_capitalina,Guatemala
+Z11,Zona 11,zona_capitalina,Guatemala
+Z12,Zona 12,zona_capitalina,Guatemala
+Z13,Zona 13,zona_capitalina,Guatemala
+Z17,Zona 17,zona_capitalina,Guatemala
+Z18,Zona 18,zona_capitalina,Guatemala
+MIX,Mixco,municipio,Mixco
+VNU,Villa Nueva,municipio,Villa Nueva
+SMP,San Miguel Petapa,municipio,San Miguel Petapa
+SCP,Santa Catarina Pinula,municipio,Santa Catarina Pinula

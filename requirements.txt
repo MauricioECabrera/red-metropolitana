@@ -1,0 +1,8 @@
+dbt-core>=1.9,<2.0
+dbt-duckdb>=1.9,<2.0
+duckdb>=1.1
+pandas>=2.2
+pyarrow>=17.0
+confluent-kafka>=2.6
+prefect>=3.1
+python-dotenv>=1.0

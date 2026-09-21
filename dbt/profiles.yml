@@ -1,0 +1,9 @@
+red_metropolitana:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../warehouse/red_metropolitana.duckdb
+      threads: 4
+      extensions:
+        - json
