@@ -20,5 +20,6 @@
 {% macro fuentes_cuarentena() -%}
     {{ return([
         'mr_cuarentena',
+        'cdc_cuarentena',
     ]) }}
 {%- endmacro %}

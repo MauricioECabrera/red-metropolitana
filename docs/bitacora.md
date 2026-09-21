@@ -218,3 +218,51 @@ con proceso trayecto, nunca se pierde de ninguno de los dos.
 
 **Resultado MetroRiel.** 299,100 en Bronze; 299,100 abordajes válidos;
 295,511 trayectos válidos; 3,589 en cuarentena por `viaje_sin_salida`.
+
+---
+
+## D-010 · Aplicación del CDC y SCD Tipo 2 del padrón
+**Estado:** cerrada · **Responsable:** A
+
+**Contexto.** El log no empieza en un padrón vacío. De las 22,462 personas,
+11,740 aparecen por primera vez con un UPDATE y 2,877 con un DELETE: el
+padrón existía antes del log y nunca se entregó su foto inicial. Además,
+hay UPDATE sobre tarjetas dadas de baja, DELETE repetidos, y 103 eventos
+cuyo `commit_ts` es anterior al del evento previo de la misma persona.
+
+**Decisiones.**
+- **Orden.** Las operaciones se aplican por `seq`, como pide el enunciado.
+  `commit_ts` no es monótono y no se usa para ordenar.
+- **Persona preexistente.** Un UPDATE o DELETE sobre una llave nunca vista
+  significa que la persona existía antes del log. El UPDATE la registra
+  como activa; el DELETE, como inactiva sin atributos conocidos.
+- **INSERT sobre una persona activa** reemplaza sus atributos.
+- **UPDATE sobre una tarjeta dada de baja** va a cuarentena
+  (`actualizacion_sobre_baja`): el log se contradice, y no se reactiva
+  una tarjeta cancelada sin un INSERT explícito.
+- **DELETE sobre una tarjeta ya dada de baja** va a cuarentena
+  (`baja_repetida`).
+- **Un DELETE nunca borra.** Cierra la versión vigente y abre una
+  INACTIVA con los últimos atributos conocidos. El historial de viajes
+  de esa persona se conserva.
+- **SCD Tipo 2 desde el log, no con `dbt snapshot`.** El snapshot marca
+  las versiones con la hora de ejecución de dbt: dos corridas darían dos
+  historiales distintos y se rompería la idempotencia. Desde el log, el
+  historial es siempre el mismo.
+- **Vigencia.** `vigente_desde` es el máximo acumulado de `commit_ts` de
+  la persona, para que las vigencias nunca retrocedan.
+
+**Resultado.**
+
+| Métrica | Valor |
+|---|---|
+| Eventos en el log | 31,050 |
+| Altas aplicadas | 10,003 |
+| Cambios aplicados | 14,646 |
+| Bajas aplicadas | 3,633 |
+| En cuarentena | 2,768 (llave_centinela 2,206; actualizacion_sobre_baja 423; baja_repetida 139) |
+| Personas en el padrón | 22,462 |
+| Activas antes de aplicar las bajas | 19,824 |
+| Activas después de aplicar las bajas | 19,110 |
+| Inactivas después | 3,352 |
+| Versiones en el historial | 27,428 |

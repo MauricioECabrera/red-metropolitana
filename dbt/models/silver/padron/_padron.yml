@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: cdc_padron_evaluado
+    description: Una fila por evento del log CDC del padron, tipado y evaluado. Las operaciones se evaluan en orden de seq. El estado previo de una persona es la ultima operacion INSERT o DELETE valida anterior. Bitacora D-005 y D-010.
+    columns:
+      - name: seq
+        description: Numero de secuencia del log. Es la autoridad del orden en que se aplican las operaciones.
+        tests: [not_null]
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002. La llave del padron puede venir en formato de Transmetro, Transurbano o MetroRiel.
+      - name: formato_llave
+        description: Operador al que corresponde el formato de la llave del evento, TM, TU o MR.
+      - name: zona_residencia_key
+        description: Zona de residencia resuelta mediante map_zona_alias. Nula en los DELETE, que llegan sin cuerpo.
+      - name: motivo_rechazo_padron
+        description: Nulo si el evento se aplica. Si no, la primera regla que falla.
+      - name: _hash_fila
+        description: Hash del registro en Bronze.
+        tests: [not_null]
+
+  - name: cdc_cuarentena
+    description: Eventos del log CDC que no se aplican, con el motivo. Contrato comun de cuarentena.
+    columns:
+      - name: motivo_rechazo
+        description: llave_centinela para SIN-TARJETA, actualizacion_sobre_baja para un UPDATE sobre una tarjeta dada de baja, baja_repetida para un DELETE sobre una tarjeta ya dada de baja, u otra regla de formato.
+        tests: [not_null]
+
+  - name: slv_padron_scd2
+    description: Historial del padron de usuarios como dimension de cambio lento Tipo 2. Una fila por version de una persona. Se abre una version cuando cambia el perfil, la zona de residencia o el estado. Un DELETE cierra la version vigente y abre una INACTIVA, nunca borra. Construido desde la secuencia del log, no con dbt snapshot, para que sea idempotente. Bitacora D-010.
+    columns:
+      - name: persona_key
+        description: Identidad unificada de la persona.
+        tests: [not_null]
+      - name: version
+        description: Numero de version de la persona, desde 1.
+        tests: [not_null]
+      - name: estado
+        description: ACTIVA o INACTIVA.
+        tests: [not_null]
+      - name: perfil
+        description: Perfil de la persona en esa version. Nulo solo si la persona existia antes del log y su unico evento es una baja.
+      - name: zona_residencia_key
+        description: Zona de residencia en esa version, referencia a dim_zona.
+      - name: formato_llave_origen
+        description: Formato de la llave con la que la persona aparece por primera vez en el log.
+      - name: operacion_origen
+        description: Operacion del log que abrio la version.
+      - name: seq_desde
+        description: seq del evento que abrio la version. Permite volver a la fila exacta del log.
+      - name: vigente_desde
+        description: Inicio de vigencia. Maximo acumulado de commit_ts de la persona, porque commit_ts no siempre crece con seq.
+        tests: [not_null]
+      - name: vigente_hasta
+        description: Fin de vigencia. Nulo en la version vigente.
+      - name: es_vigente
+        description: Verdadero en la ultima version de cada persona.
+        tests: [not_null]
