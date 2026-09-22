@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: cat_reglas_calidad
+    description: Catalogo de las reglas de calidad declaradas por fuente y proceso, con su orden de precedencia. Se declara completo aunque una regla nunca se dispare. Decision D-009 de la bitacora.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [fuente, proceso, regla]
+    columns:
+      - name: orden
+        description: Precedencia de la regla dentro de su proceso. Una fila toma el motivo de la primera regla que falla.
+        tests: [not_null]
+      - name: fuente
+        description: Operador o proceso de origen.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [transmetro, transurbano, metroriel, aerometro, cdc_padron]
+      - name: proceso
+        description: Proceso que evalua la regla. Una misma fuente puede alimentar mas de un proceso.
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [abordaje, trayecto, transaccion, padron]
+      - name: regla
+        description: Nombre del motivo de rechazo. Coincide con el valor que escribe el modelo evaluado en motivo_rechazo.
+        tests: [not_null]
+      - name: descripcion
+        description: Que condicion hace que la regla falle.
+        tests: [not_null]
+
+  - name: rpt_calidad
+    description: Registros en cuarentena por regla, con el porcentaje sobre las filas de Bronze de su propia fuente. Incluye las reglas con cero rechazos.
+    columns:
+      - name: regla
+        description: Regla del catalogo.
+        tests: [not_null]
+      - name: estado_fuente
+        description: Integrada cuando la fuente ya tiene modelo de Bronze en el repositorio, pendiente de integrar cuando todavia no.
+        tests: [not_null]
+      - name: registros_en_cuarentena
+        description: Filas retenidas por esa regla. Cero es un resultado valido.
+        tests: [not_null]
+      - name: porcentaje_de_bronze
+        description: Porcentaje que representan esas filas sobre el Bronze de su fuente. Nulo mientras la fuente no este integrada.
+
+  - name: rpt_volumen_por_capa
+    description: Filas por fuente de operacion en Bronze, Silver, cuarentena y Gold. El padron CDC no aparece porque no genera abordajes.
+    columns:
+      - name: fuente
+        description: Operador de origen.
+        tests: [unique, not_null]
+      - name: filas_bronze
+        description: Filas ingeridas tal como llegaron del operador.
+        tests: [not_null]
+      - name: filas_silver
+        description: Filas que pasaron las reglas de calidad y quedaron tipadas y unificadas.
+        tests: [not_null]
+      - name: filas_cuarentena
+        description: Filas retenidas por las reglas de calidad, sumando todos los procesos de la fuente.
+        tests: [not_null]
+      - name: filas_gold
+        description: Filas de la fuente que llegaron a fct_abordaje.
+        tests: [not_null]
+      - name: filas_no_promovidas_a_gold
+        description: Filas validas en Silver que no son abordajes exitosos y por eso no entran a fct_abordaje. En Transurbano son las transacciones con estado 7 y 9, decision D-006. En MetroRiel es cero, porque todo viaje aporta su entrada.
+        tests: [not_null]
