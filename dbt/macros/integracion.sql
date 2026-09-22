@@ -14,6 +14,7 @@
 {% macro fuentes_abordaje() -%}
     {{ return([
         'slv_mr_abordajes',
+        'slv_tu_abordajes',
     ]) }}
 {%- endmacro %}
 
@@ -21,5 +22,6 @@
     {{ return([
         'mr_cuarentena',
         'cdc_cuarentena',
+        'tu_cuarentena',
     ]) }}
 {%- endmacro %}
