@@ -17,5 +17,7 @@ sources:
         description: Catalogo de torres de Aerometro. Origen datos_red/am_estaciones.csv, via batch.
       - name: metroriel_viajes
         description: Viajes de MetroRiel, un registro por trayecto completo. Origen datos_red/metroriel_viajes.jsonl, via batch. Columna payload con el JSON original sin aplanar.
+      - name: transurbano_transacciones
+        description: Transacciones de Transurbano, una fila por transaccion de tarjeta. Origen datos_red/transurbano_transacciones.csv, via batch. Fecha y hora en columnas separadas, monto en centavos y estado del viaje como codigo numerico.
       - name: cdc_padron_usuarios
         description: Log de cambios del padron de usuarios, una fila por operacion INSERT, UPDATE o DELETE. Origen datos_red/cdc_padron_usuarios.csv, via CDC. Los DELETE llegan con la llave y sin cuerpo.
