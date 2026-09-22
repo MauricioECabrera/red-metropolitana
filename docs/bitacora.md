@@ -123,7 +123,35 @@ nunca sobre la línea cruda: el mismo registro da el mismo hash en Windows
 primera corrida CARGADO, segunda OMITIDO, conteos idénticos.
 
 ## D-004 · Vía de ingesta de Transurbano
-**Estado:** pendiente · **Responsable:** C
+**Estado:** cerrada · **Responsable:** C
+
+**Contexto.** El enunciado deja la vía de Transurbano a criterio del equipo.
+Transurbano entrega `transurbano_transacciones.csv`, 832,791 transacciones del
+periodo completo, con fecha y hora en columnas separadas, monto en centavos y
+el estado del viaje como código numérico.
+
+**Opciones.**
+1. Streaming por Kafka, simulando la publicación del CSV línea por línea, como
+   se hace con Transmetro y Aerómetro.
+2. Batch, cargando el archivo completo con `cargar()`.
+
+**Decisión.** Opción 2, batch.
+
+**Por qué.** El archivo no trae marca de llegada por transacción ni orden
+garantizado dentro del archivo: no hay nada en el dato que se comporte como un
+flujo. Simularlo como evento agregaría un punto de falla (el broker) y un
+componente que operar, sin agregar información. La vía se elige por cómo el
+operador entrega el dato, no por la herramienta que se quiere lucir.
+
+**Evidencia.** La carga es idempotente por el mismo mecanismo que MetroRiel: el
+`lote_id` es la huella del contenido del archivo. La segunda corrida reporta
+`OMITIDO` con `lote_id = 89057a42ddbc8e5f` y 832,791 filas, sin reescribir el
+Parquet.
+
+**Consecuencia asumida.** La latencia de Transurbano es la del archivo, no la
+del evento: el tablero ve las transacciones cuando llega el corte, no cuando
+ocurren. Si mañana el operador publicara eventos, cambia la vía de ingesta y no
+cambia el contrato de Bronze ni nada aguas abajo.
 
 ---
 
@@ -150,7 +178,45 @@ reporta sobre personas identificables, excluyendo la llave centinela.
 ---
 
 ## D-006 · Tratamiento de los códigos de estado 7 y 9 de Transurbano
-**Estado:** pendiente · **Responsable:** C
+**Estado:** cerrada · **Responsable:** C
+
+**Contexto.** `cod_estado` toma los valores 1, 2 y 3 para validaciones
+exitosas, 7 para saldo insuficiente y 9 para tarjeta inválida. D-001 ya
+estableció que una transacción con estado 7 o 9 no es un abordaje exitoso y no
+entra a `fct_abordaje`, y dejó abierto su destino. Son 41,390 transacciones,
+el 5.0% de las que pasan las reglas de calidad.
+
+**Opciones.**
+1. Mandarlas a cuarentena con un motivo `estado_no_exitoso`.
+2. Descartarlas al construir Silver.
+3. Conservarlas en Silver como transacciones y excluirlas del modelo de
+   abordajes.
+
+**Decisión.** Opción 3.
+
+**Por qué.** Una transacción rechazada por el validador es un hecho real y bien
+formado del operador: sabemos exactamente qué pasó y por qué. La cuarentena es
+para registros que no podemos interpretar. Mezclar las dos cosas rompe el
+significado del reporte de calidad: la tasa de rechazo del validador pasaría a
+leerse como tasa de error de datos, y `rpt_calidad` dejaría de medir calidad.
+La opción 2 queda descartada de entrada porque viola la regla estructural de
+que nada se descarta en silencio.
+
+**Implementación.** `slv_tu_transacciones` conserva las 827,788 transacciones
+bien formadas con su `cod_estado`, su lectura en texto `estado_validacion` y la
+bandera `es_abordaje_exitoso`. `slv_tu_abordajes` filtra por esa bandera y deja
+786,398 abordajes, que son los que entran a `fct_abordaje`.
+
+**Evidencia.** 827,788 = 786,398 abordajes + 41,390 no exitosas. El test
+`assert_conservacion_transurbano` verifica las dos igualdades: contra Bronze
+(827,788 + 5,003 = 832,791) y contra el corte de abordajes.
+
+**Consecuencia asumida.** `slv_tu_transacciones` y `slv_tu_abordajes` no tienen
+el mismo conteo, y la diferencia hay que explicarla cada vez que se compare
+Silver con Gold. `rpt_volumen_por_capa` la publica en la columna
+`filas_no_promovidas_a_gold` justamente para que nadie la lea como una pérdida.
+A cambio, la Agencia puede medir la tasa de rechazo por parada y por hora, que
+se perdería si esas filas cayeran en cuarentena.
 
 ## D-007 · Estrategia de seudonimización antes de Gold
 **Estado:** cerrada · **Responsable:** A

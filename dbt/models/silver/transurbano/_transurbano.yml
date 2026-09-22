@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: tu_transacciones_evaluado
+    description: Todos los registros de Bronze de Transurbano, tipados y evaluados contra las reglas de calidad. No se consume desde Gold. Es la fuente de slv_tu_transacciones y de la cuarentena de Transurbano.
+    columns:
+      - name: _hash_fila
+        description: Hash del registro original en Bronze.
+        tests: [not_null]
+      - name: motivo_rechazo_transaccion
+        description: Primera regla de calidad que falla para el proceso transaccion. Nulo si la transaccion esta bien formada.
+
+  - name: slv_tu_transacciones
+    description: Una transaccion bien formada de Transurbano por fila, exitosa o no. Conserva el codigo de estado del validador. Decision D-006 de la bitacora.
+    columns:
+      - name: transaccion_id
+        description: Identificador construido con el lote y la fila de origen. Transurbano no entrega identificador propio.
+        tests: [unique, not_null]
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002. P seguido de la parte numerica de la tarjeta a 8 digitos.
+        tests: [not_null]
+      - name: estacion_key
+        description: Parada de abordaje, referencia a dim_estacion_parada.
+        tests: [not_null]
+      - name: zona_key
+        description: Zona de la parada, resuelta desde el sector en mayusculas que entrega Transurbano.
+        tests: [not_null]
+      - name: ruta
+        description: Ruta de Transurbano tal como la entrega el operador.
+      - name: cod_estado
+        description: Codigo de estado del validador. 1, 2 y 3 son validaciones exitosas, 7 es saldo insuficiente y 9 es tarjeta invalida.
+        tests: [not_null]
+      - name: estado_validacion
+        description: Lectura en texto del codigo de estado, OK, SALDO_INSUF o TARJETA_INVALIDA.
+        tests: [not_null]
+      - name: es_abordaje_exitoso
+        description: Verdadero cuando la transaccion cuenta como abordaje segun el grano de D-001.
+        tests: [not_null]
+      - name: monto_q
+        description: Monto de la transaccion en quetzales. Transurbano entrega centavos, se divide entre cien.
+        tests: [not_null]
+
+  - name: slv_tu_abordajes
+    description: Un abordaje valido de Transurbano por fila. Contrato comun de abordajes, mismas columnas que los abordajes de Transmetro, MetroRiel y Aerometro. Excluye las transacciones con estado 7 y 9, que no son validaciones exitosas.
+    columns:
+      - name: abordaje_id
+        description: Identificador unico del abordaje, heredado de transaccion_id.
+        tests: [unique, not_null]
+      - name: modo_codigo
+        description: Siempre TU.
+      - name: persona_key
+        description: Identidad unificada segun bitacora D-002.
+        tests: [not_null]
+      - name: tarjeta_origen
+        description: Tarjeta tal como la entrega Transurbano, diez digitos con ceros a la izquierda. Se elimina antes de Gold.
+      - name: estacion_key
+        description: Parada de abordaje, referencia a dim_estacion_parada.
+        tests: [not_null]
+      - name: zona_key
+        description: Zona de la parada.
+        tests: [not_null]
+      - name: abordaje_ts
+        description: Fecha y hora local del abordaje, armada con las columnas fecha y hora que Transurbano entrega por separado.
+        tests: [not_null]
+      - name: fecha_key
+        description: Referencia a dim_fecha.
+        tests: [not_null]
+      - name: hora_key
+        description: Referencia a dim_hora.
+        tests: [not_null]
+      - name: tipo_abordaje
+        description: Siempre ENTRADA. Transurbano no distingue transbordo.
+      - name: monto_q
+        description: Tarifa cobrada en quetzales.
+        tests: [not_null]
+
+  - name: tu_cuarentena
+    description: Transacciones de Transurbano rechazadas por las reglas de calidad, con el contrato comun de cuarentena.
+    columns:
+      - name: motivo_rechazo
+        description: Regla de calidad que fallo.
+        tests: [not_null]
