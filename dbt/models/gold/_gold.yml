@@ -191,8 +191,6 @@ models:
 
   - name: fct_estado_padron_diario
     description: Foto diaria del padron. Una persona del padron por dia calendario, con su estado, perfil y zona de residencia vigentes al cierre del dia. Fuente silver.slv_padron_scd2. Bitacora D-011.
-  - name: fct_estado_padron_diario
-    description: Foto diaria del padron. Una persona del padron por dia calendario, con su estado, perfil y zona de residencia vigentes al cierre del dia. Fuente silver.slv_padron_scd2. Bitacora D-011.
     tests:
       - dbt_utils.unique_combination_of_columns:
           arguments:

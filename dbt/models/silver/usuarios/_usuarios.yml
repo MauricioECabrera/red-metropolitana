@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: usuarios_transurbano
+    description: Catalogo minimo de usuarios de Transurbano. Solo la llave de tarjeta, sin ningun atributo, porque el operador nunca entrego un padron. Entregable de la seccion 1.2.
+    columns:
+      - name: tarjeta
+        description: Numero de tarjeta tal como aparece en las transacciones de Transurbano.
+        tests: [unique, not_null]
+
+  - name: usuarios_metroriel
+    description: Catalogo minimo de usuarios de MetroRiel. Solo la llave de tarjeta, sin ningun atributo, porque el operador nunca entrego un padron. Entregable de la seccion 1.2.
+    columns:
+      - name: tarjeta
+        description: Tarjeta tal como aparece en los viajes de MetroRiel.
+        tests: [unique, not_null]
