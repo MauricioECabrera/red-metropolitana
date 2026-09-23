@@ -15,6 +15,8 @@
     {{ return([
         'slv_mr_abordajes',
         'slv_tu_abordajes',
+        'slv_tm_abordajes',
+        'slv_am_abordajes',
     ]) }}
 {%- endmacro %}
 
@@ -23,5 +25,7 @@
         'mr_cuarentena',
         'cdc_cuarentena',
         'tu_cuarentena',
+        'tm_cuarentena',
+        'am_cuarentena',
     ]) }}
 {%- endmacro %}

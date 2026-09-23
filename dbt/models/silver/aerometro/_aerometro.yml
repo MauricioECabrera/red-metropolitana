@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: am_boardings_evaluado
+    description: Modelo base de abordajes de Aerometro con tipado y validacion de reglas de calidad.
+
+  - name: slv_am_abordajes
+    description: Registros validos de abordajes de Aerometro.
+    columns:
+      - name: abordaje_id
+        tests:
+          - unique
+          - not_null
+
+  - name: am_cuarentena
+    description: Registros rechazados de Aerometro.
