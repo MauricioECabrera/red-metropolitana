@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: features_persona
+    description: Tabla de features para entrenamiento de modelos de ciencia de datos a nivel de usuario.
+    columns:
+      - name: persona_sk
+        description: Identificador seudonimizado de la persona.
+        tests:
+          - unique
+          - not_null
