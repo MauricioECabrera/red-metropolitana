@@ -35,6 +35,3 @@ seeds:
   red_metropolitana:
     +schema: seeds
 
-snapshots:
-  red_metropolitana:
-    +target_schema: silver
