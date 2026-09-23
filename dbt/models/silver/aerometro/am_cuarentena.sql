@@ -3,7 +3,7 @@ Proyecto 1 - Red Metropolitana de Transporte
 Autor: Diego de Jesus Urbina Chavez
 */
 select
-    'aerometro_boardings' as fuente,
+    'aerometro' as fuente,
     'abordaje' as proceso,
     motivo_rechazo_abordaje as motivo_rechazo,
     payload_original,

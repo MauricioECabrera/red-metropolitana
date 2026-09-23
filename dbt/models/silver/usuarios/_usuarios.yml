@@ -14,3 +14,10 @@ models:
       - name: tarjeta
         description: Tarjeta tal como aparece en los viajes de MetroRiel.
         tests: [unique, not_null]
+
+  - name: usuarios_aerometro
+    description: Catalogo minimo de usuarios de Aerometro. Solo el hash de usuario, sin ningun atributo, porque el operador nunca entrego un padron. Entregable de la seccion 1.2.
+    columns:
+      - name: tarjeta
+        description: Hash de usuario tal como aparece en los abordajes de Aerometro.
+        tests: [unique, not_null]

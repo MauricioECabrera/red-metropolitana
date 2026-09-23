@@ -3,7 +3,7 @@ Proyecto 1 - Red Metropolitana de Transporte
 Autor: Diego de Jesus Urbina Chavez
 */
 select
-    'transmetro_validaciones' as fuente,
+    'transmetro' as fuente,
     'abordaje' as proceso,
     motivo_rechazo_abordaje as motivo_rechazo,
     payload_original,

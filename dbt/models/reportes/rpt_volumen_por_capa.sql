@@ -17,11 +17,29 @@
 
 with medido as (
     select
-        'metroriel' as fuente,
-        'MR' as modo_codigo,
-        (select count(*) from {{ ref('brz_metroriel_viajes') }}) as filas_bronze,
-        (select count(*) from {{ ref('slv_mr_abordajes') }}) as filas_silver,
-        (select count(*) from {{ ref('cuarentena') }} where fuente = 'metroriel') as filas_cuarentena
+        'aerometro' as fuente,
+        'AM' as modo_codigo,
+        (select count(*) from {{ ref('brz_aerometro_boardings') }}) as filas_bronze,
+        (select count(*) from {{ ref('slv_am_abordajes') }}) as filas_silver,
+        (select count(*) from {{ ref('cuarentena') }} where fuente = 'aerometro') as filas_cuarentena
+
+    union all
+
+    select
+        'metroriel',
+        'MR',
+        (select count(*) from {{ ref('brz_metroriel_viajes') }}),
+        (select count(*) from {{ ref('slv_mr_abordajes') }}),
+        (select count(*) from {{ ref('cuarentena') }} where fuente = 'metroriel')
+
+    union all
+
+    select
+        'transmetro',
+        'TM',
+        (select count(*) from {{ ref('brz_transmetro_validaciones') }}),
+        (select count(*) from {{ ref('slv_tm_abordajes') }}),
+        (select count(*) from {{ ref('cuarentena') }} where fuente = 'transmetro')
 
     union all
 

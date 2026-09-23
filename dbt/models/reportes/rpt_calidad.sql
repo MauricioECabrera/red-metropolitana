@@ -15,8 +15,18 @@
 #}
 
 with volumen_bronze as (
-    select 'metroriel' as fuente, count(*) as filas_bronze
+    select 'aerometro' as fuente, count(*) as filas_bronze
+    from {{ ref('brz_aerometro_boardings') }}
+
+    union all
+
+    select 'metroriel', count(*)
     from {{ ref('brz_metroriel_viajes') }}
+
+    union all
+
+    select 'transmetro', count(*)
+    from {{ ref('brz_transmetro_validaciones') }}
 
     union all
 
