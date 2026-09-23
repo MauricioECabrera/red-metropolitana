@@ -21,3 +21,7 @@ sources:
         description: Transacciones de Transurbano, una fila por transaccion de tarjeta. Origen datos_red/transurbano_transacciones.csv, via batch. Fecha y hora en columnas separadas, monto en centavos y estado del viaje como codigo numerico.
       - name: cdc_padron_usuarios
         description: Log de cambios del padron de usuarios, una fila por operacion INSERT, UPDATE o DELETE. Origen datos_red/cdc_padron_usuarios.csv, via CDC. Los DELETE llegan con la llave y sin cuerpo.
+      - name: transmetro_validaciones
+        description: Validaciones de Transmetro, una fila por abordaje. Origen datos_red/transmetro_validaciones.csv, via streaming con Kafka.
+      - name: aerometro_boardings
+        description: Abordajes de Aerometro, una fila por abordaje de cabina. Origen datos_red/aerometro_boardings.csv, via streaming con Kafka. Marca de tiempo en UTC.
