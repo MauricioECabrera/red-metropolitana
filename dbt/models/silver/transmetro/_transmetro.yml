@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: tm_validaciones_evaluado
+    description: Modelo base de validaciones de Transmetro con tipado y validacion de reglas de calidad.
+
+  - name: slv_tm_abordajes
+    description: Registros validos de abordajes de Transmetro.
+    columns:
+      - name: abordaje_id
+        tests:
+          - unique
+          - not_null
+
+  - name: tm_cuarentena
+    description: Registros rechazados de Transmetro.
