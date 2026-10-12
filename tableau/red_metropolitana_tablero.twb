@@ -1,0 +1,3225 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20262.26.0819.2015                               -->
+<workbook _.fcp.WorkbookFingerprinting.true...author-id='d84a5ba627f270169f4b011a39d91e463913a3bda60066249f4f20bea669a62a' _.fcp.WorkbookFingerprinting.true...creator-author-id='d84a5ba627f270169f4b011a39d91e463913a3bda60066249f4f20bea669a62a' _.fcp.WorkbookFingerprinting.true...creator-license-type='paid' _.fcp.WorkbookFingerprinting.true...creator-machine-id='d84a5ba627f270169f4b011a39d91e463913a3bda60066249f4f20bea669a62a' _.fcp.WorkbookFingerprinting.true...license-type='paid' _.fcp.WorkbookFingerprinting.true...machine-id='d84a5ba627f270169f4b011a39d91e463913a3bda60066249f4f20bea669a62a' original-version='18.1' source-build='2026.2.2 (20262.26.0819.2015)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+    <_.fcp.WorkbookFingerprinting.true...WorkbookFingerprinting />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='fct_abordaje+ (gold)' inline='true' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='local' name='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf'>
+            <connection authentication='auth-none' class='duckdb_jdbc' dbname='tablero_gold' initialSQL='' one-time-sql='' schema='gold' server='local' v-connection_string_file='C:\Users\adria\OneDrive\Documents\URL\8vo Semestre\Ciencia de Datos\Proyecto\warehouse\tablero_gold.duckdb' v-connection_string_md='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='fct_abordaje' table='[tablero_gold].[gold].[fct_abordaje]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_estacion' table='[tablero_gold].[gold].[dim_estacion]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_fecha' table='[tablero_gold].[gold].[dim_fecha]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_hora' table='[tablero_gold].[gold].[dim_hora]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_modo' table='[tablero_gold].[gold].[dim_modo]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_persona' table='[tablero_gold].[gold].[dim_persona]' type='table' />
+          <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_zona' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+        </relation>
+        <cols>
+          <map key='[abordaje_id]' value='[fct_abordaje].[abordaje_id]' />
+          <map key='[anio]' value='[dim_fecha].[anio]' />
+          <map key='[cantidad_abordajes]' value='[fct_abordaje].[cantidad_abordajes]' />
+          <map key='[codigo_origen]' value='[dim_estacion].[codigo_origen]' />
+          <map key='[dia]' value='[dim_fecha].[dia]' />
+          <map key='[dia_semana_num]' value='[dim_fecha].[dia_semana_num]' />
+          <map key='[en_padron]' value='[dim_persona].[en_padron]' />
+          <map key='[es_dia_habil]' value='[dim_fecha].[es_dia_habil]' />
+          <map key='[es_fin_de_semana]' value='[dim_fecha].[es_fin_de_semana]' />
+          <map key='[es_franja_pico]' value='[dim_hora].[es_franja_pico]' />
+          <map key='[es_hora_pico]' value='[fct_abordaje].[es_hora_pico]' />
+          <map key='[estacion_key (dim_estacion)]' value='[dim_estacion].[estacion_key]' />
+          <map key='[estacion_key]' value='[fct_abordaje].[estacion_key]' />
+          <map key='[estado_padron]' value='[dim_persona].[estado_padron]' />
+          <map key='[fecha]' value='[dim_fecha].[fecha]' />
+          <map key='[fecha_key (dim_fecha)]' value='[dim_fecha].[fecha_key]' />
+          <map key='[fecha_key]' value='[fct_abordaje].[fecha_key]' />
+          <map key='[formato_llave_padron]' value='[dim_persona].[formato_llave_padron]' />
+          <map key='[formato_origen]' value='[dim_modo].[formato_origen]' />
+          <map key='[franja_horaria]' value='[dim_hora].[franja_horaria]' />
+          <map key='[hora_etiqueta]' value='[dim_hora].[hora_etiqueta]' />
+          <map key='[hora_key (dim_hora)]' value='[dim_hora].[hora_key]' />
+          <map key='[hora_key]' value='[fct_abordaje].[hora_key]' />
+          <map key='[km_trazado]' value='[dim_estacion].[km_trazado]' />
+          <map key='[latitud]' value='[dim_estacion].[latitud]' />
+          <map key='[linea_ruta]' value='[dim_estacion].[linea_ruta]' />
+          <map key='[longitud]' value='[dim_estacion].[longitud]' />
+          <map key='[mes]' value='[dim_fecha].[mes]' />
+          <map key='[modo_codigo (dim_estacion)]' value='[dim_estacion].[modo_codigo]' />
+          <map key='[modo_codigo]' value='[dim_modo].[modo_codigo]' />
+          <map key='[modo_key (dim_estacion)]' value='[dim_estacion].[modo_key]' />
+          <map key='[modo_key (dim_modo)]' value='[dim_modo].[modo_key]' />
+          <map key='[modo_key]' value='[fct_abordaje].[modo_key]' />
+          <map key='[modo_nombre]' value='[dim_modo].[modo_nombre]' />
+          <map key='[modos_con_servicio]' value='[dim_zona].[modos_con_servicio]' />
+          <map key='[modos_lista]' value='[dim_zona].[modos_lista]' />
+          <map key='[monto_q]' value='[fct_abordaje].[monto_q]' />
+          <map key='[municipio]' value='[dim_zona].[municipio]' />
+          <map key='[nombre_dia]' value='[dim_fecha].[nombre_dia]' />
+          <map key='[nombre_mes]' value='[dim_fecha].[nombre_mes]' />
+          <map key='[nombre_punto]' value='[dim_estacion].[nombre_punto]' />
+          <map key='[perfil_vigente]' value='[dim_persona].[perfil_vigente]' />
+          <map key='[persona_sk (dim_persona)]' value='[dim_persona].[persona_sk]' />
+          <map key='[persona_sk]' value='[fct_abordaje].[persona_sk]' />
+          <map key='[puntos_de_abordaje]' value='[dim_zona].[puntos_de_abordaje]' />
+          <map key='[semana_iso]' value='[dim_fecha].[semana_iso]' />
+          <map key='[tiene_servicio]' value='[dim_zona].[tiene_servicio]' />
+          <map key='[tipo_abordaje]' value='[fct_abordaje].[tipo_abordaje]' />
+          <map key='[tipo_division]' value='[dim_zona].[tipo_division]' />
+          <map key='[tipo_identidad]' value='[dim_persona].[tipo_identidad]' />
+          <map key='[unidad_registro]' value='[dim_modo].[unidad_registro]' />
+          <map key='[versiones_padron]' value='[dim_persona].[versiones_padron]' />
+          <map key='[zona_key (dim_estacion)]' value='[dim_estacion].[zona_key]' />
+          <map key='[zona_key (dim_zona)]' value='[dim_zona].[zona_key]' />
+          <map key='[zona_key]' value='[fct_abordaje].[zona_key]' />
+          <map key='[zona_nombre]' value='[dim_zona].[zona_nombre]' />
+          <map key='[zona_residencia_key]' value='[dim_persona].[zona_residencia_key]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>abordaje_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[abordaje_id]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>abordaje_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>persona_sk</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[persona_sk]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>persona_sk</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[modo_key]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>modo_key</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estacion_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[estacion_key]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>estacion_key</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_key]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>zona_key</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fecha_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[fecha_key]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>fecha_key</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hora_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[hora_key]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>hora_key</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tipo_abordaje</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[tipo_abordaje]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>tipo_abordaje</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>es_hora_pico</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[es_hora_pico]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>es_hora_pico</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cantidad_abordajes</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cantidad_abordajes]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>cantidad_abordajes</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>monto_q</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[monto_q]</local-name>
+            <parent-name>[fct_abordaje]</parent-name>
+            <remote-alias>monto_q</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estacion_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[estacion_key (dim_estacion)]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>estacion_key</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[modo_key (dim_estacion)]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>modo_key</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_codigo</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modo_codigo (dim_estacion)]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>modo_codigo</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>codigo_origen</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[codigo_origen]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>codigo_origen</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nombre_punto</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[nombre_punto]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>nombre_punto</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>linea_ruta</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[linea_ruta]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>linea_ruta</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_key (dim_estacion)]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>zona_key</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>latitud</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[latitud]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>latitud</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>53</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>longitud</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[longitud]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>longitud</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>53</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>km_trazado</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[km_trazado]</local-name>
+            <parent-name>[dim_estacion]</parent-name>
+            <remote-alias>km_trazado</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>53</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fecha_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[fecha_key (dim_fecha)]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>fecha_key</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fecha</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[fecha]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>fecha</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>anio</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[anio]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>anio</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mes</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[mes]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>mes</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nombre_mes</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[nombre_mes]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>nombre_mes</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dia</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[dia]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>dia</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dia_semana_num</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[dia_semana_num]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>dia_semana_num</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>nombre_dia</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[nombre_dia]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>nombre_dia</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>semana_iso</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[semana_iso]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>semana_iso</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>es_dia_habil</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[es_dia_habil]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>es_dia_habil</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>es_fin_de_semana</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[es_fin_de_semana]</local-name>
+            <parent-name>[dim_fecha]</parent-name>
+            <remote-alias>es_fin_de_semana</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hora_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[hora_key (dim_hora)]</local-name>
+            <parent-name>[dim_hora]</parent-name>
+            <remote-alias>hora_key</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hora_etiqueta</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[hora_etiqueta]</local-name>
+            <parent-name>[dim_hora]</parent-name>
+            <remote-alias>hora_etiqueta</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>franja_horaria</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[franja_horaria]</local-name>
+            <parent-name>[dim_hora]</parent-name>
+            <remote-alias>franja_horaria</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>es_franja_pico</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[es_franja_pico]</local-name>
+            <parent-name>[dim_hora]</parent-name>
+            <remote-alias>es_franja_pico</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[modo_key (dim_modo)]</local-name>
+            <parent-name>[dim_modo]</parent-name>
+            <remote-alias>modo_key</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_modo_B83B917A909049AAA6A2883CCA99FA21]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_codigo</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modo_codigo]</local-name>
+            <parent-name>[dim_modo]</parent-name>
+            <remote-alias>modo_codigo</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_modo_B83B917A909049AAA6A2883CCA99FA21]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modo_nombre</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modo_nombre]</local-name>
+            <parent-name>[dim_modo]</parent-name>
+            <remote-alias>modo_nombre</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_modo_B83B917A909049AAA6A2883CCA99FA21]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>unidad_registro</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[unidad_registro]</local-name>
+            <parent-name>[dim_modo]</parent-name>
+            <remote-alias>unidad_registro</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_modo_B83B917A909049AAA6A2883CCA99FA21]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>formato_origen</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[formato_origen]</local-name>
+            <parent-name>[dim_modo]</parent-name>
+            <remote-alias>formato_origen</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_modo_B83B917A909049AAA6A2883CCA99FA21]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>persona_sk</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[persona_sk (dim_persona)]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>persona_sk</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tipo_identidad</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[tipo_identidad]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>tipo_identidad</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>en_padron</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[en_padron]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>en_padron</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estado_padron</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[estado_padron]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>estado_padron</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>perfil_vigente</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[perfil_vigente]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>perfil_vigente</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_residencia_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_residencia_key]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>zona_residencia_key</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>formato_llave_padron</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[formato_llave_padron]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>formato_llave_padron</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>versiones_padron</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[versiones_padron]</local-name>
+            <parent-name>[dim_persona]</parent-name>
+            <remote-alias>versiones_padron</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_key (dim_zona)]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>zona_key</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_nombre</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_nombre]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>zona_nombre</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tipo_division</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[tipo_division]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>tipo_division</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>municipio</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[municipio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>municipio</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>puntos_de_abordaje</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[puntos_de_abordaje]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>puntos_de_abordaje</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_con_servicio</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[modos_con_servicio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>modos_con_servicio</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_lista</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modos_lista]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>modos_lista</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tiene_servicio</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[tiene_servicio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>tiene_servicio</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Modos Usados por persona' datatype='integer' name='[Calculation_1918977580859392]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [persona_sk] : COUNTD([modo_key])}' />
+      </column>
+      <column caption='Personas Multimodales' datatype='integer' name='[Calculation_1918977581322241]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNTD(&#13;&#10;    IF [Calculation_1918977580859392] &gt;= 2&#13;&#10;    THEN [persona_sk]&#13;&#10;    END&#13;&#10;)' />
+      </column>
+      <column caption='dim_estacion' datatype='table' name='[__tableau_internal_object_id__].[dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB]' role='measure' type='quantitative' />
+      <column caption='dim_fecha' datatype='table' name='[__tableau_internal_object_id__].[dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56]' role='measure' type='quantitative' />
+      <column caption='dim_hora' datatype='table' name='[__tableau_internal_object_id__].[dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F]' role='measure' type='quantitative' />
+      <column caption='dim_modo' datatype='table' name='[__tableau_internal_object_id__].[dim_modo_B83B917A909049AAA6A2883CCA99FA21]' role='measure' type='quantitative' />
+      <column caption='dim_persona' datatype='table' name='[__tableau_internal_object_id__].[dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1]' role='measure' type='quantitative' />
+      <column caption='dim_zona' datatype='table' name='[__tableau_internal_object_id__].[dim_zona_171EB2BD0E9D478899458B0CC9FCE91D]' role='measure' type='quantitative' />
+      <column caption='fct_abordaje' datatype='table' name='[__tableau_internal_object_id__].[fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784]' role='measure' type='quantitative' />
+      <column caption='Abordaje Id' datatype='string' name='[abordaje_id]' role='dimension' type='nominal' />
+      <column caption='Anio' datatype='integer' name='[anio]' role='measure' type='quantitative' />
+      <column caption='Cantidad Abordajes' datatype='integer' name='[cantidad_abordajes]' role='measure' type='quantitative' />
+      <column caption='Codigo Origen' datatype='string' name='[codigo_origen]' role='dimension' type='nominal' />
+      <column caption='Dia' datatype='integer' name='[dia]' role='dimension' type='quantitative' />
+      <column caption='Dia Semana Num' datatype='integer' name='[dia_semana_num]' role='dimension' type='quantitative' />
+      <column caption='En Padron' datatype='boolean' name='[en_padron]' role='dimension' type='nominal' />
+      <column caption='Es Dia Habil' datatype='boolean' name='[es_dia_habil]' role='dimension' type='nominal' />
+      <column caption='Es Fin De Semana' datatype='boolean' name='[es_fin_de_semana]' role='dimension' type='nominal' />
+      <column caption='Es Franja Pico' datatype='boolean' name='[es_franja_pico]' role='dimension' type='nominal' />
+      <column caption='Es Hora Pico' datatype='boolean' name='[es_hora_pico]' role='dimension' type='nominal' />
+      <column caption='Estacion Key (Dim Estacion)' datatype='string' name='[estacion_key (dim_estacion)]' role='dimension' type='nominal' />
+      <column caption='Estacion Key' datatype='string' name='[estacion_key]' role='dimension' type='nominal' />
+      <column caption='Estado Padron' datatype='string' name='[estado_padron]' role='dimension' type='nominal' />
+      <column caption='Fecha' datatype='date' name='[fecha]' role='dimension' type='ordinal' />
+      <column caption='Fecha Key (Dim Fecha)' datatype='integer' name='[fecha_key (dim_fecha)]' role='dimension' type='ordinal' />
+      <column caption='Fecha Key' datatype='integer' name='[fecha_key]' role='dimension' type='ordinal' />
+      <column caption='Formato Llave Padron' datatype='string' name='[formato_llave_padron]' role='dimension' type='nominal' />
+      <column caption='Formato Origen' datatype='string' name='[formato_origen]' role='dimension' type='nominal' />
+      <column caption='Franja Horaria' datatype='string' name='[franja_horaria]' role='dimension' type='nominal' />
+      <column caption='Hora Etiqueta' datatype='string' name='[hora_etiqueta]' role='dimension' type='nominal' />
+      <column caption='Hora Key (Dim Hora)' datatype='integer' name='[hora_key (dim_hora)]' role='dimension' type='ordinal' />
+      <column caption='Hora Key' datatype='integer' name='[hora_key]' role='dimension' type='ordinal' />
+      <column caption='Km Trazado' datatype='real' name='[km_trazado]' role='measure' type='quantitative' />
+      <column caption='Latitud' datatype='real' name='[latitud]' role='measure' type='quantitative' />
+      <column caption='Linea Ruta' datatype='string' name='[linea_ruta]' role='dimension' type='nominal' />
+      <column caption='Longitud' datatype='real' name='[longitud]' role='measure' type='quantitative' />
+      <column caption='Mes' datatype='integer' name='[mes]' role='dimension' type='quantitative' />
+      <column caption='Modo Codigo (Dim Estacion)' datatype='string' name='[modo_codigo (dim_estacion)]' role='dimension' type='nominal' />
+      <column caption='Modo Codigo' datatype='string' name='[modo_codigo]' role='dimension' type='nominal' />
+      <column caption='Modo Key (Dim Estacion)' datatype='integer' name='[modo_key (dim_estacion)]' role='dimension' type='ordinal' />
+      <column caption='Modo Key (Dim Modo)' datatype='integer' name='[modo_key (dim_modo)]' role='dimension' type='ordinal' />
+      <column caption='Modo Key' datatype='integer' name='[modo_key]' role='dimension' type='ordinal' />
+      <column caption='Modo Nombre' datatype='string' name='[modo_nombre]' role='dimension' type='nominal' />
+      <column caption='Modos Con Servicio' datatype='integer' name='[modos_con_servicio]' role='measure' type='quantitative' />
+      <column caption='Modos Lista' datatype='string' name='[modos_lista]' role='dimension' type='nominal' />
+      <column caption='Monto Q' datatype='real' name='[monto_q]' role='measure' type='quantitative' />
+      <column caption='Municipio' datatype='string' name='[municipio]' role='dimension' type='nominal' />
+      <column caption='Nombre Dia' datatype='string' name='[nombre_dia]' role='dimension' type='nominal' />
+      <column caption='Nombre Mes' datatype='string' name='[nombre_mes]' role='dimension' type='nominal' />
+      <column caption='Nombre Punto' datatype='string' name='[nombre_punto]' role='dimension' type='nominal' />
+      <column caption='Perfil Vigente' datatype='string' name='[perfil_vigente]' role='dimension' type='nominal' />
+      <column caption='Persona Sk (Dim Persona)' datatype='string' name='[persona_sk (dim_persona)]' role='dimension' type='nominal' />
+      <column caption='Persona Sk' datatype='string' name='[persona_sk]' role='dimension' type='nominal' />
+      <column caption='Puntos De Abordaje' datatype='integer' name='[puntos_de_abordaje]' role='measure' type='quantitative' />
+      <column caption='Semana Iso' datatype='integer' name='[semana_iso]' role='dimension' type='quantitative' />
+      <column caption='Tiene Servicio' datatype='boolean' name='[tiene_servicio]' role='dimension' type='nominal' />
+      <column caption='Tipo Abordaje' datatype='string' name='[tipo_abordaje]' role='dimension' type='nominal' />
+      <column caption='Tipo Division' datatype='string' name='[tipo_division]' role='dimension' type='nominal' />
+      <column caption='Tipo Identidad' datatype='string' name='[tipo_identidad]' role='dimension' type='nominal' />
+      <column caption='Unidad Registro' datatype='string' name='[unidad_registro]' role='dimension' type='nominal' />
+      <column caption='Versiones Padron' datatype='integer' name='[versiones_padron]' role='measure' type='quantitative' />
+      <column caption='Zona Key (Dim Estacion)' datatype='string' name='[zona_key (dim_estacion)]' role='dimension' type='nominal' />
+      <column caption='Zona Key (Dim Zona)' datatype='string' name='[zona_key (dim_zona)]' role='dimension' type='nominal' />
+      <column caption='Zona Key' datatype='string' name='[zona_key]' role='dimension' type='nominal' />
+      <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+      <column caption='Zona Residencia Key' datatype='string' name='[zona_residencia_key]' role='dimension' type='nominal' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Guatemala&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='dim_estacion' id='dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_estacion' table='[tablero_gold].[gold].[dim_estacion]' type='table' />
+            </properties>
+          </object>
+          <object caption='dim_fecha' id='dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_fecha' table='[tablero_gold].[gold].[dim_fecha]' type='table' />
+            </properties>
+          </object>
+          <object caption='dim_hora' id='dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_hora' table='[tablero_gold].[gold].[dim_hora]' type='table' />
+            </properties>
+          </object>
+          <object caption='dim_modo' id='dim_modo_B83B917A909049AAA6A2883CCA99FA21'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_modo' table='[tablero_gold].[gold].[dim_modo]' type='table' />
+            </properties>
+          </object>
+          <object caption='dim_persona' id='dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_persona' table='[tablero_gold].[gold].[dim_persona]' type='table' />
+            </properties>
+          </object>
+          <object caption='dim_zona' id='dim_zona_171EB2BD0E9D478899458B0CC9FCE91D'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='dim_zona' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+            </properties>
+          </object>
+          <object caption='fct_abordaje' id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0j9jr5815meb3z1cvt3yz0u72mjf' name='fct_abordaje' table='[tablero_gold].[gold].[fct_abordaje]' type='table' />
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[estacion_key]' />
+              <expression op='[estacion_key (dim_estacion)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_estacion_EA7B02A98F6742D2B258FED4894D9CAB' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[fecha_key]' />
+              <expression op='[fecha_key (dim_fecha)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_fecha_FCC586CAA8424E3E98D420C3AA3F9D56' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[hora_key]' />
+              <expression op='[hora_key (dim_hora)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_hora_635B1D02B5BB42C2A72E1719B0A78E0F' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[modo_key]' />
+              <expression op='[modo_key (dim_modo)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_modo_B83B917A909049AAA6A2883CCA99FA21' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[persona_sk]' />
+              <expression op='[persona_sk (dim_persona)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_persona_4FA6B6DF9F4747B08AB96A7C2BD260A1' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[zona_key]' />
+              <expression op='[zona_key (dim_zona)]' />
+            </expression>
+            <first-end-point object-id='fct_abordaje_B7E3DEFF18734DAB9AC860BFA978C784' />
+            <second-end-point object-id='dim_zona_171EB2BD0E9D478899458B0CC9FCE91D' />
+          </relationship>
+        </relationships>
+      </object-graph>
+    </datasource>
+    <datasource caption='fct_trayecto_od+ (gold)' inline='true' name='federated.05f0inl1pk7xq715i31x205dap8b' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='local' name='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn'>
+            <connection authentication='auth-none' class='duckdb_jdbc' dbname='tablero_gold' initialSQL='' one-time-sql='' schema='gold' server='local' v-connection_string_file='C:\Users\adria\OneDrive\Documents\URL\8vo Semestre\Ciencia de Datos\Proyecto\warehouse\tablero_gold.duckdb' v-connection_string_md='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='fct_trayecto_od' table='[tablero_gold].[gold].[fct_trayecto_od]' type='table' />
+          <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='dim_zona1' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+          <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='dim_zona' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+        </relation>
+        <cols>
+          <map key='[cantidad_trayectos]' value='[fct_trayecto_od].[cantidad_trayectos]' />
+          <map key='[distancia_km]' value='[fct_trayecto_od].[distancia_km]' />
+          <map key='[duracion_s]' value='[fct_trayecto_od].[duracion_s]' />
+          <map key='[es_hora_pico]' value='[fct_trayecto_od].[es_hora_pico]' />
+          <map key='[estacion_destino_key]' value='[fct_trayecto_od].[estacion_destino_key]' />
+          <map key='[estacion_origen_key]' value='[fct_trayecto_od].[estacion_origen_key]' />
+          <map key='[fecha_key]' value='[fct_trayecto_od].[fecha_key]' />
+          <map key='[hora_key]' value='[fct_trayecto_od].[hora_key]' />
+          <map key='[modos_con_servicio (dim_zona1)]' value='[dim_zona1].[modos_con_servicio]' />
+          <map key='[modos_con_servicio]' value='[dim_zona].[modos_con_servicio]' />
+          <map key='[modos_lista (dim_zona1)]' value='[dim_zona1].[modos_lista]' />
+          <map key='[modos_lista]' value='[dim_zona].[modos_lista]' />
+          <map key='[monto_q]' value='[fct_trayecto_od].[monto_q]' />
+          <map key='[municipio (dim_zona1)]' value='[dim_zona1].[municipio]' />
+          <map key='[municipio]' value='[dim_zona].[municipio]' />
+          <map key='[persona_sk]' value='[fct_trayecto_od].[persona_sk]' />
+          <map key='[puntos_de_abordaje (dim_zona1)]' value='[dim_zona1].[puntos_de_abordaje]' />
+          <map key='[puntos_de_abordaje]' value='[dim_zona].[puntos_de_abordaje]' />
+          <map key='[tiene_servicio (dim_zona1)]' value='[dim_zona1].[tiene_servicio]' />
+          <map key='[tiene_servicio]' value='[dim_zona].[tiene_servicio]' />
+          <map key='[tipo_division (dim_zona1)]' value='[dim_zona1].[tipo_division]' />
+          <map key='[tipo_division]' value='[dim_zona].[tipo_division]' />
+          <map key='[trayecto_id]' value='[fct_trayecto_od].[trayecto_id]' />
+          <map key='[zona_destino_key]' value='[fct_trayecto_od].[zona_destino_key]' />
+          <map key='[zona_key (dim_zona1)]' value='[dim_zona1].[zona_key]' />
+          <map key='[zona_key]' value='[dim_zona].[zona_key]' />
+          <map key='[zona_nombre (dim_zona1)]' value='[dim_zona1].[zona_nombre]' />
+          <map key='[zona_nombre]' value='[dim_zona].[zona_nombre]' />
+          <map key='[zona_origen_key]' value='[fct_trayecto_od].[zona_origen_key]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>trayecto_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[trayecto_id]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>trayecto_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>persona_sk</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[persona_sk]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>persona_sk</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estacion_origen_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[estacion_origen_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>estacion_origen_key</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>estacion_destino_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[estacion_destino_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>estacion_destino_key</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_origen_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_origen_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>zona_origen_key</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_destino_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_destino_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>zona_destino_key</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fecha_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[fecha_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>fecha_key</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hora_key</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[hora_key]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>hora_key</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>es_hora_pico</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[es_hora_pico]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>es_hora_pico</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cantidad_trayectos</remote-name>
+            <remote-type>3</remote-type>
+            <local-name>[cantidad_trayectos]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>cantidad_trayectos</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>32</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>duracion_s</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[duracion_s]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>duracion_s</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>distancia_km</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[distancia_km]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>distancia_km</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>53</precision>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>monto_q</remote-name>
+            <remote-type>131</remote-type>
+            <local-name>[monto_q]</local-name>
+            <parent-name>[fct_trayecto_od]</parent-name>
+            <remote-alias>monto_q</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>10</precision>
+            <scale>2</scale>
+            <contains-null>true</contains-null>
+            <object-id>[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_key (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>zona_key</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_nombre</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_nombre (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>zona_nombre</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tipo_division</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[tipo_division (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>tipo_division</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>municipio</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[municipio (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>municipio</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>puntos_de_abordaje</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[puntos_de_abordaje (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>puntos_de_abordaje</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_con_servicio</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[modos_con_servicio (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>modos_con_servicio</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_lista</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modos_lista (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>modos_lista</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tiene_servicio</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[tiene_servicio (dim_zona1)]</local-name>
+            <parent-name>[dim_zona1]</parent-name>
+            <remote-alias>tiene_servicio</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_key</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_key]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>zona_key</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zona_nombre</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zona_nombre]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>zona_nombre</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tipo_division</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[tipo_division]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>tipo_division</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>municipio</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[municipio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>municipio</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>puntos_de_abordaje</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[puntos_de_abordaje]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>puntos_de_abordaje</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_con_servicio</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[modos_con_servicio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>modos_con_servicio</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>64</precision>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>modos_lista</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[modos_lista]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>modos_lista</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tiene_servicio</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[tiene_servicio]</local-name>
+            <parent-name>[dim_zona]</parent-name>
+            <remote-alias>tiene_servicio</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Zona de destino' datatype='table' name='[__tableau_internal_object_id__].[dim_zona_034A9DBDE007413594C6AD1FF2DD8F16]' role='measure' type='quantitative' />
+      <column caption='Zona de origen' datatype='table' name='[__tableau_internal_object_id__].[dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8]' role='measure' type='quantitative' />
+      <column caption='fct_trayecto_od' datatype='table' name='[__tableau_internal_object_id__].[fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D]' role='measure' type='quantitative' />
+      <column caption='Cantidad Trayectos' datatype='integer' name='[cantidad_trayectos]' role='measure' type='quantitative' />
+      <column caption='Distancia Km' datatype='real' name='[distancia_km]' role='measure' type='quantitative' />
+      <column caption='Duracion S' datatype='integer' name='[duracion_s]' role='measure' type='quantitative' />
+      <column caption='Es Hora Pico' datatype='boolean' name='[es_hora_pico]' role='dimension' type='nominal' />
+      <column caption='Estacion Destino Key' datatype='string' name='[estacion_destino_key]' role='dimension' type='nominal' />
+      <column caption='Estacion Origen Key' datatype='string' name='[estacion_origen_key]' role='dimension' type='nominal' />
+      <column caption='Fecha Key' datatype='integer' name='[fecha_key]' role='dimension' type='ordinal' />
+      <column caption='Hora Key' datatype='integer' name='[hora_key]' role='dimension' type='ordinal' />
+      <column caption='Modos Con Servicio (Dim Zona1)' datatype='integer' name='[modos_con_servicio (dim_zona1)]' role='measure' type='quantitative' />
+      <column caption='Modos Con Servicio' datatype='integer' name='[modos_con_servicio]' role='measure' type='quantitative' />
+      <column caption='Modos Lista (Dim Zona1)' datatype='string' name='[modos_lista (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Modos Lista' datatype='string' name='[modos_lista]' role='dimension' type='nominal' />
+      <column caption='Monto Q' datatype='real' name='[monto_q]' role='measure' type='quantitative' />
+      <column caption='Municipio (Dim Zona1)' datatype='string' name='[municipio (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Municipio' datatype='string' name='[municipio]' role='dimension' type='nominal' />
+      <column caption='Persona Sk' datatype='string' name='[persona_sk]' role='dimension' type='nominal' />
+      <column caption='Puntos De Abordaje (Dim Zona1)' datatype='integer' name='[puntos_de_abordaje (dim_zona1)]' role='measure' type='quantitative' />
+      <column caption='Puntos De Abordaje' datatype='integer' name='[puntos_de_abordaje]' role='measure' type='quantitative' />
+      <column caption='Tiene Servicio (Dim Zona1)' datatype='boolean' name='[tiene_servicio (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Tiene Servicio' datatype='boolean' name='[tiene_servicio]' role='dimension' type='nominal' />
+      <column caption='Tipo Division (Dim Zona1)' datatype='string' name='[tipo_division (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Tipo Division' datatype='string' name='[tipo_division]' role='dimension' type='nominal' />
+      <column caption='Trayecto Id' datatype='string' name='[trayecto_id]' role='dimension' type='nominal' />
+      <column caption='Zona Destino Key' datatype='string' name='[zona_destino_key]' role='dimension' type='nominal' />
+      <column caption='Zona Key (Dim Zona1)' datatype='string' name='[zona_key (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Zona Key' datatype='string' name='[zona_key]' role='dimension' type='nominal' />
+      <column caption='Zona Nombre (Dim Zona1)' datatype='string' name='[zona_nombre (dim_zona1)]' role='dimension' type='nominal' />
+      <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+      <column caption='Zona Origen Key' datatype='string' name='[zona_origen_key]' role='dimension' type='nominal' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Guatemala&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='Zona de destino' id='dim_zona_034A9DBDE007413594C6AD1FF2DD8F16'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='dim_zona1' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+            </properties>
+          </object>
+          <object caption='Zona de origen' id='dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='dim_zona' table='[tablero_gold].[gold].[dim_zona]' type='table' />
+            </properties>
+          </object>
+          <object caption='fct_trayecto_od' id='fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D'>
+            <properties context=''>
+              <relation connection='duckdb_jdbc.0wj68yo0od81lb13m83ni16lcfsn' name='fct_trayecto_od' table='[tablero_gold].[gold].[fct_trayecto_od]' type='table' />
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[zona_destino_key]' />
+              <expression op='[zona_key (dim_zona1)]' />
+            </expression>
+            <first-end-point object-id='fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D' />
+            <second-end-point object-id='dim_zona_034A9DBDE007413594C6AD1FF2DD8F16' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[zona_origen_key]' />
+              <expression op='[zona_key]' />
+            </expression>
+            <first-end-point object-id='fct_trayecto_od_132EFE2711504AC5A7D57D9679E0217D' />
+            <second-end-point object-id='dim_zona_8F8DD1BBD7204A37A9F4B1F693AEA8D8' />
+          </relationship>
+        </relationships>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='01 Abordajes por modo'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_abordaje+ (gold)' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx1w1y1m4sz4f16qq6ds03cughk'>
+            <column caption='Cantidad Abordajes' datatype='integer' name='[cantidad_abordajes]' role='measure' type='quantitative' />
+            <column caption='Modo Nombre' datatype='string' name='[modo_nombre]' role='dimension' type='nominal' />
+            <column-instance column='[modo_nombre]' derivation='None' name='[none:modo_nombre:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cantidad_abordajes]' derivation='Sum' name='[sum:cantidad_abordajes:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:modo_nombre:nk]</rows>
+        <cols>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]</cols>
+      </table>
+      <simple-id uuid='{4DA2FAE2-7A5B-4831-8999-F8ADE5172EF9}' />
+    </worksheet>
+    <worksheet name='02 Demanda por zona hora'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_abordaje+ (gold)' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx1w1y1m4sz4f16qq6ds03cughk'>
+            <column caption='Cantidad Abordajes' datatype='integer' name='[cantidad_abordajes]' role='measure' type='quantitative' />
+            <column caption='Hora Key (Dim Hora)' datatype='integer' name='[hora_key (dim_hora)]' role='dimension' type='ordinal' />
+            <column-instance column='[hora_key (dim_hora)]' derivation='None' name='[none:hora_key (dim_hora):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[zona_nombre]' derivation='None' name='[none:zona_nombre:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cantidad_abordajes]' derivation='Sum' name='[sum:cantidad_abordajes:qk]' pivot='key' type='quantitative' />
+            <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]' value='144' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</rows>
+        <cols>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:hora_key (dim_hora):ok]</cols>
+      </table>
+      <simple-id uuid='{07758CCD-7514-4905-B751-089E4544F8CB}' />
+    </worksheet>
+    <worksheet name='03 Zonas sin servicio'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_abordaje+ (gold)' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx1w1y1m4sz4f16qq6ds03cughk'>
+            <column-instance column='[tiene_servicio]' derivation='None' name='[none:tiene_servicio:nk]' pivot='key' type='nominal' />
+            <column-instance column='[zona_nombre]' derivation='None' name='[none:zona_nombre:nk]' pivot='key' type='nominal' />
+            <column caption='Puntos De Abordaje' datatype='integer' name='[puntos_de_abordaje]' role='measure' type='quantitative' />
+            <column-instance column='[puntos_de_abordaje]' derivation='Sum' name='[sum:puntos_de_abordaje:qk]' pivot='key' type='quantitative' />
+            <column caption='Tiene Servicio' datatype='boolean' name='[tiene_servicio]' role='dimension' type='nominal' />
+            <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:tiene_servicio:nk]'>
+            <groupfilter function='member' level='[none:tiene_servicio:nk]' member='false' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:tiene_servicio:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:puntos_de_abordaje:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{B2CD09B6-6881-4BCF-81A7-3E554B8F0800}' />
+    </worksheet>
+    <worksheet name='04 Personas Multimodales'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_abordaje+ (gold)' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx1w1y1m4sz4f16qq6ds03cughk'>
+            <column caption='Modos Usados por persona' datatype='integer' name='[Calculation_1918977580859392]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [persona_sk] : COUNTD([modo_key])}' />
+            </column>
+            <column caption='Personas Multimodales' datatype='integer' name='[Calculation_1918977581322241]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='COUNTD(&#13;&#10;    IF [Calculation_1918977580859392] &gt;= 2&#13;&#10;    THEN [persona_sk]&#13;&#10;    END&#13;&#10;)' />
+            </column>
+            <column caption='Modo Key' datatype='integer' name='[modo_key]' role='dimension' type='ordinal' />
+            <column caption='Persona Sk' datatype='string' name='[persona_sk]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_1918977581322241]' derivation='User' name='[usr:Calculation_1918977581322241:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[usr:Calculation_1918977581322241:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{F2E6A50E-DCD6-4A10-95A2-0DD86D77BCE9}' />
+    </worksheet>
+    <worksheet name='05 Demanda no MR corredor'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_abordaje+ (gold)' name='federated.0tx1w1y1m4sz4f16qq6ds03cughk' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx1w1y1m4sz4f16qq6ds03cughk'>
+            <column caption='Cantidad Abordajes' datatype='integer' name='[cantidad_abordajes]' role='measure' type='quantitative' />
+            <column caption='Hora Key (Dim Hora)' datatype='integer' name='[hora_key (dim_hora)]' role='dimension' type='ordinal' />
+            <column caption='Modo Nombre' datatype='string' name='[modo_nombre]' role='dimension' type='nominal' />
+            <column-instance column='[hora_key (dim_hora)]' derivation='None' name='[none:hora_key (dim_hora):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[modo_nombre]' derivation='None' name='[none:modo_nombre:nk]' pivot='key' type='nominal' />
+            <column-instance column='[zona_nombre]' derivation='None' name='[none:zona_nombre:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cantidad_abordajes]' derivation='Sum' name='[sum:cantidad_abordajes:qk]' pivot='key' type='quantitative' />
+            <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:modo_nombre:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:modo_nombre:nk]' member='&quot;Aerometro&quot;' />
+              <groupfilter function='member' level='[none:modo_nombre:nk]' member='&quot;Transmetro&quot;' />
+              <groupfilter function='member' level='[none:modo_nombre:nk]' member='&quot;Transurbano&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:zona_nombre:nk]' member='&quot;Zona 1&quot;' />
+              <groupfilter function='member' level='[none:zona_nombre:nk]' member='&quot;Zona 12&quot;' />
+              <groupfilter function='member' level='[none:zona_nombre:nk]' member='&quot;Zona 17&quot;' />
+              <groupfilter function='member' level='[none:zona_nombre:nk]' member='&quot;Zona 6&quot;' />
+              <groupfilter function='member' level='[none:zona_nombre:nk]' member='&quot;Zona 8&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:modo_nombre:nk]</column>
+            <column>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</rows>
+        <cols>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:hora_key (dim_hora):ok]</cols>
+      </table>
+      <simple-id uuid='{0334DA6C-632D-4DC1-8625-854C97924134}' />
+    </worksheet>
+    <worksheet name='06 Trayectos MR origen destino'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='fct_trayecto_od+ (gold)' name='federated.05f0inl1pk7xq715i31x205dap8b' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05f0inl1pk7xq715i31x205dap8b'>
+            <column caption='Cantidad Trayectos' datatype='integer' name='[cantidad_trayectos]' role='measure' type='quantitative' />
+            <column-instance column='[zona_nombre (dim_zona1)]' derivation='None' name='[none:zona_nombre (dim_zona1):nk]' pivot='key' type='nominal' />
+            <column-instance column='[zona_nombre]' derivation='None' name='[none:zona_nombre:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cantidad_trayectos]' derivation='Sum' name='[sum:cantidad_trayectos:qk]' pivot='key' type='quantitative' />
+            <column caption='Zona Nombre (Dim Zona1)' datatype='string' name='[zona_nombre (dim_zona1)]' role='dimension' type='nominal' />
+            <column caption='Zona Nombre' datatype='string' name='[zona_nombre]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.05f0inl1pk7xq715i31x205dap8b].[sum:cantidad_trayectos:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.05f0inl1pk7xq715i31x205dap8b].[none:zona_nombre:nk]</rows>
+        <cols>[federated.05f0inl1pk7xq715i31x205dap8b].[none:zona_nombre (dim_zona1):nk]</cols>
+      </table>
+      <simple-id uuid='{CE0A5ED4-54A1-4642-997B-7D9972F708D0}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Tablero 1 - Panorama de la red'>
+      <style />
+      <size maxheight='900' maxwidth='1400' minheight='900' minwidth='1400' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98222' id='13' param='vert' type-v2='layout-flow' w='98858' x='571' y='889'>
+            <zone h='5556' id='14' type-v2='title' w='98858' x='571' y='889'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone h='92666' id='8' param='horz' type-v2='layout-flow' w='98858' x='571' y='6445'>
+              <zone h='92666' id='6' type-v2='layout-basic' w='87429' x='571' y='6445'>
+                <zone h='24529' id='3' name='01 Abordajes por modo' w='87429' x='571' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='51364' id='5' name='02 Demanda por zona hora' w='87429' x='571' y='30974'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='16773' id='10' name='03 Zonas sin servicio' w='43714' x='571' y='82338'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='16773' id='11' name='04 Personas Multimodales' w='43715' x='44285' y='82338'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone fixed-size='160' h='92666' id='7' is-fixed='true' param='vert' type-v2='layout-flow' w='11429' x='88000' y='6445'>
+                <zone h='8111' id='9' name='02 Demanda por zona hora' pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type-v2='color' w='11429' x='88000' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='950' minheight='950' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='18' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='17' param='vert' type-v2='layout-flow' w='98858' x='571' y='889'>
+                <zone h='5556' id='14' type-v2='title' w='98858' x='571' y='889'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='213' h='24529' id='3' is-fixed='true' name='01 Abordajes por modo' w='87429' x='571' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='51364' id='5' is-fixed='true' name='02 Demanda por zona hora' w='87429' x='571' y='30974'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='8111' id='9' name='02 Demanda por zona hora' pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type-v2='color' w='11429' x='88000' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='143' h='16773' id='10' is-fixed='true' name='03 Zonas sin servicio' w='43714' x='571' y='82338'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='143' h='16773' id='11' is-fixed='true' name='04 Personas Multimodales' w='43715' x='44285' y='82338'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{47A1DBF5-17F5-46AF-AEE0-5FFBD85A2A19}' />
+    </dashboard>
+    <dashboard enable-sort-zone-taborder='true' name='Tablero 2 - Corredor MetroRiel'>
+      <style />
+      <size maxheight='900' maxwidth='1400' minheight='900' minwidth='1400' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98222' id='22' param='vert' type-v2='layout-flow' w='98858' x='571' y='889'>
+            <zone h='5556' id='23' type-v2='title' w='98858' x='571' y='889'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone h='92666' id='20' type-v2='layout-basic' w='98858' x='571' y='6445'>
+              <zone h='85957' id='17' param='vert' type-v2='layout-flow' w='98858' x='571' y='6445'>
+                <zone h='85957' id='15' param='vert' type-v2='layout-flow' w='98858' x='571' y='6445'>
+                  <zone h='85957' id='7' param='horz' type-v2='layout-flow' w='98858' x='571' y='6445'>
+                    <zone h='85957' id='5' type-v2='layout-basic' w='87429' x='571' y='6445'>
+                      <zone h='39517' id='3' name='05 Demanda no MR corredor' w='87429' x='571' y='6445'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                      <zone h='40077' id='9' name='06 Trayectos MR origen destino' w='87429' x='571' y='52325'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                      <zone h='6363' id='11' type-v2='text' w='87429' x='571' y='45962'>
+                        <formatted-text>
+                          <run fontcolor='#000000' fontname='Benton Sans Book'>La demanda de otros modos identifica actividad en el corredor; la matriz origen–destino describe los trayectos MetroRiel. Ambas vistas aportan contexto para evaluar mejoras, pero por sí solas no demuestran que un abordaje de otro modo sea un transbordo hacia MetroRiel.</run>
+                        </formatted-text>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                    </zone>
+                    <zone fixed-size='160' h='85957' id='6' is-fixed='true' param='vert' type-v2='layout-flow' w='11429' x='88000' y='6445'>
+                      <zone h='8111' id='8' name='05 Demanda no MR corredor' pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type-v2='color' w='11429' x='88000' y='6445'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                      <zone h='8111' id='10' name='06 Trayectos MR origen destino' pane-specification-id='0' param='[federated.05f0inl1pk7xq715i31x205dap8b].[sum:cantidad_trayectos:qk]' type-v2='color' w='11429' x='88000' y='14556'>
+                        <zone-style>
+                          <format attr='border-color' value='#000000' />
+                          <format attr='border-style' value='none' />
+                          <format attr='border-width' value='0' />
+                          <format attr='margin' value='4' />
+                        </zone-style>
+                      </zone>
+                    </zone>
+                  </zone>
+                </zone>
+              </zone>
+              <zone forceUpdate='true' h='6709' id='19' type-v2='text' w='98858' x='571' y='92402'>
+                <formatted-text>
+                  <run bold='true' fontcolor='#000000' fontname='Benton Sans Book'>Recomendación preliminar:</run>
+                  <run fontcolor='#000000' fontname='Benton Sans Book'> evaluar un piloto de coordinación de frecuencias y conexiones en las zonas 6 y 8, priorizando las horas de mayor demanda del corredor. Medir tiempos de espera, ocupación y conexiones reales antes de modificar rutas permanentemente.</run>
+                </formatted-text>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='950' minheight='950' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='25' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98222' id='24' param='vert' type-v2='layout-flow' w='98858' x='571' y='889'>
+                <zone h='5556' id='23' type-v2='title' w='98858' x='571' y='889'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='39517' id='3' is-fixed='true' name='05 Demanda no MR corredor' w='87429' x='571' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='8111' id='8' name='05 Demanda no MR corredor' pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type-v2='color' w='11429' x='88000' y='6445'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='6363' id='11' type-v2='text' w='87429' x='571' y='45962'>
+                  <formatted-text>
+                    <run fontcolor='#000000' fontname='Benton Sans Book'>La demanda de otros modos identifica actividad en el corredor; la matriz origen–destino describe los trayectos MetroRiel. Ambas vistas aportan contexto para evaluar mejoras, pero por sí solas no demuestran que un abordaje de otro modo sea un transbordo hacia MetroRiel.</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='40077' id='9' is-fixed='true' name='06 Trayectos MR origen destino' w='87429' x='571' y='52325'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='8111' id='10' name='06 Trayectos MR origen destino' pane-specification-id='0' param='[federated.05f0inl1pk7xq715i31x205dap8b].[sum:cantidad_trayectos:qk]' type-v2='color' w='11429' x='88000' y='14556'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone forceUpdate='true' h='6709' id='19' type-v2='text' w='98858' x='571' y='92402'>
+                  <formatted-text>
+                    <run bold='true' fontcolor='#000000' fontname='Benton Sans Book'>Recomendación preliminar:</run>
+                    <run fontcolor='#000000' fontname='Benton Sans Book'> evaluar un piloto de coordinación de frecuencias y conexiones en las zonas 6 y 8, priorizando las horas de mayor demanda del corredor. Medir tiempos de espera, ocupación y conexiones reales antes de modificar rutas permanentemente.</run>
+                  </formatted-text>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{DBE01103-7948-43BB-9B6D-0E144FFEF830}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='51'>
+    <window class='worksheet' name='01 Abordajes por modo'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:modo_nombre:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{48FBCC16-7359-418F-ACCD-661E22BEFD99}' />
+    </window>
+    <window class='worksheet' name='02 Demanda por zona hora'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:hora_key (dim_hora):ok]</field>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{719CB675-87C1-4E39-86A2-CAA280E82AE6}' />
+    </window>
+    <window class='worksheet' name='03 Zonas sin servicio'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:tiene_servicio:nk]</field>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{FB6DB327-83A7-41C8-8252-7EFD35BB8B3A}' />
+    </window>
+    <window class='worksheet' name='04 Personas Multimodales'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BF393126-F63D-488F-88B5-989E236AEB57}' />
+    </window>
+    <window class='worksheet' name='05 Demanda no MR corredor'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[sum:cantidad_abordajes:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:hora_key (dim_hora):ok]</field>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:modo_nombre:nk]</field>
+            <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[none:zona_nombre:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{97F19390-828B-4E8C-8E7B-3E90281A8A8A}' />
+    </window>
+    <window class='worksheet' name='06 Trayectos MR origen destino'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.05f0inl1pk7xq715i31x205dap8b].[sum:cantidad_trayectos:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.05f0inl1pk7xq715i31x205dap8b].[none:zona_nombre (dim_zona1):nk]</field>
+            <field>[federated.05f0inl1pk7xq715i31x205dap8b].[none:zona_nombre:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{1FFA352C-7ECF-4FCA-B539-B9F93F2773DD}' />
+    </window>
+    <window class='dashboard' name='Tablero 1 - Panorama de la red'>
+      <viewpoints>
+        <viewpoint name='01 Abordajes por modo' />
+        <viewpoint name='02 Demanda por zona hora'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='03 Zonas sin servicio' />
+        <viewpoint name='04 Personas Multimodales'>
+          <zoom type='fit-width' />
+          <selection-collection>
+            <tuple-selection>
+              <tuple-reference>
+                <tuple-descriptor>
+                  <pane-descriptor>
+                    <x-fields />
+                    <y-fields />
+                  </pane-descriptor>
+                  <columns>
+                    <field>[federated.0tx1w1y1m4sz4f16qq6ds03cughk].[usr:Calculation_1918977581322241:qk]</field>
+                  </columns>
+                </tuple-descriptor>
+                <tuple>
+                  <value>36827</value>
+                </tuple>
+              </tuple-reference>
+            </tuple-selection>
+          </selection-collection>
+        </viewpoint>
+      </viewpoints>
+      <active id='11' />
+      <simple-id uuid='{D78F5AF5-1C70-4CFA-BD4D-C9F197EEBD41}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Tablero 2 - Corredor MetroRiel'>
+      <viewpoints>
+        <viewpoint name='05 Demanda no MR corredor'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='06 Trayectos MR origen destino'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{13465978-732A-49C7-8491-F4880694068E}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='01 Abordajes por modo' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='02 Demanda por zona hora' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAaFUlEQVR4nO2d6ZNUZ3ann7vkvlVWZm1QFFAgFiHRCElNN1pbSNFW2+0Zu+3oibY9EbZj
+      HNN22/PBMfNPzHya+TAx4/EsYYfd1ooQUksCCe00EiAJBFXs1EJR+5L7cpf5UICUFKjJ91aT
+      WZ3niZCoqrgn73sz7y/ve8/9vedoruu6CEKLojd6AILQSEQAQsvgui43T3jMBo1FEOrA4tTp
+      C3RETLTUatKRAJqmLdlq7upF8lqcudk57tu6EdD4+mbHfvkRTjjF5JVhHn10N9OzcyIAYSVg
+      88E7B2kL+lm7cycfDo+S6lzFpcHPuG/Hw5z98jgP7PkR4dlR/umtU/zRH/+IvS+9SCCWIOAL
+      4jPg8ccfYzZXIBrfwJ5HErx9+BOiIb9MgYSVQeeqPjZvXMv87BSr+zewMD3Jqg334eSnaW+L
+      MDGbA2DTPeu5cO4cQ6Pj6GYYKztGVQ8B4LpQLRc4dfoMbe1Jcvk8mmSBhObHYWEhT8DUwOdn
+      9PIletasw7EtfFiMTc7S2bMaPxVsI0gpn6OUn8cxw5w5+hH3Pfk7dEZ9fPTeITZs2065VKFv
+      dSeZrAhAaCEc28JBxzS+mvisyClQOTvDsRODSrGuY/HOm/v5YuCCUrxjlXnv7Te5eGVKKf7k
+      scPs3/8akwsFpfjBk8f48MhxHIWvLdd1OfL+QU6eHao71rGrfHLsOK7rcuzwe5wYvFhXfLWU
+      57MvTuG6Dl8e+5SCVd/+ZyeGOT90lemxy7z22i+Yy5fvPNh1GT53kvGFChcHvuDIZ6e4/vat
+      SAEcPnKMixfOKsVaxUlOnZ0gnW5Xij9z9D1G522CAb9S/L07vo1hlwkFA0rxg4NnGbt8jmLV
+      qT+4MMZwJsiZzz/BrlNA5XyGL04NYhcnuZrxcfnMybpeIzO/wMCZM9jVIgMnvqRg17f/3PRV
+      Tl0YJRhLsb4zyIWhO/8CcoHxS6cZmcnTlu5mdOgy19+9FScApzTPxEyGy0PDVK36TwLNSPCH
+      P/4hhw4eUBuAbrB562aOfHxYKbySmcCN9hALGArRLhYGsZBJReHYCXfTn4YphatPMJqkoy2C
+      44LjWDiOy9JE5O1JdnYRDpjoZoie7hS2U58CVvf24joOI2c/Z7gQYfs93XXF9/b24tgOpqFR
+      yWexr719Ky4Nqgfb+PGP/4ArY2P4zPr1q+kal8+f47Enn1La/+adj3L006N895HdSvEV2+Cx
+      3Q8pxYLGzu33MlvUSIRUBLT4Gj/47d/GqOfsBfKZGdLtKUZnbDb1RvEl7kGv4zWmx0dJp9q5
+      MjaGFmtnemSErk3r7jj+wsgk6bCGEUkSKy0wkynQk4rfYbTDRBZ03ySTls22nQ/hu3bq3LgJ
+      zmazS56SNZIvJmawFMfj072cIJAv24zMlZTj7XwJu1xVjk92t6HXc3bdRCLk4xbPie4eXk4j
+      jbquLF53feMKEIvFPOx2+Xn783MUrDrvlK4RDRhs6w4r73topsCrJyaV4wvDU1Rmssrx9z95
+      L/6gTzl+S1cEw4OAPJ2ArsfzXwPdg3rr/RJfcfcAgrCciACElkYEILQ0NQKwclP85//2d+Tn
+      x/kv//V/cez4cebm5shnFygW85w7f4ns/DTnL482aryCsKzUpEFdxyYVMXj/yCk6ejoYG7tC
+      Z7DK3k9G2NTh576Hd/POoQ9oj5oEEyl6k6FGjVsQloWaK4Cmm2zZdj+zCznWpBNEo1Hm8hZr
+      O2Ik2hJcuDBENBxgJmcT85ClEIRmoeYKYEbT7N6VZveu2o22X/v3eorJxVuqShCahbqeBF9f
+      hSOnvvCbgmSBhJZGBCC0NE1rhkuEDAJqTgjCfp2gqT5RiwVNVrWpZ7hmKm1kQ2p2aYB0LIDf
+      r+5ligeNht6jebGU3e1hN68AgiZBW+3dCJoaQQWn6HViAZMeDwKwATuqHp+M+Qma6gKIBRon
+      gOaxU94ZMgUSWhoRgNDS/NoEcKsqXILQbNTcA5QyE7zy+ntsvG8Hm/o6wQjgNyBXKNGebOOL
+      j98iH+4nmDtPMdxHezTAut4uKrZGKODD0DRcXWdhfgGfu8DAiMuOPp3/s+9DNm7cxCM7t2Lr
+      PgaOH2PzzgdxSwUCkRhutUTV0QkFDLL5Mu3JRKPeD6HFqBGAbvoxNAcXOPHpYY5fmGJdZ4TC
+      XJ49P/kJZUtjbmqUQHkB3clwYSLDl18co2xBOhFlbSrC2Zk8hYU52rvShCLrcCoO+MJkF2Z5
+      4V/+GTfQhl5aoGP9ek4f/Zjpip84RYpll4ce3sYb+97iD/793zTo7RBajVo3aNWiLZVm6Nwg
+      F0cmaIuGicRTbFjTg4OLrpvEtQJafBWGoaPrBgYO2XwJzS5yYuAcfp9JtmiRjEYwdB00nU1b
+      t/N7v/N9rHKRWKKdVau6mJ+6ylTGIhzQKZeK2OicO3OOnq40VUumTsLdYUlhLMe20XQD17HR
+      DOMbbQ+uY3Ps08PMFnSeefI7uK6GrmvYto1+i1jXdXDdxYKlruvi4mLoGsePf86OHQ+gae6N
+      1/jfJ7+kbNdZO+MaQVOjL6lWdgRgKlfl6EhOOX50vshMQX1N8OMbkp7SoL1tfkmD3iFLngPo
+      xuIbrxm/+gPQdIOHdj361e/X3nPjNrGapt/Y5uvVfXfu3Hl9i8Yu5hZaDkmDCi2NCEBoaZrW
+      CmE7LpZKAUzAdjWl2pnXsRyXkqV2/wFQrlhUShXl+KrlomvqB1B1vMV7n4V6KGvi+S6ivn03
+      rQAcF+WT2PFYm8ZxFwWoim072CqlC6/Hezh2AMd18XISehWAl/s4L8e9iItWxxHIFEhoaUQA
+      QktTWxXixiMBF8cBXGfxeqgZN0rtXff4LF7mdElbCiuaGgEsjJ1lYMZHaeIcoWQH2uwYRIKE
+      +x7CnblM/5ZtkB3l71/8iMfu6yR9z7fpSIYpF8rMTAyR7FqDrvtw7TLZuSkIJenr6WjUsQnC
+      r6RGAIme9cx+fgDN8JMbv0Knf/HrvZKbZ2rsEpfGC3zvgQ560yG+ODPEuiKU79/GqQOHGC44
+      pNoGScajgE4yYnDy/BH+4s/+pBHHJQh3xE11gfyEKdC9dhPxeJxwLE44EqO8MEnVFyUZC2OY
+      ATZvfxitkqM9leTksc+Ir1pDV1uEbfd9i7CTpad/IxOT86TTqUYdlyDcEUu8QNd/vbkR8eK8
+      f+nfrm97a++/urXhf3x+kpKiFyjk01nXru4FGs9UOHx5QTn+ykye2WwdPaxu4ol7uwn61L1A
+      a5I+T14g72lQ9VdwlmENST1p0CXPAW43+Fv9/et/83LQgtAoJA0qtDQiAKGlaVorxFyxSlHR
+      jxP165Sq6oeWK1uMzxeV47MTC5Rn1dcTzKxpw+9XH39byKirgd3X0Tz26Lr2Kh5ivd0D1Gul
+      aFoBZMs2hapaZSzXNajU2wj3axQqFrM5dTNbcTZLdVL9JnohX8bnafyOpx5hHkKv0bhlMbb0
+      CBOEO0cEILQ0IgChpakRQCk/y74Xfs6/vPoOC7NTzGcLFPJZxiemqJQKjF2dwHFdMtNX+J//
+      958aNWZBWDZqboKDkSTtbXHW37+Nt9//JbbtENAr5PNlHty1kw8OvMl3f/inbFndw6pUczXW
+      FgQVaq4A2YlLHDl1mdGRK7hWCc0wiae6WLu6i0sXLpDq7MCxHTLT4wwNDXNpdKJR4xaEZaHm
+      ChDr6udv/8NfAvDwzh2gaTc8JdfXAej6omb+6md/dZeHKgjLz22fA1w/0a+jaZr4fYTfOCQL
+      JLQ0IgChpWlaK0QyZBJQ7MUd9RsEDA89wgLeeoTNdbeRUx080BEP4vPgBVrsEaYc7inWvfG/
+      xlDvrptWAB1RH2Vb7QIVNDXCHprMJcM++jujyvGjAQNfh3qPg9XtYQIeepy1R7z1CPNkZfN4
+      8i9HWax67lVlCiS0NCIAoaURAQgtzRIv0P6XX+CVtz7AsqpYtoPj2FQtC9dxqFatGw/E3tn3
+      POfG5ho1bkFYFm7yArXTlU6QXr+Rl158CccIEtZLTExl2fPMo+x74SWe/eOfES8NU3VN5vPq
+      i0YEoRmouQLkpi7z7tGzzE1NgGYALqFEms3rVnHqy1OsXd9LqVilYusUsjOMj4sXSFjZ1FwB
+      wqk1/PVP/xxdN7hv62YwfF8trXMdKlWbQCCArqfo27AFdxlWjwpCI6ltk6obBIPX8+c3P8gx
+      CJlf/U3TdTn9hRWPZIGElkYEILQ0TWuFyJVtipZaWRTL57Usis1UpqQcn5nNU8io1xWa64zg
+      91AbNBHyZoXwjAc/w3LYiOo58qYVwNhCRbkuUDxg0BXzK+97Olfl9Kh6XZ/S8CTWTEY5/mJH
+      HF9Q3UwXDZjKdYGWoTatt6YpHvcvdYEEoQ5EAEJLIwIQWpolXqDX9r7Mm+99cs3zc+ug/PwE
+      +/e9yvCEeIGElc0SL9Da1SmMVA97X3wBxx8johUYm8zw1FO7eefAQb73r/8tY8c/ouD4qVSr
+      jRq3ICwLNVeA4vxVPjpxmYBbRAtEwSphhBNs7O1k8MxZ2tvCLGTLJNvb6V3dw+DguUaNWxCW
+      hZorgBlK8FtPP0EwHOPRb0fRAjGCPh0NF9exmcvk6Ohow7/+UUaGR9n5rd5GjVsQloUaAfgC
+      YdauXXvbjSOxr9a59q1b92sblCDcLSQLJLQ0IgChpWlaK0TA1LFdNX36Td1TbRufoREIqL81
+      dtiPU1TvUxz2G/g8eIF8huatzZEXO8Ky9BhTx3Dr23vTCiDo03E1tZMg4NMxPRTGMk2dcFjd
+      i1MNB7DKaj4mgHDA9CRAv66he2/0pcxKKiErUyChpREBCC2NCEBoaWommqX8LAfffJtquIsf
+      PPkQ6H4M7fpieB+lcoVwKMToxQE+OXqMdP/DPPHwlkaNXRA8s6RHWEcqQffGe9j36us4mo+Q
+      XmJ6Ns8T39vN63v38sy/+SlbNtzLpfMX2Lq1v1HjFoRloUYA2clLHPpkgKciKRzbwjFMQok0
+      GyMxTp86Rc/qbsoli2pxnjk7TEdUfdWVIDQDNQKIdqznP/3tX6NpGg8+8C3Q9K/Wlroututi
+      XGud9LvPPnXXBysIy02NAL7eB8wwbspDa1rzPjQQBEUkCyS0NCIAoaVp2llNqepQtGylWFOH
+      qoe6QFXLoVRUX+1mFcrYOfW6QMWKja2pfzdVbBdjOeqbKOLRSnRXaVoBZEpV8op1gVzXoWyp
+      fwzFkkVmQf0ErszmsD3UBZovVDAd5XCKVUe5LhB4a5LnuIv/eeFueolkCiS0NCIAoaURAQgt
+      zS3qAr3ELw79Etd1blsXaGLoDPv2vcq5YekQI6xsltQF6u1OEuzu5aXnn6+pC7Tn6Ud467Vf
+      8PQf/jnO7BTFUpGpuQz39HU1auyC4JlaL9DEJd47fp7v7Epi+nzgM0kkV5FuTzMyMkoq1Ual
+      bIPtEgqHcRTLlwtCs1AjgFjXev7mL/8dAO7O7cBX1gj32nxI0zToe5TNjouuyy2EsLK57XMA
+      7aYHMVpNcraxa04FYbmQr3ChpREBCC1N01ohumJ+ipZaWZSIXyfiV9d2MuqnvyeuHL9guBRS
+      UeX43lQYv1/9o0mFTU9TVK8lhTzbkDwMwK1z500rgO54gLKtZoYLmJonAbRHfGzwIICrET9z
+      RfUM2ZpUhIDpZfxmY5vkecCrduoVgEyBhJZGBCC0NCIAoaVZUhfowBsHqYQ6efbxnWAGMDWH
+      QqlKNBwkmy+SSMS5cPIon5+5xPZvP8nmtZ2NGrsgeGZJXaB0e5zeLVt4/c2D2BiEtDLzCwV2
+      P7aLA6/t58kf/QXFhQVCkTCnBgZFAMKKpmYKlJ24xPvHzzI2egXHqgIakbY063u7OTM4SGd3
+      J9WKRd+GezAdi/7+9Q0atiAsD5p7m7yR49g1dYEW26Yu+n9c18VxHAxDvYb9r+IfTp/ylAZd
+      FVcv2jWTr3LiakE5/mqm5CkN+p21bZ7SoKviPkmD3iG3fQ6g67Un99drBmma9ms9+QXhbiFZ
+      IKGlEQEILU3TWiG80PjZr7cRNHL8jasm1BiaVgCa1rheU5qmebqJ1DVvtXXAowg0Dy/QYAVo
+      ePvc3TqDZQoktDQiAKGlEQEILc0t6wLtf/vjb6wLlJ8b5+cvvYpjldn/8vO8/8vP78ZYBWHZ
+      WVIXaFVngljvWl547jkcX4SwVuTqZIann3mU1/fu4/s/+SnrUynChktx8iLB3h3Mjw3gujtW
+      VINkQYCbrgD5mRHe/+wi5ewcmi+I5toE4ym2rFvFwMAgq3u7yOcrlAtZJibGmavozAwNUHH1
+      Zsg9CkLd1HiBbKvCQiaHzx9EcypgBvGbOrgurutQKJaJxeO4VoVsvkAwFMEqF/CFooQCvmUd
+      2D8OePACGRo9HrxAswWLk569QOr9BXb1efMC9STUvUANbCsALEMatM7ta6ZAhumnvb392m/h
+      JRsHgqFrGwZpDwQXfw4F6tylIDQPkgUSWhoRgNDSNK0VwnJcLMU+X6aueXqi7zguFcX+ZACl
+      qk2xor4eoGo7nqwUtuPiKL8Dmud8hvceYeqv4OkeoJmwHVDtc2d7bFLl4HpqslexHMpV9SZf
+      lu1ieLg2247rwcvkJda7lci5y3fhMgUSWhoRgNDSiACElmaJF+jVF37Oc/sPkZmfIZMvUizk
+      mJqepVouMjE5jeO6ZKav8Hf/759xbItX/uG/c3G63KjxC4InltQFak8mWLdtKwcOfYjtQFCv
+      kM2W+PZ3H+TdN9/gkX/1Z2xZ3UN3MoqmG2y5p9/TDaMgNJIlPcIOn7iImejEtcpoZphYeyep
+      eJkL58+T7urAthwy0+MMDV3m0vAIZ85eQq/2sKlzu5jhhBXHN9QFcuBrSwO/XhfobvD3J79U
+      9gIFTY2+pLpFYypX4ehwTjl+dL7ITL6iHP/4hhQBn3rZmd42b3WBGpkGrbeuj1e+oS7Q0h5h
+      mnzFC79hSBZIaGlEAEJL07RWiPlClYJiI+6o36AYUT+0TNFibCavHD8/laG4oL6eYLIj4qlH
+      WDyoe5rHe5/pemrydVcrszStAMazFQpVNQHEAwbdXhbE5CpcHM8qx1eHp7BnFpTjR/rSmEH1
+      8beHfRiKbrrlOPm82uk8LYiRHmGCcOeIAISWRgQgtDRLvED7X36RfQc+xHFsnGsPvxzHqfk3
+      N3OVf3xuL3Y1x+t7X+GNQx81uqSkICixpC5Qd0ec9rUbeP6553DMMBF9sS7QM888xr4XX+YH
+      f/IzNnR0kAgaGL4o27b2c+pKplHjFwRP1FwBctNDvHfsPNnZSXTTj45LKNHB1vW9nD49wNr1
+      vRQLVQqZOUZGRrh84TQ/f+VtujvSjRq/IHiixgvk2BbFUhndMNEcCwwf5vW1ea5DqVIlFAqD
+      bVGqVDBNE8uy0HSDUCi4rLWx/uPBI57SoNtXR5X3fXkqz96jY8rx1eFJT2nQdXu2e0qDPrA6
+      LmnQO6RmCqQbJpEbD5CWmsmivmsfiu4j4lsshBUISF0gYeUiWSChpREBCC1N01ohIn4DTVOb
+      kYb9Bj5DfSIZ9BkkIupz8FwiTElxLQNAPOTHF1D/aEI+Hd1DYSEvnnyvlnnPNYnqHHrTCqA7
+      5qdkqy0KCfl0YgH1BSWpmJ8NqxPK8VeCJrMdbcrxazuiBD0siOmIeSmO6/022JMIPO6+3rpC
+      MgUSWhoRgNDSiACEluYWPcJe5sAHn15bBH/roFJ2llffOIhtFXn7F6/z4adfiBdIWJEs8QKt
+      602jJbt45aUXcQIxIlqBsYksTz31Hd49eIgnfveP6IkFKOez6EaQVT3tnJuYb9T4BcETtVeA
+      hXE+PjlERK9AIIZbKaIH42xYnWbwzDkS8QDz2cUqcOVintmpCcxYJ5nZqYYMXhC8UtsiKRBj
+      zxO78YXjPPLgNgjECfl1NFxcx2JmPkdXdwK7nOO7u3fj6IueoWef/b70yBNWJDUC8AUj9Pf3
+      33bjaDy5+IO/jf7YYp67Iy1OUGHlIlkgoaURAQgtTdNaIcqWQ0mxT5euLfYYU6ViORRK6n1+
+      K4UKdq6oHF+sWHjp8lSxXHRFHxV4tENoGt46tHmjXitE0wpgZL5EXnVBTNCgI6reuHsqU2Zw
+      WD21W7l8FWtSPf5cVxwzpG7GC/sN5QUxy7EkZiUV15UpkNDSiACElkYEILQ0S71A+17hw09P
+      fKMXyCoX+ODjI1j5Ofbt28db7x4WL5CwIlniBdra38O8HuGN/fsglCRMniuTWR5/7CE+O/YZ
+      Ox9/ljajyPDwCI/t3sX3v7eLtw6flSfBwoqk5gpQLcxxZGCM9R1BnGCSSm6OiuanNxXl7PmL
+      VIvzTM0VCcXaiAZNbNvhg/cO8/gTuxs1fkHwRM0VwLahv6+HiQWLrX3taJFNxEI+dNfBsSuM
+      tneyoSdGdnaK7p4erkxMc//Du0l4WH4oCI2kdgoUS7Jr167bbpzuWr34Q7ibXenuX+vABOFu
+      IFkgoaURAQgtTdNaIaIBE9WWxFG/gd9DXaCQ3yAZUy/5mG2PUfTgp2mL+PEF1K0cYb+XHmHe
+      Etoa3sqi3G0rRNMKYFU8QMlWG95iXSD1Q0tFA2z0UBdoNGgy25lUjvdaFygdMT35cTzjcdde
+      wuv93pEpkNDSiACElkYEILQ0t6wL9Ma7R77RC1RYmObl/W9iVwu8sX8fH3zyuXiBhBXJEi9Q
+      X087vs5VvPzC8zj+a3WBJjPs2bObg2+8xVO//6f0JiK41RKOVWJqNkPOuQrsaNAhCII6NVeA
+      4twYH564jGkV0AIRsMqYkTbuWdPFwOBZ0qkYmVwZ26qSXZhj6uoVAm09VEuF5emtIwh3mdqy
+      KOEkP3x2D4FQlCd2t6H5IgT8Bprr4roW85kCqXQbbqXAnqefJhxv44mHkwQiSU99nQShUdQI
+      wAyE6O3tve3G4Uh88QdfjN5IbPHnuHozOkFoNJIFEloaEYDQ0vx/djanBsOUsTwAAAAASUVO
+      RK5CYII=
+    </thumbnail>
+    <thumbnail height='45' name='03 Zonas sin servicio' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAAAtCAYAAAD4BmRbAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAIpklEQVR4nO2ce0xU2R3HP65AXaBTxWm21t2lWF9NfGTDrDxcNoo8ZkWm4JsqatSNVHbA
+      t7FGXKKsLau9NeujrBuFmIkoELWohWKo1S44OD6qiLWLGHd5RL0gmQbanV5j/xiGEUthYAbd
+      5J7Pf9x7ft/zu797v/ecc8+EQc+ePXuGQKBSXnvVCQgErxJhAIGqEQYQqBphAIGqEQYQqBph
+      AIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBph
+      AIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBphAIGqEQYQqBqv3hpYLJaXkYdA
+      8EoYJP45rkDNiCmQQNUIAwhUjTCA4KVhs8rIT9pRXnUiz9HrIrhnFJoqTRw5+kcu17eD75tM
+      mvYBi+d/wPgAN6W7dNPOk9Z2Bmu0aHw8oGf7hrLDezl27h/IgHbsTOamJjMzyM/FeCuy9Sm+
+      Q4fh66nLfJDHojmfgbEI09JAD4m+yF1OZRVy+/lDw8cQG5eA7i1HYS+yXbeOs3G/xZL5vkd7
+      v7xHz7paI0WmpQzUFfYVN0YAhbq8Fcw2fkEVowkJCSFkNFSbMlm8t8JzGQI0FPCRXs+ey+5L
+      KXVFGOMT2WKqZcikEEJCQgh4eJzjF2XXRS7vQa//iIIG9/PpxH800xITmTba34OiL/KQ6ydP
+      cuZ8BWazGbPZzF9M2aQkxrP9orWjzRu8k5hI4jtvDGAe3x3ceH9VYfr9bbTJhylMn+QUUtq5
+      U/fYE7kNAA84nrmbSuLIPr2NyM5RajM22ytNDIZP5cOtU19KV6OWHXCOMkoTJ4yzyf44B0P5
+      RoIZR8LWrSS8lExePW6NAMp/wPf7/l1d5OXLz8Y6Brg2aooyWB4TgU6nQ6fTERGTSs5Nq7O9
+      WcJg+JRz1/PYMHc6YTodurBZrCmqQwEaCtMxrM6lDijfacBgMGAwSJhd1X+emjPk34bIdZue
+      e/gBvPDx6fi7rYaijOXEROg6NCOISc3BIWmWDBh2lgN15K7uyCe9kAYXYjvjJTMoTZzLmMv0
+      sEXkPQAwIxkMpBc6hpUGCtMNpJsqKdvl1IxIkqjq1HvERWk1c6eHdfQXxvS5GZxr6sMs22sE
+      s+dFgrWavzc4+zVI5s4mDYXpGNJNVJbtctY6IgmpM5H/jen+WFfaaorIWB5DRMe900XEkJpz
+      k/9z9wYENwwQTHikN/cO/JIVUjHVTd0tbmRuVcpMXCmRX1JCSb5EwohrHFpzgCpH429baWw8
+      zq7se0xc+ilH8yWSxjbz190mqoChwUmkJU9FC4yPTyMtLY20tGiCXNV/jobrVTQRzrT3epjr
+      y7eolCeyUsqnpKSEfCmBEdcOseZAFQoQFJ1GWvx4QMvU5I58koIZ6kKs/XIbaWxtpmLXMjL+
+      bCVo6jTss55vaW1sRG5ztFRokxv5cl8WBUP0bD+YT+6mSHy/MrG/2GGSWszXtMRvPcSpkhJO
+      5a7l3X+eI2NbEQ/7cCebHz8EtAwb6uy3sfXbzvNKm0zjl/vIKhiCfvtB8nM3Een7Fab9xXbj
+      dxPT/bEXS12JPHElUn4JJSX5SAkjuHZoDQe6u3kDhBtTID9id+bR+qtN7DNlssyUyetvTmF2
+      6hZSo9/CvqQKZMHuA84QbQTrNy/mwpIK7jTAlM6VUBxZxzJxLLnmRo7i2G0FBfALCiXqtbsc
+      oYQfT44iqsu6zFV9O4qiAP7497TWDVxAV8n1bF58gSUVd2hgCoEToohquQS0MyYsiqjAPsQ6
+      Tlzeyyc/MnD4bCqTND3kAoxL2c/njunKhFmEZpdTqzgekHA2Hg1/rsP5bE83U55Rw12g11m8
+      zUr9zZP85vANvN/dQnBPdRmXwv7PHYvXCcwKzaa8VnHri07ggt04y6UlYv1mFl9YQkV3N2+A
+      cO8zqM9YFuw+xSWLBYvFwqVTv2byhaWEh+2gAqCtgh2xOmKNOZyvrkeWZWTbIHw9knrf9UcG
+      jcaba9yq6UlyB7G6WIw556mul5FlGdsg1zJ2OTZ0K2fyen/4e+WBiaVhYczbcQJLrb2/fz31
+      7jVMaXtir5XVxpCxSXxWaqHy4JzeDeNR2qjYEYsu1kjO+WrqZRlZtuFiqT1G/0eAthZavAMI
+      6PJZUsNPfvpDKO14M1wt5XRzLNnSKiIdPbX5ufvt1Ukf9b3C4/i55ixFpnKSsyLp7vm7Wnqa
+      5thspFWROCVdy9id2P7w4MI5br/9ISe2zWeU4+APvtdrnJffMLRa7YDl5RpXKT3dTGy2xCrn
+      zWMAy9Ut/R8B5GKMM5LIyCvufPvUXvodWUfu4R0ZTjCAnz8a7nDlSgsKCu33y5CyCqjra18j
+      gxjtDZdOn6RWlpHrH9kXSn3V95rC6o/j8C7dyi/W5HCpVkaWa7GckPjk9APskhq4c4UrLQoo
+      7dwvk8gqeEExcBTjuMufTlnsb66mFtpcjfUg/v4a+PoK5m9sgI1HluNkHCwfsP56yAR/DVB7
+      HUu9jFxfTbGURc+X7oe9XFewl+s+Zb3GeJ7+G2BkDCtmvs7lLzJJWahHr9ezcG0RzSEbydsZ
+      ix9A8HxWTX5MgTGGUF0oM4xnCYiPdr6tXMUrnKUb3sO3IouFej36hP3c6Ke+5v1t5GYbGPa3
+      XNYu1KPXLyRF+gMtg+3f34Pnr2Ly4wKMMaHoQmdgPBtAfPQLioGJpC8aw9dHU0jQ69FvKEZ2
+      NdaDDNcnM2f4DfYkhqPThTNnTx3TDJ7dvHIxE6KT4hh+9ygpCXr084yc+HcoYW/3FBPM/FWT
+      eVxgJCZUR+gMI2cD4hnAcnWLB34NqtD+pJX2p+DT7U6t47wPGq0GtzZybVZkq43BvkMZ1rkF
+      21/9HuI6dp6f+mjQ9rD1rLQ/obX9adfrdjHWc9iwylZsg30ZOszXc9PLftBtPQYgxpOIn0ML
+      VM1/AVz3w9vtu4k4AAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='25' name='04 Personas Multimodales' width='64'>
+      iVBORw0KGgoAAAANSUhEUgAAAEAAAAAZCAYAAACB6CjhAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAEoUlEQVRYhe2YT2gTXxDHP8Z2W1ptLETwIhZtRS/iSURUCtqLBzFC8SAWRLv+qVXQoxZs
+      8CCWLR5EUQ9C8SAI/gEtqCiNuWgvgtAmrkHdphQTPWTDNmZ3uxkP0oX8kkr5tZCD/cBeZr5v
+      mJn35j3YZSIi/MMEqp1AtVlqQLUTqDZLDah2AtVmqQHVTqDaLDWg2glUm6UGVDuBavPPN6Bm
+      IYtd1yUajfLw4UNSqRQAW7du5cSJE6xbt65EOzo6yo0bN0gmkwSDQTo6Ojh9+jT19fUVYz97
+      9oyhoSEsy2LFihV0dXWxb98+AoE/e1YsFhkdHeXevXukUikURSEcDnPo0CHq6+tJpVIMDQ1h
+      23ZZ7KamJlRVpampCWQBjIyMyOXLl+Xbt2/ieZ44jiOvX7+Wzs5O+fr1q6+LxWJy5MgR+fTp
+      k4iIOI4j79+/F8uy5ozd29srhmGIiIhhGNLb2yt37971/QMDA3LmzBkZHx8Xz/PENE0ZHByU
+      /v5+cV1XHMeRdDpd9sViMVFVVUzTFBGRBTVgLjRNk1evXomIiGmacurUKYnH4/Nen81m/eJn
+      MQxDenp6JJvNioiIruvieV6JJp1Oy7FjxySdTleM63meRCIRefr0qW9b9DvAcRy+f//uH+1E
+      IsHKlStpbW2dd4za2lry+XyJLZ/PoygKtbW1ALS1tfnjMItlWSiKQl1dXcW4uq4zNTXFrl27
+      fNuiNuDHjx9cvXqVUCjEtm3bAEgmk2zYsIF8Ps/bt28ZHh7m48ePFIvFOeM0NDSgaRpjY2O4
+      rsvY2BiaptHV1UVDQ0PFNdlsloGBAXbv3k0wGCzzF4tFHj16REdHB83Nzb59QZcgwM+fPzl/
+      /jyGYVBTU8PFixdpb2/3d8eyLO7fv8/IyAjt7e2sWrWK69evs3z5cjRN+3MRVeDgwYOcO3cO
+      RVFwHIcLFy6wZcuWitp3795x7do1Dh8+TDgcrqiZmJhgYmICVVVLHfMezHnieZ7cvHlTbt++
+      LSIijx8/Fk3TynQfPnyQ/v7+ijF0XfdnfZZsNisnT54UXddFRMS2benr65O+vj759evXX3My
+      DEO6u7slk8mU+Rb9DggEArS1tfHlyxcANm3aRDKZJJfLlegsy5pzDBzHKZvvQCBAIBDAcRzg
+      zzM5MzPDpUuX5nxKZ3ny5Ak7d+5k9erV5fnOu7IKDA8Pk8lkSmyFQoE3b96wY8cOAFpbW1mz
+      Zg0PHjzwC3Ych5cvX7J9+3Z/XTwe5/PnzwC0tLQQjUZ9fbFYJBqN4rouLS0t2LZNLBbjwIED
+      KIry1xynpqZIJBLs3bu3on+ZyP//K/zixQtu3bqFbdts3rwZ13VJJBKEw2GOHz/uJ5fL5YhE
+      IkxOTrJ+/Xri8Th79uxBVVUURSGXy9HT00NnZyf79+8H4OjRo5imycaNG9F1nWAwSCQSYe3a
+      tWQyGVRVpVAolJ2UUCjE4OAgoVAIgDt37lAoFDh79uziN2CW6elppqenAWhubvafqv9imia2
+      bdPY2EhjY6Nvj0ajPH/+nCtXrpTs6Ky+rq6u4s2+GCz4FQDKCpqLSkXMzMwQi8VKTszf9IvN
+      b7LjICeO2NBCAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='05 Demanda no MR corredor' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='06 Trayectos MR origen destino' width='192'>
+      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
+      ifZ/DYMA85w9UhcAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Tablero 1 - Panorama de la red' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAAgAElEQVR4nO2dZ3BcV3agv84ZndDIgWAAs0iRGgWOIhUmKMyMRl7PrNcbamv335b3h8s/
+      ttZVU671ura2ttausr0O45E1HlsziiORIkWREgUSTAAYAZIAiIwGGkCj0Tn3e29/QKQIAiDR
+      D2QTFO5XhUIB/c695933Tr97zzv3HI2iKAoCwSpFe78VEAjuJ8IABKsaYQCCVY0wAMGq5hYD
+      UMjn83N+FlohDw8Pz/k7POknlpGWpUgunSR/hyYKhQL5fB5JkpfV173C7/ff9vNbx+1e9SNY
+      OrcYgExbawvvvvmX/O0/f0RLaxsL3Wqtrcfm/D3QdRp/JK9aiaMHP+BP/viP8Mdvf9zf/MX/
+      pqWlhfd+8ys+PHTs9gffB86cOXPbz1uPtd6Vfk63nb4r7QhAP/dPHd9+7gVqyjSMW7by7S1V
+      FFIzvLPvMLlcjs279rB76zr8/d28986vyWnt/O6PX7khXcjE+fCj/UiSzBPPv0KNJcWl4Sh9
+      F0+z5ztvMNXbxtXBMSyual5/5QU0X8k9+vR3MMrJOyprcfp44YUXAHjrzX+kkNrGB7fotv+9
+      X5GSjcSTOX7v3/4bcqERfnvwSxSNlu+8+iO8utgcnXraPmMyksJTvZbv7d3D8S8OMh1OMB1O
+      0FhfRXBygnU7n+Lxh+r56J2PSORz1K3fzjOP7fhKK4WWz/YxNp3k2miAHwPXus5y/ko/WrOL
+      H7/20o3zvM7Zk0fpHRpHYyrjjddfRf/VAW3tbeSiU+g866h3SLSevwJaM2/8+DXIxPjtR/so
+      aI1EEtmiL7RgEZQFGOg4orReDiiKoiiyJCmyLCu5XE55881/VBRFUX75y9nfvWc+Vb68OKJ0
+      HHlXuRxIKwfff1uZiGUVRc4pb731z0o6cFn5g//2P5XpWFqRkpPKm2/vUxRFUbpPHVROXB6b
+      02fr/l8qA+Gv/5ZlScnlckq+ULjxv7/+i/+jXLp0SWk5ckD5lw8/XVC3n//93ymKoiiXWj5S
+      rgTSyq/e/IWSLciKnE8pb/7y7Tk6KYqiSJKk5HM55de/eFNJKIry1pu/UCRZUbqO71NO9Uwp
+      iiIr77zzjqIosiJJs3394s03b+g0fKlF+fR0j6IoivLee+8piiIpb731S0VRFKXn9EHl1NWJ
+      G8f+6pe/utFnIZ9XLh79UGnrC934/H/88R8q57uHFUVRlLfeekuRFUWZ7DmtHDh1Vfng7V8q
+      wXhGURRFeff9dxe6bAIV6O9kIBMDlzh4qocNTXVE4hkAtNrZmVN1TTWX+2ewf3XsVCRKz4Uz
+      9AJV9Q0APLn3JbwOM/HRHjw1jQA0NNZzuXsSttQs2m8uHuKTI8epW7uZR3du/spYZXK5HPXN
+      O3m6vppA34V5upktZgB0Oh0KoBhMGHUawIJBK8/RSc5G+fmbv2H9pk1MjAfJAzqDHq0GNBoN
+      BoMB0KDVaklOj/KrD79g06b1TISiN/QcHZlg67NP3aR5konhSY4fP46c01Dum7+w+eBffoHV
+      t4bcVABfRe7G/xs27mTnxtlxC00M03r8OMg5Kst99GuMlNtNd7pcgiK5oxfIP9DH1kefoqHC
+      STo7O8+PzIQITU/x7v5jPLZz041jH25uJC5b2LJpAx6Pa047jppmxjpPEk+m+OSzE+zavnH2
+      A7nAyPAwU9Nhxv3DTIdjAJjKfLz++us3bn4Ak83F7t27aaqvXlS3W3GbJK4MBhjuOYfeUTnn
+      s1xsCp27gZ1b1pNOpW47DuHAEJXND7NxTQ2pdObG/zds3sDhTw4RCU3RN+QHHPgqLTSua6au
+      tpoym+2WlgpMxwo8/cQjZNPpRfur9FVS3biOxrpanGU2ygwSZ68OMdp/lVBUTIHuFhpFmR8K
+      kY6HyWltOG1GFLlA28kTmDw1VHvKqKyqZKCnC//kDBu37qDS6yQeDqK1ebEZtQx0dzIajLHj
+      4d2UGSVCSRmf2wFAIjzFidMdbNi2m7X1X92Mco7z5ztvLLa9lbWsqataUNlAIEB1dfWNvxfS
+      bXJygsrKKpLREFjc2AwKba3HyBicPPnYLsgn5+jU23WOybhE85p6vNVVhG6Sl41OHBY9wWAQ
+      n6+cix2nyGgcNNRVUF35tTEN9nYxMhln/YZ11FZVkM8kaW/vwOyu4uGtG9F8NcefnJiksqqS
+      iZF+rg6MsWXzRsx2N06bEYCJyUmqvmpXzmdob29HY3az++Gt6JDpOH0SraOS+ko3Pp9P/VUX
+      3GBBAxAIVgviRZhgVSMMQLCqEQYgWNUIAxCsaoQBCFY1wgAEq5o5BpCaGee9Dz7ivfc/Jq9A
+      NBTgH/7q5yRuETrdcpDT53oAOPrpQTIsnaFzR+meuEWikKCrZ6h47e8inx789L72L7g/zAmF
+      +PL4GV794Y9IDZ+j9cIQa10yGxpqKMwRkQklQY71wq6NyIUMJ1q+RJL1vPjck4z0dtHvn6Sq
+      cRPNlSYGJ5P0DQ7y0tOPcvTL4wSHLrPjtSe4cqGNiVCM6jWb2bzOi0WnR8olOX7iDFqTg6f3
+      fIv2ky1Ekll2Pf4MXoeJaX8fl/oD5DIZnnn+BTKhEdo7+3H7qvjWjmb6rg3S193Hc69+DxNw
+      /PMDZCUtRouDXDrO2m2PUufU8OWJdkx2N8/s+RYTI71c7Bmhf2QCUDjT+iXRVIHHn3qOMssd
+      I0UEDzhzngBZGUxacFfXEJkI0Ni0Ft0tk6Tw8CVc9dux6xSiOQXQ8fhTz7CjRs/Jy37OXRlg
+      797n6e1sp5CY4r0Dx9j77NN8cfgwjzy1l8d3z0ZRNm/ZQWNDPadOtgAZenqGaT36Jbv2PEO9
+      JUmnP0TvwDjP7X0Bl3X2Rpwa7qF+y+M898Q2jracoeXkOV58YS+p8V5msgXe/817PPbcXq5H
+      zEzHM7zw0ksEg5O88NJLXDl/msNHWnj2+RdptKY4PzRNa1sX33nxBdbUVRC4egqlfAsv7n2S
+      o59/fo+HXrASmHN7G7Ua8grEglM4KyoXFGi/eI3Q8AViqRin27pAq0On1WC32cjmUhj0ltm2
+      9Hpk4NE9T2LSa8lhwGUx3Gjnw/ffQdEZsZq/DvCKxaKcPXOC0ZiGCpuZ7774FF8c+i3nr47e
+      OEZvMGAwW1EKOfQGAxrAZTWSzMls2/Uo7psCxoxGE6DFbJ79rdEoKDo9Rp0Gr8dFLBrDYnXc
+      OD4eS+LxutDozehQv79B8OAw5xn/9J5dfPD+hyAr/PCN1+k8e4qBQIDIkSM89uiTlJeZsZfX
+      8tKePQC0trbi8Ng52XKMaDjKy6+9Skd0mMOHP8PsrEBvtOG2z8a57NhQy3sffYIhE2Jnkxa7
+      1cLI0CB6k/VG/0899QRfdvRQZtGhkdKcPX8ZBQN2+9fHtJ9s4VJ2hqe+8woT3e0cPHSYvGJm
+      h0OP3+Oec3Jej2fe7wafk48/OUg+l+eV116jdayTI59/TiKrsGHXt/lo3376jHo2PPTEPRhu
+      wUpjRcQCtX25j4JrC3t2rrvtcVdOfIJl68s0uW57mECwZFaEAQgE9wvxHkCwqhEGIFjVCAMQ
+      rGqEAQhWNcIABKsaYQCCVY0wAMGqpuTRXn3+EOnc8vKIyrKEVqu7b/J3sw2H1czaGvedD16E
+      QqGAXr+8y/hNaUON/B2PHu27jLliPb6ypSdlSkUi6F0ujAt89vNPznF1OFSMjt9otjVV8Kf/
+      ae/9VmPVckcDyGvN5IJjRMZSxDIyTqseg81OJBjBYLWiyScJx1LozRYqXTZi0RgajFhqC2TG
+      h7DZHCRkLRaThXVr6kpxTgLBkrmtAWQiAUKxDIqUxyinkbQ29CYbjTUVRGcSIMtY7S50RitG
+      k5FsIkwqJ7Gm2kksL2N3l+O1msjEMsjyykxpLljdLD0WSFGQFeVGXlBZltBotGg0c3Mfy7KM
+      Vqu98RtAkiR0utn58uH2PqZjxewhm8/Nbd8P+bvZRpXHwfO7m1S3sRLm3iulDTXyJQ+GE4vg
+      ldfG5gbPfb9570Yb92QRDDDQfZnK9VsI9nVRvn47dj1AjkikgMtlnXPsyFA/2ZxEfUMdBYzY
+      zXogz+jINPUN1WIRvAJ5/0/euN8q3DeWZABak5Ep/zjJ8Ay58VHyyThGI0RCGlxOBaPdSXQq
+      iNZsRVNIolE0pGIhgjGFdDaJq8xKPiOirgUrj6VNYrVG0uFRHOW1SPkckUiMMrcPg05BZ7LR
+      WFuBRqtHoyjYy9xYLWakTIp8Pk80EkFvFHntBSsTVWuAhRa6siyj0WgWXRRfRyyCV14bv/PM
+      pvs+f78bbdyzNcCtXB/wmwd+sYuw3IsjuPf85uiVu26Ie3c1Uem+tTjIymMRA5AYuXqBoKaC
+      7euqyKRTJGNRXBU1FFJR0gUtFoNCVtZj1hZIZAoUJIVqn5PAdAxDJk6+zEOlw0I6UyARm6G8
+      uh6jTsPn5wbFIngVsK2p4kE2AB1VFV5kKunrvkz9umayOYn+vgH0OgWTwUQsn8LiLCcci5LN
+      ZrHabXRfDaCV82gMHqrqy7h66TwVHjeG8lqGBwbYsOH2m94FglKz6BRIYzBjRoPZV41DX2Aw
+      I+GwWbGYZnP76DRGZuIJXGUOcnkLBqMeq1FHOifjLbMxFQhSWVOH225iIDCGzeZYrCuB4L4h
+      XoSJNu5JG03VLuyWhcIhF+eBfhOsKMo8D9BCCC+QaONetaFGfp65hIKT9A0MsWXbQyhSDjmf
+      RdFbsRohGE5Q5S1jYiZOZbkHLQoFRUMmkyYYGMXursLtMDEdTVHhdRGcmKCitp6p8VGxCBas
+      SOYZgNdXSSgSJTThx+IsR85mGZ+awG4zYTAYmZhIkVUMjI+NYyfLREaLw+MGvYl0NIxO6yQ4
+      NEQ05aGpxkPnqfPU7dgiFsGCFcmCzwuLxYLZVkZluZt4Io7VasXpdGK1zP7OJBOgkZmKJLDa
+      HFRXeNEqEmlJJp1IYDZbsFgdWMwWyiu9hAJjmMUiWLACKfkiuHckSDpXuPOBt0GsAUQbd0u+
+      5AZw896A+9XGStBBtHH321AjX/I4hbsRGrHcNlaCDqKNu9+GGnmRHVqwqil5WpRkaIL+yTBl
+      ZW70ZEml8jQ3r7+9kJLl4vkeGtavJTB8DUlnxe2woZGzOKsasZtufxrxSIieoTE211d81beD
+      6FQQo70Mh9VIPpOmrmkDBt3i7zGut/Hw+goujaZZ31DOQE9fUW1MjI0wNhnG57GTiMVwuH2E
+      4/GixuJ6G16PHb3ehM2oY3Q6UkQbEkP9QyRyEkZyJHJQ4bQQi8XweFwUTB7ymTRN9VVLa0Nb
+      wFZWjpKNF9kGTI2PMDaTxqbLq9NDKXDoyDFeeGKL6mtS8inQdCzN1i2bUXJphq5exFZec2ch
+      ScZaZmdmJozF7sRuMZCMhQnGsne8+QEcLi9Om+nrvpNTOCrWYtZriYQmSRV0tx2km9uQNBbK
+      zBAO+otuw2w24XC5KChatmxdS3//VNFjcb0Np91BNhVlcCJWZBs6rFYDsgJ6s40Kh43kV/pE
+      p8Kcv3SV+rrb37g3t1FmdzATmiZbZBtSLsHQWIh8NqVaj97LXZhtVuJZneprUvIpUDY+Q/94
+      EJfbh1bJkU6lWdPUxO3ULGRTjIwF0OjNSJk4stZEmd2KUVNAa/fhst3+lXssPE33tQHWraln
+      MhzD5fYSn55Eby3DZjGg5DK4qxsx6xfX4nobTU1NxGJRjFY7qXCoqDa6Lp7DWlaO1aQhGolR
+      XlnJ5HSoqLG43obLYSIUmsbhLGcmGll6G4Us/SNjFCQwaSVSBSh3mAlHYlRUuJHMXhIzIdY0
+      3MaQbmrDYdExE01T7rYRLaINRVGQJAn/+Djks6r0kCSJUb+fCq+LwGRQ1TURawDBqkbsVhGs
+      aoQBCFY1wgAE9xllXtbAO/1962fLmcPrfvazn/1sGfICwYJ0dZzgZMdFXJ5yrvX143HZGBgY
+      pFCQOPDJAczaHBmDB39/G2c6RtDkI2CyEw8FeH/fZ+x8aBuXT7dw+Gw306P9ZPIKXqeNC51X
+      8bpsBCaCyHKe9/7x11RtWce17n6sSpyhGYXp0WtYXeX0X+3EaHNjMi7uKSz5ewDB6mBoIswP
+      X3uVyeFrjPacZXLCj85TR+LqeTQaDXIiRFvLF6zduR6N4md0dIxzVwcw63U4bWYALvcPMhPJ
+      4VlTSybQzT+cu8z3n1jH/o8+Jm6uwUmEKp+H0OQ4g50niNZvIBK5TGAmSWVPL8GZFN/11lNm
+      Wzwtj3gCCO4JZrKc7LhILJnBbDJgc7ipamhCV8gjZaK4vD4sThfjo2O4LEZC8RwVFeVImQiS
+      zsrmjU3Ek3ke21zHYDBNMp1n28YG+gf8NKxpYM3GHZCYYHomhdFmxKjVYLVY0NgrMWth6+YN
+      WCx6CoqJ6orF6y8IN6jgG0Nv13kq1m3HZVn6xEYYgGBVI7xAglWNMADBqkYYgGBVIwxAsKoR
+      BiBY1QgDEKxq5hiAUkhz+NBBjraeAWBytI99+/fzRWvbjWN6LrTx9q9/w4n2i8uKwViItrb2
+      u9xi8bS3td35IME3hjkGcOzwZ+zY8zz15iTnBqdJF3S88sorWOJ+AqnZYzr7/Pz0J79Lk0fL
+      /iMnAei7eolrg34AwqEgF891MDkd5uK5dqbCcRQpT9fF8/QMjM4eE56hu+sCQ/5JAGIzU3Sc
+      Pc9YYApZytF54Rx9Q2M39IqGwwz2XaW7fwSAbCpK25kzhBMZKGQIx1MMDAwAkEvF6ezspLOz
+      k1ROJjTpp63jPHlZIRENMxHw03G+CwVIRKZpb28nFEvd6Cs4NcmVS+cYCQQBmPQP0nG+E1mB
+      cDhMLhVnNBBkZmqc9vYOEpn83b4mghIyxwBmMjIVDiPrt2xiuKePNU1NTI30MpgwUDm3Fh41
+      67Yjp4J0tx8jafIRH7nItYkE+z78gJo16/ng7V9R27SB1qNfkE0lcFXWE77WRu9Umk9++x62
+      8jo6Th+nkAzy8eHTrF/bgCQrZBJxvDVr8F86xmhkNn9QR+vnZI0uUv5LXBwKsX/fATZv3cqh
+      T/ajJAL8+V/+nMhX6Ua1Oj1lZQ5OnzyJkglx+EQXG9dW88mBI/R0tHLZH8OjTNLRFyKWSLFx
+      40Y+O3DgxnkFA37c1U2cOXGM1PQgJ7rGWFvt4MCR45w8doj9n32JyWQikc6ysXktBz45gODB
+      Zc47Y61WiwIUMmlMVhs950/SF9Hy0995dYEtdgqKrNDnD+BIA3kdplSS8uo6fB4XjWvXUu52
+      YTbpmRofoWt4isjwCIbmLO7KWuqryum0WJge6WXzY8/gcjuxGLUE/MP0jc8QGBmlIlOYVVFn
+      YU1DNUbndj7rHMfscOGw2/E5LGSA3U/uZdeWtbMnZLIwMdjNiz/8Cbnpa9Rv3onTU4VBexbQ
+      sXX7FsyBNIF0nr6hy2RlHROhyI2z8tU0UO1zY7VYmBjqZ/POJ/FUmdGevYyis/GDl19Fp4FD
+      J4+gMdiYiSfu3dUR3HPmPAF2Ndfx/r5DvLvvGI89spmjx09hkhJ8fuQIscxXKc1zCQ5/doj3
+      3n2Hzbv28PCWjQSjadAZ8TitC/VBcGoSk8WO2Tx/766vcRPnv/iYE62txDMSU5MTmK12zKab
+      jpVSnGw9ybv7Wti9cxOabJxTZ04TTMtYAN1N+WCmBjs5eq6fvs52FO96hs4e5eSxoxjtvnl9
+      T04FcdhtGPQLJ1Nq2LyTs0f3cezoYey+BtBqmd1jLRGcjmC32+b0LXjwmBcLlEkn0erNGA1L
+      z7AlSxIK3DYrVzKZwGq1s1AGdamQI1cAy1cGkkwksNrtN546nx/4hMdf+g4WnQ6tRgMoxGJx
+      HI6yBdu7GUUqkEhncdjnl+tRpAKpXAGbxbyovFTIkc5K2G2Wuf/P58jJYDEVlwNfsLJ4IILh
+      wqEQTq9X+GwFd50HwgAEgnuF+FIVrGqEAQhWNcIABCVjeGQEyDIyPLHoMdlYkIlwgoGBwQU/
+      P3f2LKdOnOBkRyep8AQT4dQtRxQYHhljYniE7CJ9XDnfQTI/O/MXawBByfjgnbdpXFeDP6Bg
+      kKNYvdUUZkZx16wlFpnA17iTOt04f/vbdt746RsMnGvD7nGBzoZRU2D3wxs50tJJTjGyzhYi
+      bPBi1uu5NjiMkpfxVdfw3JMP8fd/808YCgoPv/gY/t5hGhvrOHdllG89vJHungFeeWEXrRem
+      eW7PNvEEEJQOvdnK2rWN6LIRJEsl8ZlJMDmotskk8gVGhscBKPd5CY8PcrFnmHRBS2j4AgnJ
+      BFIGjc5CLptmMhzHJKcIzcxQ0/wQvnIfZJMAuMsrqa7w0j/o5/HdG+m+fJVNjzxJYLifiVE/
+      ktlGPhUHxBNAUEJCoRBer5NQKEl0ehSzpw6LXsFhMdB1bYjGukYcZkjKJrLJCIlIEI3VS+ep
+      ozz/o59g02v44osvaKitxWB3U+uxEM8U0BotyLksION2OwmFouiRMdvNXOrsZfvW9eSxkJwe
+      JZSU0aUmsDY+TIPXKgxA8GCRz2XRGUxo71ySelGy2Swm02yuoAdyCiTnEpzuuFS0XG/XOfYf
+      bilaLjY9xoEDn5EussB917lT7Pv4Y6bjuaLkwpMjfPrZEZK54jpMhif55JNPiWeWXoRQkfK0
+      d5wDFFq/OEjfyNQSBWXOtM+Grw/3XGQissTi5zfkZE5+eZj2i91L1ZTLZ9vIak10nPqSqwP+
+      ovVMR6Y4f6Xvxs0PD6gBnDpxitHxkaLlzp47R4VvfkzQnfj008/Qm4zoitwBsW3XE2gVmbI7
+      1C+4ld7uHuTUDIOBaFFyp06dZvcjGzl6bOn7KlLxKD39gyTHL5NzbuTqxTNLkitkEnR29wEQ
+      HO5mLLw0A7hZbttDDzPQ17s0RZU8fV1XSBTA6XAz5h8tur8T7RfxD87t7wE0gDzhSILR/n4y
+      RX4jv/i9HzBx9QLRIuVsZW6aXBKdI5E7H3wT2eg4Gkc1xiJHORSOsX3TGqZCxRnAE9/+Nl1n
+      2zHbypYsYylzU2Yxgs5ANhlDWjwP7Rx0JjsVLhsFSaKqqoqCtLRB/Vouz4cf/JZnnn12iZoa
+      qKr2Uijk8Pm8BCcXd6Uu1F8uGSKWSHNtcK7hPICpEXU0b95Mc/MGymwLR58uRjgYwFbVSH25
+      qyi5xroqRmZkdm9uvG31lltJp7Osb96AvsgJa31dNf1jMR7btRndnaL9biKfSRHPm3jy0e13
+      DBK8TiISIi/J6Bw1ODRxNu14BKvJcOe+UjHS2QI5SSGWzKOjQFVF+dLl8hIup5NMTqLS57mz
+      olKGyVgGpVAgGgqydecj2K2LBzHe2l9eY2HP44/QvK4Jq/Xr+2bOIjgej99ZkRJyeHCJ87xb
+      qHUungz1dnRPJIgVMX++Ti4UR1ZR/Ntb68ZkKT6a1GrUYTOpq6erZu24HDeJpggDvqlHVX2p
+      kZqzIcbhcKjq+F5xejqmSu4xm7rzODw6zdhSF3M3kbg2TiFRvFzzo+tweOxFy/nsRioc6sKw
+      1RqAWhvQqXDXqHVMLtsAALJTvfzV/k5+smcth7oC7FhbReOaNWg1GuRciqRsREpM4/DVU+4q
+      /uIJBCuJecszRS6gLRS4GspQYYHARIDOM0dp6xqk9XQ7bm2ErpE4J44dvR/6CgR3lXlPAK3R
+      xtOPbSYQyuLxzi5ONEjoC1nMVhNjUQkSk7h8d6olKxCsfOYZgNHTyK47LMo3NW+6V/oIBCVl
+      RZdIqlK50LMX63j/ikavFZv5zi7AWxmhmrSK/EDVFQ7c9uI9Vi6rHncRRSDuBmoXwcuIWCga
+      BYp2Wd3TUZRlGe0ysiZYDOpki/W7X8dm0pMt8iUZgMlupmAs3nAsZgNWY/HuTItei0lfuneY
+      D0qw2Kz3qLhrP28UZ4a6+Kd3fkvvcIDey5cIRZMERgfpH57N1Pbz//u/CGUK/Omf/Rn9neeI
+      ZPN0dXYSi4YJx1OEw2HGhvqYnInx6cGDALz5d3/JW//yHvHIND0DIxw/uI8rI+MM9V1lPBgm
+      GBjl2uAo8XDwxmtrgaAUzHsCOCrrcOi6icfCRMbGOHd1GJO2gKLRsK6xlqbmJs4c+BC9u5HI
+      1ASXRibZtbGa462nwLUGIj0M9oxg9VVRdd3HrdHhsFvZ99GHhMN51jRWs9bjYqC9i/62Tnxl
+      ZsgVSDc3ca7lJJVN66lQ9y5LICiKeQaQjMWxu1zkk2EiaYWqSh9lNhO57OwGM0/1ekaGh3lq
+      Zz12I2yyu+i+chGNo56ovwePz0vzJh2+ho1k42EANm1/mCcef5z2ky1kJRM+l57RoRGi0ThV
+      VZWkpobR2CpIRiJUVFehL+XEUbCqWfZ+gJkpP+cv9bB7z9O4rMXPgwEGBwdoalo77///78JF
+      Ve01++4cI7IQZ4bjzKSKD2nom04WHboM8Ei9E4+KMXOadThLuAh+sNYAxbHsUfRU1PH8C3XL
+      amOhmx8gL6kbepViZAsy6XzxN3I2kyebVRFDlJfIScVfgpykkFtq2OZNLOfBqiamR0F9WING
+      rbZFit1x9GV5dqCX481RS6m/eWRFQVZxwWRZRlZxQ8rK7E/Rcqgbm+J9JMtDUZSSX8Niz2+e
+      AYxdPkXEuZVAdxsej4dAYAINCs88+Tj9/hDbtzZz7NP3MVZtJxUaYdeu3QCYdQpDUzGqvE5s
+      Jh3RZIbAVITtW5tLOugCQTHMM4DaTTu49OnnaMweAhMBrtvU5PgYnSeO4qpvRja5SEwOki0U
+      OHVytkhGIjzJzEyKmvXrMemgpraGzpOzxzcsfX+GQFBS5s9rdFaURJAtux7B4/Hi8XrweLzM
+      hCP4KqsxaMHlcvP4zvXEcgYMFIikcqxf38y2h3fx1Lc2MZnQko19fbxAsFJZ0Vkh/uLsBVVy
+      mystdz5oAY73R5hOFh/SMDARI6liI8231pXjUREK4bTocFlKtyEGVC6Cl7EGULsILlbNFR0L
+      FEmrq7+VLah7izaTzBGMLZZQb3FSk1FyqeLlIj4biqodUwYMKsM9VHWHyo006o6HYHkAAAuJ
+      SURBVLpa1g60YodlhRtA8d+qMOvOVEM4odIApiJI8XTRctE15UiG4i+BQafBUkQBk+toUG8A
+      pURRFNRdQYraQw0LrAHioQD7PnyHYx3dN1ygC3H14ilOnb1avIYCwQpifiyQtxqr2cymWhO/
+      fv9jnE43kcA1CoYytjV6+LxjgD/6g//Mhq3NfHZoqUmNBIKVybwnwNTABc73TTA26kejM6DI
+      ElUN6yh32bjWP0K5a7bW1mBvD31911SFDwsEK4V5T4CKtTv5w/+yE4CHdktodbobCyBZktBo
+      Z+eeG7bsYcOWPSVTVCC4F9x2BXZr1UftbapA3gvKbeqC68wqN4tUOc3odMXLTjaUk0kVl/8T
+      oMJjw1lWvMfKYzXgVOEG1VBab45altPfskMhVhI+uzoDULuTrNplxrKErGi3kgdV0aCVXhtu
+      FdGgDrOOMvPKT4y1nBtZW6L3Dqq9QPlkiLffP1CsjgLBikK1F+jEqXOoyOonEKwoVHuBbFYD
+      A9d6iBebolkgWEHcNhZIkhb2ApXqbeLfXVK3I2ydV92OsHP+BJFiq2AA/SF1O8J21ZaJNcAi
+      lGoNsKK9QMGEulig2jJ1c7PxcJqpIqu5AIT8IbLp4uUmzDpS+eKN1VswoCgrf/65csMsv2ZF
+      e4GmVRpApqBu5APhNP4lVjq5mfRICClRfCzQpK+MhKLmmw4MKr6MlpfmXIWQ2ifHgxALdLGt
+      lc9aThWvoUCwglDtBTp/4QLOynXkFTA8ABGGAsFCzDOA614gj9c9xwuUSafmeIHKfRVEI9Nk
+      JFAR0SsQrAhUxwK9/MM3kGUo8bpYILirqPYCaTTae37zm1WGNKgI5wHAZNJjNhf/OMtbTary
+      31jMBmwqkuOa9VpVO8KWFWNT4iCiUm2lXNGTF7OKXU+gri4VgMmkw2Ip3i+ftplUeS0sJgM2
+      Y/GXwGzQYdCVduFV2p1k6jpT4+VS7QU61XKYX/zinyne+y0QrBxUe4GeePpZJsOHWPmvYwSC
+      xVHtBbp0qoXtTzxban0FgruKai/QQ3teKJmSAsG9YkXHAiVUZFwGyKkMhUil8iQTxadFyUWT
+      qgplJ1I5NObiJ5FmgxZ7KSvF82DUCFPDivYCqTYAlfnR06mcKgPIR1PIKmKBkukciopztJt0
+      ZFUYudq8QIqiPuV8qfMQFdudai/QyS8P8/GBw6qDlgSClcACXqAqrGYLG2uM87xATZVlDE7E
+      +He/96+YCUdIpqEAwhMkeGBZwAt0idFInqqZODazAbfbRbVvN7lshmQkhNM5m+vcbDGTvz45
+      XOkTPYFgERbwAu3g36/dAcDWbTsWFXzhu6/eO60EghKxohfB1Spy5gDYVFaKryu3YVSRFiUk
+      VZFTsSOstsKBw1n8jrBymwGPVd2lU+0FKqEbaDkZ+4tN476iDaDGWVoDqPfZcNiLvyF1JgMp
+      FcX1aisduFTEHpWZ1O8JLiXq06OXzgBUe4GOf36QfZ9+UbyGAsEKQnUs0HhgkplQiuR392K7
+      H5oLBHcB1XmBtm3bhqOyAnXFiASClYHqvECyJIFGi1Zl7P1S+HnnJVVyTR51a4fzY+ryAg3N
+      pFWtAXbUiDXAgnIrZRF8u1igUscFlQKNytJsGs2D8SrkfqTpUTUuyxjMb1R26PtRz0pNNUS1
+      MTZq05U/MHnOUXsN1V/4ZRtAPBTgy2PHcdY/xJO7mtFqF3YpXr14ikjBRaUlQ0dXPy+99iNc
+      D8BjWSC4mWXXCAspYV55chOnr4yyd9ea+3AKAoF6ll0jzGrU8tmJS9TXlJdceYFgudyF7NAK
+      kiTPWzDfDf6hS50XaI1bnRfowliSqIp070MzKVVeoIeq1XmB1GaHvh/JatU4CVdMiaSl7QjT
+      3JObH6AgqxsKtQNYkBVyKopsZ/MSGRXp0fOSQl7FTpOCpCCpHJtSs9LVXNFeIKnEu20Kkkxe
+      RaeZvERGxRMgJ8mqjFyS1RnArLeqdAm1luPPLxXLrhQfHO1j3+GWe6qkQHCvWLYXyL3jMXSX
+      eu6H7gLBslm2F2h8bJS+vn6C4UTJlRcIlsuKrhH21xfU1Qhr9qmrEXZmKMZMqvgsDX3BhKoa
+      YbsbXHisxe+odpp16gtlizXAHFZ0XiA19boAap3qCmwHZlJMxorvM+qfJquiUvykVU/aaS1a
+      LlswoKDuHL/pUUvfqOzQwYQ6A0jl1AVpB8Jp/DPF5/fJjUyrygs0VeUiPn8WekcURcGgIgf8
+      8vzr6gxHXR4i9ZoWW11y2bFAVbY85zu7efzF16hxqZt6CAT3i2V7gR7/7iNcvnzlgXiwCgS3
+      ojo79HUv0G/fuUbBVoFWERXjBQ8eqrNDb9iyhw1b9pRMUYHgXrCivUAeqzpPh0VlbTGf04yk
+      YtU2nfCQTRWfVLfcbcXhKD5wz2szqt4SWaraW1/LFY+Cojpwr9jLt6K9QF5biQ3AZUGjouZr
+      Oi9Dpvj3B+VuGx578QbgsuhwWorXs5R7bWc7VNeXoigl27y2bC9QrVPhQmc3jz3/MpUqM7kJ
+      BPeLZXuBdm3cQuzYCVjEUASClcyyvUB19TYqPHYCUzEq7d6Sn4BAsByWHQukKDKSpKDX3/0F
+      8p93nFclt7lS3Zvg1oEo08l80XIDE3GSKtYAj67zql4DuFQkxxVrgPks2wuk0WjR36OldEpF
+      gBmgapcVQDKTJ64ipicXS1FQkR06mXZgUFEM3KgHc17tlFPd2JTUAChdIN2K9gKNRoovPAfQ
+      5FUXkjE8mVAVC5S5OoocTxXfn9NCMFf8DrRkzowklzYxULExNsvp7b5mhouHArScOkvTxofY
+      uqFhUcHwlJ/plAYlMUnPoJ/dTzxHTbmjeI0FgvvIgl6gOrcFswk+/mgfvromZvzdyCY3G+u9
+      9I6GeOW7z5PKRei9HOXll7/N6PAo9jKRI1rw4DFvIpmaGeNaqIAtM4GzcRvT48OYy7xo5QwD
+      A4P4R4cBqKyqQpYKSNkoCY2DMpVFKQSC+8m8J4CkMbK2tpycvZ6KjJ/tzzyHRsoiyzKJcJC1
+      W2e/6Uf6J6mpLSOZkdm79+mSKy4Q3A3mT4HcPnbv9s3+UVPx1X9ndy15vV/7+ddu3HrPlbOq
+      8JAA6FWmbLeZ9ThUxB8pZVbyKvq0WQzYVFR8txq1mPSq8lhTUi+QWhQN6h2h36AdYY0edf58
+      p1ndaTVVlVFWVnyf/Ua9qvcAa2rdqt4DOM06XCpigZaFyvtfla9qGe7TYlkwL9D+/fu5fG3k
+      toLhKT/XhsaYHhvk0OEvSBdW/gZogeBWlu0Fclvi5OJh/NMJNlQJN6jgwWLZXqDpSJKt62oJ
+      hpMlV14gWC7L9gKtW7uN3v5RHnuoquTKCwTLZU4wXDwev5+6zOP9nj5Vcg3u4pNNAXRNJImp
+      WMyOz6RJq4hb2lRdhkPFYtZu1GFX4T1aFqXMelDCRfBto0EFgm864vWtYFUjDECwqhEGIFjV
+      CAMQrGrmGYAsS8g3rYtvVyVGIFDDrffY/WSODy5w7SItnaPko9O8+tPfp7ftS2bSefz+IL//
+      H34fkxbOtBxiYHyGrksX+a///U/x2e6OO87f14W5ahPl9hUdniRYJrfeYy6zjrPHD3NhNMZ/
+      /Nc/BuDDt98igxGdRmH3sy+zrsp5z/SZc7e1XRnid1//AblgL593dPP9p59HlnJ8+M4HXPdy
+      P/bMd9gYuIa7ZgM+q8Kn+z5CZzRQu34HSmiQwUiaQizMk997nYmeDqbCCbRWL7vWuTna1o3V
+      7uDFZ78NwKmWw6QKGurXbcWcTVFAzxeH9iHpLESTOd74wffv2YkL7g+33mPPbnESUtxUO7/e
+      Uy0ZHPz0jddR8kH2H7nCTFmGVAHMzmoabRmuTGaQFR1lmjjxrEzNmk1UmrOcuNiHlM/x3Zdf
+      4fDHv8HiLCcnG/j+3kc5fPgYuWySh779EsFrZwmnClTUr+P/A9qcTBMxLUxrAAAAAElFTkSu
+      QmCC
+    </thumbnail>
+    <thumbnail height='192' name='Tablero 2 - Corredor MetroRiel' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
