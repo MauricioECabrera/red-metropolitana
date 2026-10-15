@@ -14,12 +14,12 @@ tabla, la misma llave y el mismo dueño para todos los procesos.
 
 | Dimensión | Modelo Gold | Dueño | Fuente |
 |---|---|---|---|
-| Fecha | `gold.dim_fecha` | A | generada |
-| Hora | `gold.dim_hora` | A | generada |
-| Zona | `gold.dim_zona` | A | `seed_dim_zona`, `seed_zona_alias` y catálogos |
-| Modo | `gold.dim_modo` | A | definida en el modelo |
-| Estación | `gold.dim_estacion` | A | los cuatro catálogos de estaciones y paradas |
-| Persona | `gold.dim_persona` | A | abordajes de todas las fuentes y el padrón SCD Tipo 2, bitácora D-002, D-007 y D-011 |
+| Fecha | `gold.dim_fecha` | Mauricio | generada |
+| Hora | `gold.dim_hora` | Mauricio | generada |
+| Zona | `gold.dim_zona` | Eduardo | `seed_dim_zona`, `seed_zona_alias` y catálogos |
+| Modo | `gold.dim_modo` | Diego | definida en el modelo |
+| Estación | `gold.dim_estacion` | Eduardo | los cuatro catálogos de estaciones y paradas |
+| Persona | `gold.dim_persona` | Mauricio | abordajes de todas las fuentes y el padrón SCD Tipo 2, bitácora D-002, D-007 y D-011 |
 
 ## Dimensiones de rol
 

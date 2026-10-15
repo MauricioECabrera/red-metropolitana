@@ -65,6 +65,17 @@ El workbook `tableau/red_metropolitana_tablero.twb` contiene dos tableros:
 esquema `gold`. Al abrir el workbook en otra computadora puede ser necesario
 actualizar la ruta de la conexión.
 
+Para revisar los tableros sin instalar el conector DuckDB ni generar el
+warehouse, abra `tableau/red_metropolitana_portable.twbx` en Tableau Desktop
+o Tableau Reader. Esta entrega académica incluye extractos de datos sintéticos
+para las dos fuentes del libro. El archivo `.twb` permanece disponible para
+editar el diseño y conectarlo a una ejecución local de Gold.
+
+La recomendación está en `docs/gobernanza/recomendacion_movilidad.md`; el
+diccionario campo por campo, en `docs/gobernanza/diccionario_gold.md`; y las
+definiciones y responsables propuestos, en
+`docs/gobernanza/definiciones_oficiales.md`.
+
 Las definiciones y límites de sus indicadores están en
 `docs/gobernanza/diccionario_tablero.md`. La política de acceso propuesta y
 los controles de publicación están en

@@ -27,8 +27,10 @@ permisos efectivos y comprobarse con cuentas de prueba.
 
 ## Controles al compartir
 
-1. Versionar el archivo `.twb` y la documentación, no `.env`, datos crudos,
-   archivos `.duckdb` ni extractos con datos de personas.
+1. Versionar el `.twb`, la documentación y, excepcionalmente para esta
+   entrega académica, el `.twbx` con datos sintéticos. No versionar `.env`,
+   datos crudos ni archivos `.duckdb`. Con datos reales, no publicar
+   extractos que incluyan registros por persona.
 2. Revisar la conexión y las rutas locales guardadas en el workbook antes de
    compartirlo; cada integrante debe generar su propio Gold.
 3. Mostrar agregados en los tableros compartidos. Evitar publicar hojas de
@@ -44,3 +46,16 @@ Aerómetro carece de una llave enlazable con los otros tres operadores.
 La métrica de multimodalidad no identifica conexiones con Aerómetro.
 Los abordajes de otros modos en una zona y los trayectos MetroRiel en esa zona
 no prueban que una misma persona haya hecho un transbordo.
+
+## Retención
+
+Como política propuesta para una operación real, conservar los archivos
+originales y la cuarentena durante 90 días para investigar errores y
+reprocesar cargas; conservar Gold y sus agregados durante 12 meses para
+comparar periodos y auditar indicadores. Al vencer cada plazo, eliminar
+las copias operativas y sus respaldos conforme al mismo calendario.
+Revisar estos plazos con el responsable de datos antes de aplicarlos:
+el prototipo local todavía no automatiza la eliminación.
+
+## NOTA
+Para esta entrega académica se versiona el archivo .twbx con un extracto de datos sintéticos, a fin de que el docente pueda abrir el tablero sin instalar DuckDB ni reconstruir el warehouse. Antes de publicarlo se comprueba que el paquete no incluya .env, la sal, datos Bronze/Silver ni credenciales. Esta excepción no sería apropiada para datos reales de pasajeros: en ese caso se distribuiría mediante acceso controlado o se prepararía un extracto agregado sin identificadores.
