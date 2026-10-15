@@ -35,7 +35,6 @@ import importlib.util
 import os
 import pathlib
 import runpy
-import shutil
 import socket
 import subprocess
 import sys
@@ -75,11 +74,6 @@ def _kafka_disponible():
         return False
 
 
-def _ejecutable_dbt():
-    carpeta = pathlib.Path(sys.executable).parent
-    return shutil.which("dbt", path=str(carpeta)) or shutil.which("dbt")
-
-
 def _registrar(ejecucion_id, etapa, estado, segundos, inicio):
     BITACORA_EJECUCIONES.parent.mkdir(parents=True, exist_ok=True)
     nuevo = not BITACORA_EJECUCIONES.exists()
@@ -103,13 +97,11 @@ def ingestar(modulo):
 
 @task
 def construir_dbt():
-    dbt = _ejecutable_dbt()
-    if not dbt:
-        raise RuntimeError("No se encontro dbt. Activar el entorno virtual .venv")
     entorno = {**os.environ, "DBT_PROFILES_DIR": str(RAIZ / "dbt")}
+    dbt = [sys.executable, "-m", "dbt.cli.main"]
     if not (RAIZ / "dbt" / "dbt_packages").exists():
-        subprocess.run([dbt, "deps"], cwd=RAIZ / "dbt", env=entorno, check=True)
-    subprocess.run([dbt, "build"], cwd=RAIZ / "dbt", env=entorno, check=True)
+        subprocess.run([*dbt, "deps"], cwd=RAIZ / "dbt", env=entorno, check=True)
+    subprocess.run([*dbt, "build"], cwd=RAIZ / "dbt", env=entorno, check=True)
 
 
 @task

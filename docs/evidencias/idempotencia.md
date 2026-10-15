@@ -4,9 +4,9 @@ Generada por `python -m orquestacion.verificar_idempotencia`. El flujo completo 
 
 | | Corrida 1 | Corrida 2 |
 |---|---|---|
-| Ejecución | `20261012-154534` | `20261012-154629` |
-| Inicio | 2026-10-12 15:45:19 | 2026-10-12 15:46:29 |
-| Duración | 69.3 s | 38.1 s |
+| Ejecución | `20261015-165652` | `20261015-165713` |
+| Inicio | 2026-10-15 16:56:47 | 2026-10-15 16:57:13 |
+| Duración | 25.6 s | 21.1 s |
 | Tablas medidas | 52 | 52 |
 | Filas totales | 9,080,860 | 9,080,860 |
 
