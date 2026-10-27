@@ -409,3 +409,45 @@ flujo dos veces seguidas y compara todas las tablas de todas las capas por
 cantidad de filas y por una huella de contenido (XOR del hash de cada fila,
 independiente del orden). Resultado en `docs/evidencias/idempotencia.md`.
 El mismo comando se corre en vivo el día de la presentación.
+
+---
+
+## D-013 · Carga de los datos del Proyecto 2 desde cero
+**Estado:** cerrada · **Responsable:** Miguel
+
+**Contexto.** Los datos del Proyecto 2 (1 de junio al 29 de agosto de 2026)
+reemplazan a los del Proyecto 1: mismos nueve archivos y columnas, otros
+usuarios y otros hábitos. Si se cargan encima, Bronze, Kafka y el warehouse
+mezclan las dos versiones sin avisar.
+
+**Opciones.**
+1. Vaciar a mano lake, warehouse y Kafka antes de cada carga y dejar Kafka como
+   paso manual del README.
+2. Que el flujo borre lo existente antes de cargar.
+3. Vaciar fuera del flujo, con un procedimiento documentado, y que el flujo
+   levante Kafka por su cuenta.
+
+**Decisión.** Opción 3.
+
+La opción 2 se descarta: un flujo que borra lo que ya cargó deja de ser
+idempotente, y `verificar_idempotencia` perdería sentido. La opción 1 deja un
+paso manual, que el enunciado pide eliminar.
+
+Vaciar significa borrar `lake/bronze/`, `lake/staging/`, `warehouse/` y
+`dbt/target/`, y bajar Kafka con `docker compose down -v`. Los mensajes viven
+en el contenedor: sin bajarlo, el consumidor (`auto.offset.reset: earliest`)
+releería los mensajes de la carga anterior y duplicaría Bronze. El proyecto no
+usa snapshots ni modelos incrementales de dbt, así que no hay más estado.
+
+El flujo levanta Kafka como etapa propia (`docker compose up -d --wait`),
+registrada en `ejecuciones.csv` con su duración.
+
+**Evidencia.** Corrida desde entorno vacío: 11 etapas, 95.80 s, `dbt build`
+con PASS=226 y ERROR=0, y 9 de 9 archivos con diferencia 0
+(`docs/evidencias/conteos_bronze.md` y `docs/evidencias/tiempos_flujo.md`).
+
+**Consecuencia asumida.** Quien carga datos nuevos debe vaciar el entorno
+antes de correr el flujo (README, sección "Corrida desde cero"). Las filas
+esperadas de `scripts/conteos_bronze.py` son las del LEEME de esta entrega: con
+otro juego de datos, por ejemplo el de la prueba de invarianza, la tabla
+mostrará diferencias que hay que explicar y no son un error del pipeline.

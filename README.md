@@ -29,8 +29,7 @@ conector DuckDB/MotherDuck para Tableau y controlador JDBC de DuckDB
     python -m pip install -r requirements.txt
     cp .env.example .env
     # Editar .env y configurar la sal compartida por el equipo.
-    python generador/generar_red_metropolitana.py
-    docker compose up -d
+    # Copiar los nueve archivos de datos del Proyecto 2 a datos_red/.
     python -m orquestacion.flujo
     ```
 
@@ -38,6 +37,22 @@ El flujo carga las fuentes, ejecuta dbt y publica
 `warehouse/tablero_gold.duckdb`. La sal real se comparte de forma privada;
 `.env` no se sube al repositorio. Para volver a publicar Gold, cerrar Tableau
 antes de ejecutar el flujo.
+
+## Corrida desde cero
+
+Con el entorno virtual activo, `.env` configurado, Docker Desktop abierto y
+los archivos de datos en `datos_red/`, un solo comando corre todo el flujo:
+
+    python -m orquestacion.flujo
+
+El flujo levanta Kafka, carga las nueve fuentes a Bronze, ejecuta dbt, publica
+Gold, exporta el modelo y deja en `docs/evidencias/` la tabla de conteos
+(`conteos_bronze.md`) y la de tiempos por etapa (`tiempos_flujo.md`). Al
+terminar imprime el historial de corridas: cuantas hay y cuando se hicieron.
+
+Los datos del Proyecto 2 reemplazan a los del Proyecto 1. Antes de cargarlos
+se vacian `lake/bronze/`, `warehouse/` y `datos_red/`, y se baja Kafka con
+`docker compose down -v` para que no queden mensajes de la carga anterior.
 
 ## Reglas del repositorio
 
