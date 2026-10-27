@@ -15,9 +15,14 @@
     7. dbt build            Bronze, Silver, Gold, features y reportes
     8. Publicar Gold        archivo del tablero
     9. Exportar modelo      DDL y diagrama
+   10. Conteos de Bronze    filas esperadas contra filas cargadas
+   11. Tiempos              segundos por etapa de la ejecucion
+   12. Historial            cuantas corridas hay y cuando se hicieron
 
   Las etapas de ingesta tienen reintentos. Una etapa cuyo modulo
   todavia no existe en el repositorio se registra como OMITIDA.
+  Si hay etapas de streaming, el flujo levanta Kafka con
+  docker compose up -d --wait antes de ingestar.
   Cada corrida queda en lake/bronze/_control/ejecuciones.csv con
   la duracion de cada etapa.
 
@@ -90,6 +95,31 @@ def _registrar(ejecucion_id, etapa, estado, segundos, inicio):
         })
 
 
+def _corridas():
+    if not BITACORA_EJECUCIONES.exists():
+        return []
+    with BITACORA_EJECUCIONES.open(newline="", encoding="utf-8") as f:
+        registros = list(csv.DictReader(f))
+    corridas = {}
+    for r in registros:
+        c = corridas.setdefault(r["ejecucion_id"], {"inicio": r["inicio"], "segundos": 0.0, "estado": "OK"})
+        c["segundos"] += float(r["segundos"])
+        if r["estado"] == "ERROR":
+            c["estado"] = "ERROR"
+    return list(corridas.items())
+
+
+def _imprimir_historial():
+    corridas = _corridas()
+    print(f"Corridas registradas: {len(corridas)}")
+    print(f"{'n':>3}  {'ejecucion':<17}{'inicio':<21}{'segundos':>9}  estado")
+    print("-" * 62)
+    for numero, (ejecucion_id, c) in enumerate(corridas, start=1):
+        print(f"{numero:>3}  {ejecucion_id:<17}{c['inicio']:<21}{c['segundos']:>9.2f}  {c['estado']}")
+    print("-" * 62)
+    print()
+
+
 @task(retries=2, retry_delay_seconds=5)
 def ingestar(modulo):
     importlib.import_module(modulo).main()
@@ -107,6 +137,11 @@ def construir_dbt():
 @task
 def ejecutar_script(ruta):
     runpy.run_path(str(ruta), run_name="__main__")
+
+
+@task
+def levantar_kafka():
+    subprocess.run(["docker", "compose", "up", "-d", "--wait"], cwd=RAIZ, check=True)
 
 
 @flow(name="red-metropolitana", log_prints=True)
@@ -129,8 +164,10 @@ def flujo_red_metropolitana():
         resultados.append((nombre, "OK", segundos))
 
     requiere_kafka = [m for _, m, k in INGESTAS if k and _modulo_existe(m)]
-    if requiere_kafka and not _kafka_disponible():
-        raise RuntimeError("Kafka no responde. Levantarlo con: docker compose up -d")
+    if requiere_kafka:
+        etapa("kafka", levantar_kafka)
+        if not _kafka_disponible():
+            raise RuntimeError("Kafka no responde despues de docker compose up -d --wait")
 
     for nombre, modulo, _ in INGESTAS:
         if _modulo_existe(modulo):
@@ -142,6 +179,8 @@ def flujo_red_metropolitana():
     etapa("dbt_build", construir_dbt)
     etapa("publicar_gold", ejecutar_script, RAIZ / "scripts" / "publicar_gold.py")
     etapa("exportar_modelo", ejecutar_script, RAIZ / "scripts" / "exportar_modelo.py")
+    etapa("conteos_bronze", ejecutar_script, RAIZ / "scripts" / "conteos_bronze.py")
+    ejecutar_script(RAIZ / "scripts" / "tiempos_flujo.py")
 
     print()
     print(f"Ejecucion {ejecucion_id}")
@@ -152,6 +191,7 @@ def flujo_red_metropolitana():
     print("-" * 42)
     print(f"{'total':<32}{sum(s for _, _, s in resultados):>10.2f}")
     print()
+    _imprimir_historial()
     return ejecucion_id
 
 
