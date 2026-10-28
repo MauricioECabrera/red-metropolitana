@@ -38,16 +38,16 @@ Todos los modelos usan exactamente los mismos folds y la misma metrica.
 
 Esquema `features`. La publica quien tiene la seccion 1.3. Una fila por (unidad_id, fecha_corte).
 
-| Columna | Tipo |
-|---|---|
-| unidad_id | VARCHAR |
-| fecha_corte | DATE |
-| viajes_28d | INTEGER |
-| dias_desde_ultimo_viaje | INTEGER |
-| gasto_28d_q | DECIMAL(10,2) |
-| operadores_distintos_28d | INTEGER |
-| abordajes_fin_semana_28d | INTEGER |
-| etiqueta | INTEGER (NULL en el corte C) |
+| Columna | Tipo | Definición y Ventana | Origen Silver |
+| :--- | :--- | :--- | :--- |
+| `unidad_id` | VARCHAR | Llave única de la persona (`persona_key`) | Múltiples |
+| `fecha_corte` | DATE | Fecha de análisis del corte | Múltiples |
+| `viajes_28d` | INTEGER | Abordajes válidos en la ventana (28 días) | Abordajes unificados |
+| `dias_desde_ultimo_viaje` | INTEGER | Días desde el último viaje al corte (28 días) | Abordajes unificados |
+| `gasto_28d_q` | DECIMAL | Suma de montos gastados en quetzales (28 días) | Abordajes unificados |
+| `operadores_distintos_28d` | INTEGER | Modos de transporte distintos usados (28 días) | Abordajes unificados |
+| `abordajes_fin_semana_28d` | INTEGER | Abordajes realizados en domingo o sábado (28 días) | Abordajes unificados |
+| `etiqueta` | INTEGER | 1 si abandonó, 0 si continuó. (Null en Corte C). | Abordajes unificados |
 
 Puede crecer con mas columnas. Estas no cambian de nombre ni de tipo.
 

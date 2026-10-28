@@ -1,10 +1,14 @@
 version: 2
+
 models:
-  - name: features_persona
-    description: Tabla de features para entrenamiento de modelos de ciencia de datos a nivel de usuario.
+  - name: poblacion
+    description: "Tabla base de poblacion y etiqueta calculada por unidad_id y fecha_corte."
+  - name: features_corte
+    description: "Tabla de features por unidad y corte para entrenamiento de modelos."
     columns:
-      - name: persona_sk
-        description: Identificador seudonimizado de la persona.
+      - name: unidad_id
         tests:
-          - unique
+          - not_null
+      - name: fecha_corte
+        tests:
           - not_null
