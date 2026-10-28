@@ -26,9 +26,8 @@ poblacion_base as (
 bajas_cdc as (
     select persona_key as unidad_id
     from {{ ref('slv_padron_scd2') }}
-    where estado = 'INACTIVO' 
+    where estado = 'INACTIVA' 
       and vigente_desde < cast('{{ fecha_corte }}' as date)
-      and vigente_hasta >= cast('{{ fecha_corte }}' as date)
 ),
 poblacion_activa as (
     select p.unidad_id
