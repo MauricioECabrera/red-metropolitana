@@ -1,0 +1,24 @@
+{
+  "parametros": {
+    "learning_rate": 0.1,
+    "max_iter": 100,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 20,
+    "l2_regularization": 1.0,
+    "early_stopping": false,
+    "random_state": 42
+  },
+  "unidades": 59515,
+  "variables": [
+    "viajes_28d",
+    "dias_desde_ultimo_viaje",
+    "gasto_28d_q",
+    "operadores_distintos_28d",
+    "abordajes_fin_semana_28d"
+  ],
+  "repeticiones_permutacion_por_fold": 10,
+  "segundos_entrenamiento_total": 3.667602200002875,
+  "segundos_prediccion_total": 1.1311794998473488,
+  "segundos_importancia_total": 12.8459351999918,
+  "segundos_total": 19.94533610000508
+}
