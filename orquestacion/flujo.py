@@ -13,6 +13,7 @@
     5. Productor Kafka      via streaming    si ya esta integrado
     6. Consumidor Kafka     via streaming    si ya esta integrado
     7. dbt build            Bronze, Silver, Gold, features y reportes
+       Cortes B y C         poblacion y features de los cortes 2026-07-31 y 2026-08-30
     8. Publicar Gold        archivo del tablero
     9. Exportar modelo      DDL y diagrama
    10. Conteos de Bronze    filas esperadas contra filas cargadas
@@ -37,6 +38,7 @@ import csv
 import datetime
 import importlib
 import importlib.util
+import json
 import os
 import pathlib
 import runpy
@@ -51,6 +53,8 @@ from ingesta.comun.bronze import LAKE_BRONZE, RAIZ
 
 BITACORA_EJECUCIONES = LAKE_BRONZE / "_control" / "ejecuciones.csv"
 COLUMNAS_BITACORA = ["ejecucion_id", "etapa", "estado", "segundos", "inicio"]
+
+CORTES_ADICIONALES = ["2026-07-31", "2026-08-30"]
 
 INGESTAS = [
     ("catalogos", "ingesta.batch.cargar_catalogos", False),
@@ -135,6 +139,17 @@ def construir_dbt():
 
 
 @task
+def construir_features_cortes():
+    entorno = {**os.environ, "DBT_PROFILES_DIR": str(RAIZ / "dbt")}
+    dbt = [sys.executable, "-m", "dbt.cli.main"]
+    for corte in CORTES_ADICIONALES:
+        subprocess.run(
+            [*dbt, "build", "--select", "poblacion", "features_corte", "--vars", json.dumps({"fecha_corte": corte})],
+            cwd=RAIZ / "dbt", env=entorno, check=True,
+        )
+
+
+@task
 def ejecutar_script(ruta):
     runpy.run_path(str(ruta), run_name="__main__")
 
@@ -177,6 +192,7 @@ def flujo_red_metropolitana():
             resultados.append((nombre, "OMITIDA", 0.0))
 
     etapa("dbt_build", construir_dbt)
+    etapa("features_cortes", construir_features_cortes)
     etapa("publicar_gold", ejecutar_script, RAIZ / "scripts" / "publicar_gold.py")
     etapa("exportar_modelo", ejecutar_script, RAIZ / "scripts" / "exportar_modelo.py")
     etapa("conteos_bronze", ejecutar_script, RAIZ / "scripts" / "conteos_bronze.py")

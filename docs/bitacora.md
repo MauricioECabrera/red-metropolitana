@@ -437,13 +437,13 @@ Vaciar significa borrar `lake/bronze/`, `lake/staging/`, `warehouse/` y
 `dbt/target/`, y bajar Kafka con `docker compose down -v`. Los mensajes viven
 en el contenedor: sin bajarlo, el consumidor (`auto.offset.reset: earliest`)
 releería los mensajes de la carga anterior y duplicaría Bronze. El proyecto no
-usa snapshots ni modelos incrementales de dbt, así que no hay más estado.
+usa snapshots, y los modelos incrementales de población y features (D-014) viven en el warehouse, que también se vacía, así que no hay más estado.
 
 El flujo levanta Kafka como etapa propia (`docker compose up -d --wait`),
 registrada en `ejecuciones.csv` con su duración.
 
-**Evidencia.** Corrida desde entorno vacío: 11 etapas, 95.80 s, `dbt build`
-con PASS=226 y ERROR=0, y 9 de 9 archivos con diferencia 0
+**Evidencia.** Corrida desde entorno vacío: 12 etapas, 109.87 s, `dbt build`
+con PASS=228 y ERROR=0, y 9 de 9 archivos con diferencia 0
 (`docs/evidencias/conteos_bronze.md` y `docs/evidencias/tiempos_flujo.md`).
 
 **Consecuencia asumida.** Quien carga datos nuevos debe vaciar el entorno
@@ -451,3 +451,40 @@ antes de correr el flujo (README, sección "Corrida desde cero"). Las filas
 esperadas de `scripts/conteos_bronze.py` son las del LEEME de esta entrega: con
 otro juego de datos, por ejemplo el de la prueba de invarianza, la tabla
 mostrará diferencias que hay que explicar y no son un error del pipeline.
+
+---
+
+## D-014 · Cortes B y C dentro del comando único
+**Estado:** cerrada · **Responsable:** Miguel
+
+**Contexto.** La población y las features reciben la fecha de corte como
+parámetro (`fecha_corte`, por defecto 2026-07-01). El `dbt build` del flujo solo
+calculaba el corte A: `features.features_corte` quedaba con 59,515 filas y los
+cortes B y C dependían de correr `features/calcular.py` a mano, así que el
+comando único no dejaba la tabla con los tres cortes.
+
+**Opciones.**
+1. Dejar B y C como paso manual con `features/calcular.py`.
+2. Cambiar el valor por defecto de `fecha_corte` para calcular los tres cortes
+   en un solo build.
+3. Agregar al flujo una etapa que corra `poblacion` y `features_corte` para B y
+   C justo después del `dbt build`.
+
+**Decisión.** Opción 3.
+
+La opción 1 deja un paso manual, que el enunciado pide eliminar. La opción 2
+mezcla la lógica de tres cortes en un parámetro pensado para uno solo. La etapa
+`features_cortes` invoca dbt como módulo de Python, igual que `dbt_build`, y
+evita la dependencia de PowerShell de `calcular.py`. Los modelos son
+incrementales con llave `(unidad_id, fecha_corte)`: repetir la etapa no duplica
+filas.
+
+**Evidencia.** Corrida desde entorno vacío: 12 etapas, 109.87 s, `dbt build`
+con PASS=228 y ERROR=0, y 9 de 9 archivos con diferencia 0. `features_corte` y
+`poblacion` quedan con 175,354 filas (cortes A, B y C). La prueba de
+idempotencia da IDEMPOTENTE con 19,537,396 filas en las dos corridas
+(`docs/evidencias/idempotencia.md`).
+
+**Consecuencia asumida.** Como estos modelos son incrementales, su estado vive
+en el warehouse: al cargar datos nuevos hay que vaciarlo junto con el lake
+(README, sección "Corrida desde cero").
