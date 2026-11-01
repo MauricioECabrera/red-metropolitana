@@ -1,0 +1,6 @@
+segmento,nombre,tamano,porcentaje,mediana_viajes_28d,mediana_dias_desde_ultimo_viaje,mediana_gasto_28d_q,mediana_operadores_distintos_28d,mediana_abordajes_fin_semana_28d,tasa_abandono
+0,viajeros regulares,26128,43.9,8.0,2.0,13.0,1.0,1.0,0.0867
+1,viajeros intensivos multimodales,795,1.34,116.0,1.0,207.4,2.0,16.0,0.0252
+2,viajeros regulares multimodales,17498,29.4,12.0,2.0,17.6,2.0,2.0,0.0618
+3,viajeros frecuentes multimodales,6030,10.13,45.0,1.0,74.9,2.0,7.0,0.0227
+4,viajeros en enfriamiento,9064,15.23,4.0,16.0,6.9,1.0,0.0,0.3965

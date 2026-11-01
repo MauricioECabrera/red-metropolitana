@@ -163,6 +163,8 @@ def nombrar_segmentos(medianas, referencia):
 
         if fila["dias_desde_ultimo_viaje"] >= max(2 * referencia["dias_desde_ultimo_viaje"], 7):
             partes.append("en enfriamiento")
+        elif fila["viajes_28d"] >= 6 * referencia["viajes_28d"]:
+            partes.append("intensivos")
         elif fila["viajes_28d"] >= 1.5 * referencia["viajes_28d"]:
             partes.append("frecuentes")
         elif fila["viajes_28d"] <= 0.6 * referencia["viajes_28d"]:
@@ -182,11 +184,12 @@ def nombrar_segmentos(medianas, referencia):
 
         nombres[segmento] = "viajeros " + " ".join(partes)
 
+    repetidos = pd.Series(nombres).value_counts()
     vistos = {}
     for segmento in sorted(nombres):
         nombre = nombres[segmento]
-        vistos[nombre] = vistos.get(nombre, 0) + 1
-        if list(nombres.values()).count(nombre) > 1:
+        if repetidos[nombre] > 1:
+            vistos[nombre] = vistos.get(nombre, 0) + 1
             nombres[segmento] = f"{nombre} ({vistos[nombre]})"
 
     return nombres
