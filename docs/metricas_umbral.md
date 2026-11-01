@@ -72,8 +72,7 @@ ganancia que se deja de ganar.
 
 1. Modelo: **ensemble** (HistGradientBoosting), el de mejor AP de
    validación en `docs/metricas_fase2_ensemble.md` (0.4258 contra 0.4083 de
-   la logística). *Confirmar con Adrián y con la decisión de 2.1 antes de
-   evaluar B.*
+   la logística), acordado con Adrián.
 2. Se usan las predicciones fuera de fold del corte A
    (`scripts/modelos/predicciones_cv.csv`) unidas con la etiqueta de A.
    Ninguna fila del corte B participa.
@@ -96,19 +95,48 @@ python -m scripts.modelos.umbral --modelo ensemble --corte-eval A
 
 ## Resultado en validación cruzada (corte A)
 
-*Pendiente: llenar con la salida del comando sobre el warehouse real.*
+Población: 59,515 unidades, 7,098 positivos (7,098 / 59,515 = 0.1193).
 
 | Dato | Valor |
 |---|---:|
-| Umbral elegido | |
-| Contactados | |
-| Verdaderos positivos / falsos positivos | |
-| Ganancia observada | Q |
-| Umbral de máxima ganancia esperada | |
-| Ganancia de contactar a todos | Q |
+| **Umbral elegido** | **0.33** |
+| Contactados | 5,689 de 59,515 (9.6 %) |
+| Verdaderos positivos / falsos positivos | 2,649 / 3,040 |
+| Precisión en el umbral | 2,649 / 5,689 = 0.4656 |
+| Recall en el umbral | 2,649 / 7,098 = 0.3732 |
+| **Ganancia observada** | 15 × 2,649 − 5 × 5,689 = **Q11,290** |
+| Ganancia esperada (Σ 15p − 5) | Q11,441.78 |
+| Umbral de máxima ganancia esperada | 0.33 |
+| Contactar a todos (umbral 0) | −Q191,105 |
+| No contactar a nadie | Q0 |
+
+Comparación con la línea base: contactar a todos equivale a usar el
+baseline de tasa constante (todos tienen la misma p = 0.1193 < 1/3, así
+que con ese modelo la decisión correcta sería no contactar a nadie y la
+ganancia sería Q0). El ensemble permite encontrar al 9.6 % de usuarios con
+p ≥ 0.33 y convertir la campaña en Q11,290 de ganancia.
+
+**Lectura.** El umbral observado (0.33) coincide con el de la ganancia
+esperada y con el equilibrio teórico 1/3. Las dos curvas casi se
+superponen, lo que indica que las probabilidades fuera de fold del
+ensemble están razonablemente calibradas: cuando el modelo dice p, la
+proporción real de abandono es cercana a p.
+
+**Estabilidad entre folds** (mismo umbral 0.33):
+
+| Fold | Contactados | VP | Precisión | Recall | Ganancia |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 1,102 | 504 | 0.46 | 0.36 | Q2,050 |
+| 2 | 1,148 | 548 | 0.48 | 0.39 | Q2,480 |
+| 3 | 1,134 | 524 | 0.46 | 0.37 | Q2,190 |
+| 4 | 1,211 | 555 | 0.46 | 0.39 | Q2,270 |
+| 5 | 1,094 | 518 | 0.47 | 0.36 | Q2,300 |
+
+Los cinco folds dan ganancia positiva con poca variación (Q2,050 a
+Q2,480), así que el umbral no depende de un fold en particular.
 
 Gráfica: `docs/umbral/ganancia_umbral.png` (panel derecho con el detalle
-de la zona positiva). Estabilidad por fold: `docs/umbral/ganancia_por_fold.csv`.
+de la zona positiva). Curva completa: `docs/umbral/curva_ganancia_cv.csv`.
 
 ## Evaluación única en B
 

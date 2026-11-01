@@ -150,12 +150,15 @@ def ganancia_en_umbral(prob, etiqueta, umbral):
     positivos = int((contactados & (etiqueta == 1)).sum())
     falsos = int((contactados & (etiqueta == 0)).sum())
     total = positivos + falsos
+    reales = int((etiqueta == 1).sum())
 
     return {
         "umbral": float(umbral),
         "contactados": total,
         "verdaderos_positivos": positivos,
         "falsos_positivos": falsos,
+        "precision": positivos / total if total else 0.0,
+        "recall": positivos / reales if reales else 0.0,
         "ganancia_observada_q": BENEFICIO_POSITIVO * positivos
         - COSTO_CONTACTO * total,
         "ganancia_esperada_q": float(
@@ -300,6 +303,8 @@ def evaluar_a(modelo):
         "ganancia_cv_q": float(elegido["ganancia_observada_q"]),
         "contactados_cv": int(elegido["contactados"]),
         "verdaderos_positivos_cv": int(elegido["verdaderos_positivos"]),
+        "precision_cv": float(elegido["precision"]),
+        "recall_cv": float(elegido["recall"]),
         "unidades_cv": int(len(datos)),
         "umbral_max_ganancia_esperada": float(esperado["umbral"]),
         "umbral_teorico": UMBRAL_TEORICO,
