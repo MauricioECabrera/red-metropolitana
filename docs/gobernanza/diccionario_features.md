@@ -1,3 +1,4 @@
+> **Nota de Gobernanza:** Este documento describe la tabla histórica `features_persona` del Proyecto 1. Para la tabla de modelado del Proyecto 2 (`features_corte` con 10 variables), referirse al documento oficial vigente: [docs/etiqueta_y_features.md](../etiqueta_y_features.md).
 # Diccionario de Features
 **Fecha de corte declarada:** 2026-07-15
 

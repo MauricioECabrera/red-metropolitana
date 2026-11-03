@@ -3,12 +3,67 @@ version: 2
 models:
   - name: poblacion
     description: "Tabla base de poblacion y etiqueta calculada por unidad_id y fecha_corte."
-  - name: features_corte
-    description: "Tabla de features por unidad y corte para entrenamiento de modelos."
     columns:
       - name: unidad_id
         tests:
           - not_null
       - name: fecha_corte
+        tests:
+          - not_null
+
+  - name: features_corte
+    description: "Tabla de features v2 con 10 variables predictivas para entrenamiento."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - unidad_id
+              - fecha_corte
+    columns:
+      - name: unidad_id
+        tests:
+          - not_null
+      - name: fecha_corte
+        tests:
+          - not_null
+      - name: viajes_28d
+        tests:
+          - not_null
+      - name: dias_desde_ultimo_viaje
+        tests:
+          - not_null
+      - name: gasto_28d_q
+        tests:
+          - not_null
+      - name: operadores_distintos_28d
+        tests:
+          - not_null
+      - name: abordajes_fin_semana_28d
+        tests:
+          - not_null
+      - name: viajes_7d
+        tests:
+          - not_null
+      - name: dias_activos_28d
+        tests:
+          - not_null
+      - name: gasto_promedio_viaje_q
+        tests:
+          - not_null
+      - name: proporcion_hora_pico_28d
+        tests:
+          - not_null
+      - name: tendencia_viajes_14d
+        tests:
+          - not_null
+
+  - name: unidad_tarjetas
+    description: "Mapeo de unidad_id hacia lista de tarjetas originales ordenadas y separadas por punto y coma."
+    columns:
+      - name: unidad_id
+        tests:
+          - unique
+          - not_null
+      - name: tarjetas
         tests:
           - not_null
