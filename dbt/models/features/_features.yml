@@ -58,11 +58,19 @@ models:
           - not_null
 
   - name: unidad_tarjetas
-    description: "Mapeo de unidad_id hacia lista de tarjetas originales ordenadas y separadas por punto y coma."
+    description: "Mapeo de unidad_id hacia lista de tarjetas originales ordenadas y separadas por punto y coma, acotadas a fecha_corte."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - unidad_id
+              - fecha_corte
     columns:
       - name: unidad_id
         tests:
-          - unique
+          - not_null
+      - name: fecha_corte
+        tests:
           - not_null
       - name: tarjetas
         tests:
