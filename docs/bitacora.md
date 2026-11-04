@@ -488,3 +488,9 @@ idempotencia da IDEMPOTENTE con 19,537,396 filas en las dos corridas
 **Consecuencia asumida.** Como estos modelos son incrementales, su estado vive
 en el warehouse: al cargar datos nuevos hay que vaciarlo junto con el lake
 (README, sección "Corrida desde cero").
+
+## D-015: Ampliación a 10 features predictivas para modelo de churn
+- **Fecha:** 2026-11-02
+- **Autor:** Diego de Jesús Urbina Chávez (Rol 2)
+- **Decisión:** Se amplió la tabla `features_corte` de 5 a 10 variables predictivas (`viajes_7d`, `dias_activos_28d`, `gasto_promedio_viaje_q`, `proporcion_hora_pico_28d`, `tendencia_viajes_14d`) y se creó la tabla `features.unidad_tarjetas`.
+- **Justificación:** Satisfacer el requerimiento de rúbrica de la sección 2.1 (top 10 importancias) y proveer mayor capacidad predictiva temporal y de comportamiento sin incurrir en fuga de datos (validado con 0 diferencias en prueba de recorte).
