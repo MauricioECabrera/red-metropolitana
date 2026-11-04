@@ -13,11 +13,11 @@ def main():
 
     cmd = [
         "powershell", "-ExecutionPolicy", "Bypass", "-File", ".\\scripts\\dbt.ps1", "build",
-        "--select", "poblacion", "features_corte",
+        "--select", "poblacion", "features_corte", "unidad_tarjetas",
         "--vars", f'{{"fecha_corte": "{args.fecha_corte}"}}'
     ]
     
-    print(f"Calculando features para el corte: {args.fecha_corte}")
+    print(f"Calculando modelos para el corte: {args.fecha_corte}")
     resultado = subprocess.run(cmd)
     sys.exit(resultado.returncode)
 

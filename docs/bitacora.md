@@ -540,3 +540,9 @@ la validación de D-015 ("0 diferencias en prueba de recorte"); se le avisa
 a Diego con esta evidencia para que la acote a `fecha_corte`. Mientras no
 se corrija, el campo `tarjetas` de las predicciones no debe usarse para
 decisiones basadas en el estado del corte, solo `puntaje` y `contactar`.
+
+## D-017: Corrección de fuga en features.unidad_tarjetas por fecha de corte
+- **Fecha:** 2026-11-03
+- **Autor:** Diego de Jesús Urbina Chávez (Rol 2)
+- **Decisión:** Se modificó `features.unidad_tarjetas` para que sea incremental por `(unidad_id, fecha_corte)` y filtre estrictamente `abordaje_ts < fecha_corte`.
+- **Justificación:** Corregir la fuga temporal detectada en D-016 donde 2,642 registros del Corte B incluían tarjetas observadas en agosto. Con este cambio, la prueba de invarianza y recorte es determinista y libre de fuga futura.
