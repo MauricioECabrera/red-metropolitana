@@ -54,7 +54,7 @@ def ejecutar_git(*argumentos):
 
 
 def verificar_arbol_limpio():
-    if ejecutar_git("status", "--porcelain", "--untracked-files=no"):
+    if ejecutar_git("status", "--porcelain", "--untracked-files=no", "--", ".", ":!tableau"):
         raise RuntimeError(
             "Hay cambios sin commit. El commit evaluado queda anotado en "
             "los metadatos del modelo: hace commit antes de entrenar."
