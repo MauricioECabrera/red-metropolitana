@@ -17,7 +17,7 @@
   B bajo ningun motivo: ni lo lee ni lo menciona.
 
   Ejecutar desde la raiz del repositorio:
-    python scripts/entrenar_modelo.py
+    python -m scripts.entrenar_modelo
 =====================================================================
 """
 import json
