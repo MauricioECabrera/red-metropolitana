@@ -13,15 +13,17 @@
     5. Productor Kafka      via streaming    si ya esta integrado
     6. Consumidor Kafka     via streaming    si ya esta integrado
     7. dbt build            Bronze, Silver, Gold, features y reportes
-       Cortes B y C         poblacion y features de los cortes 2026-07-31 y 2026-08-30
-    8. Publicar Gold        archivo del tablero
-    9. Exportar modelo      DDL y diagrama
-   10. Conteos de Bronze    filas esperadas contra filas cargadas
-   11. Tiempos              segundos por etapa de la ejecucion
-   12. Historial            cuantas corridas hay y cuando se hicieron
+       Cortes B y C         poblacion, features y unidad_tarjetas de los cortes 2026-07-31 y 2026-08-30
+    8. Prediccion corte C   predecir.py con el modelo congelado, si ya esta versionado
+    9. Publicar Gold        archivo del tablero
+   10. Exportar modelo      DDL y diagrama
+   11. Conteos de Bronze    filas esperadas contra filas cargadas
+   12. Tiempos              segundos por etapa de la ejecucion
+   13. Historial            cuantas corridas hay y cuando se hicieron
 
   Las etapas de ingesta tienen reintentos. Una etapa cuyo modulo
-  todavia no existe en el repositorio se registra como OMITIDA.
+  todavia no existe en el repositorio, o cuyo archivo de entrada
+  todavia no esta versionado, se registra como OMITIDA.
   Si hay etapas de streaming, el flujo levanta Kafka con
   docker compose up -d --wait antes de ingestar.
   Cada corrida queda en lake/bronze/_control/ejecuciones.csv con
@@ -49,12 +51,14 @@ import time
 
 from prefect import flow, task
 
-from ingesta.comun.bronze import LAKE_BRONZE, RAIZ
+from ingesta.comun.bronze import DATOS_CRUDOS, LAKE_BRONZE, RAIZ
 
 BITACORA_EJECUCIONES = LAKE_BRONZE / "_control" / "ejecuciones.csv"
 COLUMNAS_BITACORA = ["ejecucion_id", "etapa", "estado", "segundos", "inicio"]
 
 CORTES_ADICIONALES = ["2026-07-31", "2026-08-30"]
+FECHA_PREDICCION_C = "2026-08-30"
+RUTA_MODELO_CHURN = RAIZ / "modelos" / "modelo_churn_v1.joblib"
 
 INGESTAS = [
     ("catalogos", "ingesta.batch.cargar_catalogos", False),
@@ -144,9 +148,15 @@ def construir_features_cortes():
     dbt = [sys.executable, "-m", "dbt.cli.main"]
     for corte in CORTES_ADICIONALES:
         subprocess.run(
-            [*dbt, "build", "--select", "poblacion", "features_corte", "--vars", json.dumps({"fecha_corte": corte})],
+            [*dbt, "build", "--select", "poblacion", "features_corte", "unidad_tarjetas", "--vars", json.dumps({"fecha_corte": corte})],
             cwd=RAIZ / "dbt", env=entorno, check=True,
         )
+
+
+@task
+def predecir_corte_c():
+    import predecir
+    predecir.predecir(str(DATOS_CRUDOS), FECHA_PREDICCION_C)
 
 
 @task
@@ -193,6 +203,13 @@ def flujo_red_metropolitana():
 
     etapa("dbt_build", construir_dbt)
     etapa("features_cortes", construir_features_cortes)
+
+    if RUTA_MODELO_CHURN.exists():
+        etapa("predecir_corte_c", predecir_corte_c)
+    else:
+        _registrar(ejecucion_id, "predecir_corte_c", "OMITIDA", 0, datetime.datetime.now())
+        resultados.append(("predecir_corte_c", "OMITIDA", 0.0))
+
     etapa("publicar_gold", ejecutar_script, RAIZ / "scripts" / "publicar_gold.py")
     etapa("exportar_modelo", ejecutar_script, RAIZ / "scripts" / "exportar_modelo.py")
     etapa("conteos_bronze", ejecutar_script, RAIZ / "scripts" / "conteos_bronze.py")
