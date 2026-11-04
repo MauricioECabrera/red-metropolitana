@@ -39,3 +39,5 @@ Book*.twb
 Thumbs.db
 desktop.ini
 .DS_Store
+salidas/
+datos_recortados/

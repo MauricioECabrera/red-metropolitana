@@ -54,6 +54,24 @@ Los datos del Proyecto 2 reemplazan a los del Proyecto 1. Antes de cargarlos
 se vacian `lake/bronze/`, `warehouse/` y `datos_red/`, y se baja Kafka con
 `docker compose down -v` para que no queden mensajes de la carga anterior.
 
+## Fase 2: correr en otra maquina
+
+Probado con Python 3.14. Las versiones de requirements.txt estan fijadas con
+== para que el entorno sea el mismo en cualquier maquina.
+
+1. Clonar el repositorio y entrar a la carpeta.
+2. Crear el entorno virtual y activarlo: python -m venv .venv, luego
+   .venv\Scripts\activate (PowerShell) o source .venv/Scripts/activate (Git Bash).
+3. pip install -r requirements.txt
+4. Copiar .env.example a .env y completar la sal de seudonimizacion del
+   equipo (se pide por privado, nunca se versiona ni se le pasa a una IA).
+5. Abrir Docker Desktop y esperar a que el motor este listo.
+6. Copiar los nueve archivos de datos a datos_red/.
+7. python -m orquestacion.flujo
+8. python predecir.py --datos datos_red --fecha-corte 2026-08-30
+
+La semilla fija en todo el proyecto es 42 (folds, modelos y KMeans).
+
 ## Reglas del repositorio
 
 - Cada integrante crea archivos unicamente dentro de las carpetas de su rol.
