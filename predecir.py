@@ -62,6 +62,10 @@ LECTORES = {
 }
 
 
+class CorteVacio(ValueError):
+    """El corte pedido no tiene filas con los datos actualmente cargados."""
+
+
 def contar_carpeta(conexion, carpeta, archivo):
     ruta = carpeta / archivo
     lector = LECTORES.get(archivo, lector_csv)
@@ -136,7 +140,7 @@ def cargar_corte_a_predecir(fecha_corte, variables):
         ).df()
 
     if datos.empty:
-        raise ValueError(f"El corte {fecha_corte} esta vacio.")
+        raise CorteVacio(f"El corte {fecha_corte} esta vacio.")
 
     if datos.duplicated("unidad_id").any():
         raise ValueError(f"Hay unidades duplicadas en el corte {fecha_corte}.")

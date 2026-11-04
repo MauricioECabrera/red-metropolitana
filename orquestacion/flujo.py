@@ -156,7 +156,11 @@ def construir_features_cortes():
 @task
 def predecir_corte_c():
     import predecir
-    predecir.predecir(str(DATOS_CRUDOS), FECHA_PREDICCION_C)
+
+    try:
+        predecir.predecir(str(DATOS_CRUDOS), FECHA_PREDICCION_C)
+    except predecir.CorteVacio as error:
+        print(f"Prediccion del corte C omitida: {error}")
 
 
 @task
