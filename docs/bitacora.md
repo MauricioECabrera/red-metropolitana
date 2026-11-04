@@ -494,3 +494,49 @@ en el warehouse: al cargar datos nuevos hay que vaciarlo junto con el lake
 - **Autor:** Diego de Jesús Urbina Chávez (Rol 2)
 - **Decisión:** Se amplió la tabla `features_corte` de 5 a 10 variables predictivas (`viajes_7d`, `dias_activos_28d`, `gasto_promedio_viaje_q`, `proporcion_hora_pico_28d`, `tendencia_viajes_14d`) y se creó la tabla `features.unidad_tarjetas`.
 - **Justificación:** Satisfacer el requerimiento de rúbrica de la sección 2.1 (top 10 importancias) y proveer mayor capacidad predictiva temporal y de comportamiento sin incurrir en fuga de datos (validado con 0 diferencias en prueba de recorte).
+
+## D-016 · Ensayo de invarianza del corte B (prueba de recorte)
+**Estado:** cerrada
+**Fecha:** 2026-11-03 · **Commit:** 831f1336d7768447b0c75ac4c6dae7dd8a714cc7
+
+**Contexto.** El corte B (2026-07-31) solo necesita datos hasta el 30 de
+julio. Si el pipeline usara información posterior a esa fecha, el score del
+churn estaría contaminado con datos del futuro. Se construyó
+`scripts/recortar_datos.py` para generar una copia de `datos_red` truncada
+al 30 de julio, respetando el formato y la zona horaria de cada uno de los
+nueve archivos.
+
+**Procedimiento.** Se corrió el flujo completo dos veces desde un entorno
+vacío: una con `datos_red` completo (salida `salidas/B_completo.csv`) y
+otra con la copia recortada (salida `salidas/B_recortado.csv`), prediciendo
+el corte B en ambos casos con el mismo `modelos/modelo_churn_v1.joblib`.
+
+**Resultado.**
+| Comparación | Filas | Diferencias |
+|---|---|---|
+| `unidad_id` (conjunto) | 58,128 | 0 |
+| `puntaje` | 58,128 | 0 |
+| `contactar` | 58,128 | 0 |
+| `tarjetas` | 58,128 | 2,642 |
+
+El score del modelo (`puntaje`) y la decisión de contacto (`contactar`) son
+idénticos fila por fila entre las dos corridas: las diez variables de
+`features.features_corte` no tienen fuga de datos futuros.
+
+La columna `tarjetas`, que viene de `features.unidad_tarjetas` y se adjunta
+al CSV solo como dato informativo (no entra a `predict_proba`), sí difiere
+en 2,642 filas. Esa tabla no está acotada por `fecha_corte`: cuenta tarjetas
+vistas en todo el histórico cargado en el warehouse, así que con datos
+completos ve tarjetas usadas después del 31 de julio.
+
+**Evidencia.** `sha256sum salidas/B_completo.csv salidas/B_recortado.csv`
+da hashes distintos (`d8c677b6...` vs `d33438fd...`) por la columna
+`tarjetas`; comparando columna por columna con pandas, `puntaje` y
+`contactar` dan 0 diferencias en las 58,128 filas.
+
+**Consecuencia asumida.** El churn model queda validado contra fuga de
+datos. `unidad_tarjetas` sí tiene fuga de información futura y contradice
+la validación de D-015 ("0 diferencias en prueba de recorte"); se le avisa
+a Diego con esta evidencia para que la acote a `fecha_corte`. Mientras no
+se corrija, el campo `tarjetas` de las predicciones no debe usarse para
+decisiones basadas en el estado del corte, solo `puntaje` y `contactar`.
