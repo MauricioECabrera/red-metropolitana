@@ -663,3 +663,17 @@ en `docs/umbral/umbral_elegido.json`; este commit es el congelamiento y
 B se evalúa sobre él sin cambiar modelo ni umbral.
 
 Documentación: `docs/metricas_umbral.md`.
+
+
+---
+
+## D-020 · Evaluación única del corte B
+**Estado:** cerrada · **Responsable:** Eduardo
+
+- **Fecha:** 2026-11-08 12:25:50
+- **Commit:** `2ba297c903766f792e1aea29d872f2a8c2974d24`
+- **Modelo y umbral:** ensemble, umbral 0.31, ambos congelados en A antes de esta corrida.
+- **Resultado:** AP 0.3712, ganancia Q7,145.00 con 6,602 contactados.
+- **Detalle:** `docs/test_b.md` y `docs/umbral/registro_test_b.json`.
+
+Se evaluó una sola vez. No se ajustó nada después de ver la etiqueta de B.

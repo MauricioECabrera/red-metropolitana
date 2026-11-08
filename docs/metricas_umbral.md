@@ -174,3 +174,8 @@ no está versionado o si hay cambios sin commit. Después de B, el modo A
 también queda bloqueado, para que el umbral no se pueda volver a elegir.
 
 Resultados: `docs/test_b.md` y la entrada en `docs/bitacora.md`.
+
+**Resultado (8 de noviembre de 2026, commit `2ba297c`).** AP 0.3712,
+precisión 0.4055, recall 0.4194 y ganancia 15 × 2,677 − 5 × 6,602 =
+Q7,145 con 6,602 contactados, contra −Q194,895 de contactar a todos. La
+explicación de la diferencia con A está en `docs/test_b.md`.
