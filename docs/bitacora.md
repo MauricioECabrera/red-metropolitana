@@ -623,3 +623,43 @@ evaluación única en B deben quedar congelados y versionados el modelo
 seleccionado y el umbral. Esta entrada no certifica si B fue evaluado
 previamente en otro equipo; ese estado debe comprobarse entre los
 responsables antes de ejecutarlo.
+
+---
+
+## D-019 · Umbral de contacto recalculado con el ensemble de diez variables
+
+**Fecha:** 2026-11-08
+
+**Responsable:** Eduardo
+
+**Estado:** cerrada; umbral congelado antes de la evaluación única en B.
+
+**Contexto.** Con D-018 cambiaron las probabilidades fuera de fold del
+corte A, así que el umbral de 0.33 de la versión de cinco variables no se
+trasladó. Se volvió a correr
+`python -m scripts.modelos.umbral --modelo ensemble --corte-eval A` sobre
+el `predicciones_cv.csv` nuevo (59,515 unidades, 7,098 positivos). El
+corte B no participa.
+
+**Opciones.**
+
+1. Umbral teórico 1/3, que solo vale si el modelo está calibrado.
+2. Umbral de máxima ganancia esperada (Σ 15p − 5): 0.33, Q11,728.60.
+3. Umbral de máxima ganancia observada (15 × VP − 5 × contactados): 0.31.
+
+**Decisión.** Umbral 0.31 con el ensemble, por la regla declarada desde
+la primera versión: máxima ganancia observada, que no depende de la
+calibración.
+
+**Resultado en A.** 6,653 contactados, 2,985 verdaderos positivos,
+precisión 0.4487, recall 0.4205 y ganancia 15 × 2,985 − 5 × 6,653 =
+Q11,510. Contactar a todos da −Q191,105 y no contactar a nadie Q0. Los
+cinco folds dan ganancia positiva, de Q2,210 a Q2,400.
+
+**Consecuencias.** La cima de la curva es plana: 0.31, 0.32 y 0.33 se
+separan por Q20, así que la decisión es robusta a la opción elegida. Se
+contacta a 964 personas más que con la versión anterior. El umbral queda
+en `docs/umbral/umbral_elegido.json`; este commit es el congelamiento y
+B se evalúa sobre él sin cambiar modelo ni umbral.
+
+Documentación: `docs/metricas_umbral.md`.

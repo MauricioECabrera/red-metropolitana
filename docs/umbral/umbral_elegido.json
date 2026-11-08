@@ -1,12 +1,12 @@
 {
   "modelo": "ensemble",
-  "umbral": 0.33,
+  "umbral": 0.31,
   "criterio": "maxima ganancia observada en predicciones fuera de fold del corte A",
-  "ganancia_cv_q": 11290.0,
-  "contactados_cv": 5689,
-  "verdaderos_positivos_cv": 2649,
-  "precision_cv": 0.46563543680787484,
-  "recall_cv": 0.3732037193575655,
+  "ganancia_cv_q": 11510.0,
+  "contactados_cv": 6653,
+  "verdaderos_positivos_cv": 2985,
+  "precision_cv": 0.44866977303472116,
+  "recall_cv": 0.42054099746407436,
   "unidades_cv": 59515,
   "umbral_max_ganancia_esperada": 0.33,
   "umbral_teorico": 0.3333333333333333,
@@ -16,5 +16,5 @@
     "tasa_retencion": 0.25,
     "valor_retenido_q": 60.0
   },
-  "fecha_decision": "2026-11-01 09:38"
+  "fecha_decision": "2026-11-08 12:24"
 }
