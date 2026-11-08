@@ -11,6 +11,38 @@ semilla 42, scikit-learn 1.9.1. Archivos: `modelos/modelo_churn_v1.joblib`
 y `modelos/modelo_churn_v1.json`.
 **Umbral de contacto:** 0.31 (congelado, ver "Lógica de negocio").
 
+## Datos, unidad y etiqueta
+
+**Datos y período:** datos simulados, igual que en el Proyecto 1. Periodo de
+90 días, del 1 de junio al 29 de agosto de 2026, en los mismos nueve
+archivos, columnas y formatos del Proyecto 1 (reemplazan a esos datos, no
+se agregan).
+
+**Unidad:** la Persona (`persona_key`). Mantiene la estrategia de identidad
+del Proyecto 1, donde las tarjetas de Transmetro (`TC-`), Transurbano y
+MetroRiel comparten el identificador numérico subyacente: modela el
+abandono real de la red integrada y evita falsos abandonos en usuarios
+multimodales que alternan o sustituyen tarjetas. Costo de la unidad:
+Aerómetro emite un hash unidireccional de 12 caracteres que no se puede
+vincular con el padrón general ni con el resto de operadores; esas
+entidades se conservan con el prefijo `AM:`, tratadas como usuarios
+independientes.
+
+**Etiqueta:** positivo (1) si la persona no tiene ningún abordaje válido
+registrado en la capa Silver de ningún operador en los 30 días exactos que
+inician en la fecha de corte; de lo contrario es negativo (0).
+
+**Población por corte:**
+
+| Corte | Fecha | Población | Positivos | Tasa positiva |
+|---|---|---:|---:|---:|
+| A | 2026-07-01 | 59,515 | 7,098 | 0.1193 |
+| B | 2026-07-31 | 58,128 | 6,383 | 0.1098 |
+| C | 2026-08-30 | 57,711 | — | Etiqueta oculta (producción) |
+
+Definición completa de etiqueta, unidad y población en
+`docs/etiqueta_y_features.md`.
+
 ## Comparación de modelos (corte A, validación cruzada de 5 folds)
 
 | Modelo | AP validación | DE | AP entrenamiento | Brecha | Entrenamiento 5 folds (s) |
@@ -109,6 +141,6 @@ SHA-256: `ef3c2a3cea1f7c47827a7e049b94a522db06fe09ee279ba0684124926660c74c`.
 
 ## Fuentes
 
-`docs/decision_modelo.md`, `docs/metricas_umbral.md`, `docs/test_b.md`,
+`docs/etiqueta_y_features.md`, `docs/decision_modelo.md`, `docs/metricas_umbral.md`, `docs/test_b.md`,
 `docs/umbral/umbral_elegido.json`, `docs/umbral/registro_test_b.json`,
 `modelos/modelo_churn_v1.json`, `docs/bitacora.md` (D-015 a D-021).
