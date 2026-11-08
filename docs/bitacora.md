@@ -677,3 +677,40 @@ Documentación: `docs/metricas_umbral.md`.
 - **Detalle:** `docs/test_b.md` y `docs/umbral/registro_test_b.json`.
 
 Se evaluó una sola vez. No se ajustó nada después de ver la etiqueta de B.
+
+## D-021 · Modelo final y predicciones oficiales del corte C
+**Estado:** cerrada
+**Fecha:** 2026-11-08 · **Commit base:** 80173bf6e7ae86a74ad40116b0d35b99104b1593
+
+**Contexto.** Con las cinco ramas de Fase 2 fusionadas en `main`
+(`fase2-features`, `fase2-modelos`, `fase2-umbral-diez`, `fase2-test-b`,
+`fase2-segmentacion-diez`), se re-entrenó el modelo final con
+`entrenar_modelo.py`: ensemble con las 10 variables de Adrián y el umbral
+0.31 congelado por Eduardo. El entrenamiento quedó anotado sobre el commit
+`80173bf`.
+
+**Bug encontrado al correr el flujo completo.** `predecir.py` rompía con
+"Hay unidades duplicadas en el corte 2026-08-30". El fix de D-017 cambió el
+grano de `features.unidad_tarjetas` de una fila por persona a una fila por
+`(unidad_id, fecha_corte)`, para poder acotar las tarjetas a cada corte. El
+`left join` de `predecir.py` seguía uniendo solo por `unidad_id`, así que
+cada persona traía una fila por cada corte en el que aparece en esa tabla.
+Se corrigió el join para que una también por `fecha_corte`, en el mismo
+commit que esta entrada.
+
+**Corrida de cierre.** Flujo completo desde entorno vacío: 13 etapas, todas
+`OK`, 105.91 s. `predecir_corte_c`: 57,711 filas, 7,408 contactados, umbral
+0.31.
+
+**Prueba de idempotencia.** `python -m orquestacion.verificar_idempotencia`:
+**IDEMPOTENTE**, 19,712,750 filas idénticas entre las dos corridas en las 25
+tablas de todas las capas, incluyendo `features.unidad_tarjetas` ya con el
+grano por corte (175,354 filas). Evidencia en `docs/evidencias/idempotencia.md`.
+
+**Evidencia.** `sha256sum predicciones/predicciones_2026-08-30.csv` =
+`ef3c2a3cea1f7c47827a7e049b94a522db06fe09ee279ba0684124926660c74c`.
+
+**Consecuencia asumida.** Estas son las predicciones oficiales del corte C
+de Fase 2: modelo congelado, umbral congelado, sin fuga de datos (D-016),
+sin fuga en `unidad_tarjetas` (D-017), y verificadas idempotentes. Quedan
+listas para el tag `fase-2`.

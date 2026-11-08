@@ -1,6 +1,6 @@
 # Conteos de Bronze contra filas esperadas
 
-Generado: 2026-11-03 21:58:12
+Generado: 2026-11-08 13:44:45
 
 | archivo | filas esperadas | filas cargadas | diferencia |
 |---|---:|---:|---:|

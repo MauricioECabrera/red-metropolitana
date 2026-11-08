@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "fecha_entrenamiento": "2026-11-08 13:23:38",
+  "commit": "80173bf6e7ae86a74ad40116b0d35b99104b1593",
+  "version_scikit_learn": "1.9.1",
+  "semilla": 42,
+  "variables": [
+    "viajes_28d",
+    "dias_desde_ultimo_viaje",
+    "gasto_28d_q",
+    "operadores_distintos_28d",
+    "abordajes_fin_semana_28d",
+    "viajes_7d",
+    "dias_activos_28d",
+    "gasto_promedio_viaje_q",
+    "proporcion_hora_pico_28d",
+    "tendencia_viajes_14d"
+  ],
+  "modelo": "ensemble",
+  "umbral": 0.31,
+  "filas_entrenamiento": 59515,
+  "segundos_entrenamiento": 0.17979259999992792
+}

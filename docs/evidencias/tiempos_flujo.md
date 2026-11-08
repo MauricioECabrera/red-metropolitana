@@ -1,20 +1,20 @@
 # Tiempos por etapa del flujo
 
-Ejecucion: 20261103-215619
+Ejecucion: 20261108-134330
 
 | etapa | estado | segundos |
 |---|---|---:|
-| kafka | OK | 17.89 |
-| catalogos | OK | 0.13 |
-| metroriel | OK | 1.08 |
-| transurbano | OK | 2.10 |
-| padron_cdc | OK | 0.18 |
-| productor_kafka | OK | 2.78 |
-| consumidor_kafka | OK | 42.53 |
-| dbt_build | OK | 30.01 |
-| features_cortes | OK | 13.11 |
-| predecir_corte_c | OK | 1.89 |
-| publicar_gold | OK | 1.63 |
-| exportar_modelo | OK | 0.05 |
+| kafka | OK | 1.31 |
+| catalogos | OK | 0.05 |
+| metroriel | OK | 0.11 |
+| transurbano | OK | 0.14 |
+| padron_cdc | OK | 0.03 |
+| productor_kafka | OK | 0.11 |
+| consumidor_kafka | OK | 30.94 |
+| dbt_build | OK | 29.63 |
+| features_cortes | OK | 11.03 |
+| predecir_corte_c | OK | 0.50 |
+| publicar_gold | OK | 1.27 |
+| exportar_modelo | OK | 0.04 |
 | conteos_bronze | OK | 0.03 |
-| **total** | | **113.41** |
+| **total** | | **75.19** |

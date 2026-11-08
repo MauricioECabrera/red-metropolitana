@@ -132,7 +132,8 @@ def cargar_corte_a_predecir(fecha_corte, variables):
             f"""
             select f.unidad_id, {columnas}, t.tarjetas
             from features.features_corte f
-            left join features.unidad_tarjetas t on f.unidad_id = t.unidad_id
+            left join features.unidad_tarjetas t
+                on f.unidad_id = t.unidad_id and f.fecha_corte = t.fecha_corte
             where f.fecha_corte = cast(? as date)
             order by f.unidad_id
             """,
