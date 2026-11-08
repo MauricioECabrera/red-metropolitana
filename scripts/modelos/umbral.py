@@ -41,7 +41,7 @@ import pandas as pd
 from sklearn.metrics import average_precision_score, confusion_matrix
 
 from scripts.modelos.baseline import ASIGNACION, RAIZ, SALIDA, WAREHOUSE
-from scripts.modelos.logistica import VARIABLES
+from scripts.modelos.variables import VARIABLES
 
 
 COSTO_CONTACTO = 5.0
