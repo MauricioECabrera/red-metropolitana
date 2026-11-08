@@ -5,7 +5,7 @@
   Autor: Eduardo Hernandez
 
   Lee la tabla features.features_corte de un corte (por defecto A),
-  escala las cinco features del contrato con StandardScaler y ajusta
+  escala las diez features del contrato con StandardScaler y ajusta
   KMeans para k = 2..k_max. Guarda la curva del codo (inercia) y la
   silueta, elige k, proyecta los segmentos con PCA a dos componentes
   y describe cada segmento con medianas y tasa de abandono.
@@ -14,9 +14,10 @@
   la tasa de abandono por segmento, que es descriptiva y no prueba
   que el segmento cause el abandono.
 
-  Regla de eleccion si no se pasa --k: el codo propone k y la
-  silueta lo valida. Si la silueta del k del codo es al menos 0.25
-  (estructura razonable) se usa ese k; si no, el de mayor silueta.
+  Regla de eleccion si no se pasa --k: el codo elige k y la silueta
+  se reporta como control. Si la silueta del codo queda por debajo de
+  0.25 se avisa que la estructura es debil, pero no se cae a k = 2:
+  ese k solo separa a los muy activos y esconde al grupo que abandona.
 
   Ejecutar desde la raiz del repositorio:
     python -m scripts.segmentacion --corte A --k-max 10
@@ -41,17 +42,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from scripts.modelos.baseline import RAIZ, WAREHOUSE
+from scripts.modelos.variables import VARIABLES
 
 
 CORTES = {"A": "2026-07-01", "B": "2026-07-31", "C": "2026-08-30"}
-
-VARIABLES = [
-    "viajes_28d",
-    "dias_desde_ultimo_viaje",
-    "gasto_28d_q",
-    "operadores_distintos_28d",
-    "abordajes_fin_semana_28d",
-]
 
 SEMILLA = 42
 MUESTRA_SILUETA = 10000
@@ -175,6 +169,9 @@ def nombrar_segmentos(medianas, referencia):
         if fila["operadores_distintos_28d"] >= 2:
             partes.append("multimodales")
 
+        if fila["gasto_promedio_viaje_q"] >= 2 * referencia["gasto_promedio_viaje_q"]:
+            partes.append("de tarifa alta")
+
         proporcion = fila["abordajes_fin_semana_28d"] / max(fila["viajes_28d"], 1)
         proporcion_ref = (
             referencia["abordajes_fin_semana_28d"] / max(referencia["viajes_28d"], 1)
@@ -268,12 +265,13 @@ def main():
     k_codo = k_del_codo(evaluacion)
     silueta_codo = float(evaluacion.loc[evaluacion["k"].eq(k_codo), "silueta"].iloc[0])
 
-    if parametros.k:
-        k_elegido = parametros.k
-    elif silueta_codo >= SILUETA_MINIMA:
-        k_elegido = k_codo
-    else:
-        k_elegido = k_silueta
+    k_elegido = parametros.k or k_codo
+
+    if silueta_codo < SILUETA_MINIMA:
+        print(
+            f"\nAviso: la silueta del codo ({silueta_codo:.4f}) es menor que "
+            f"{SILUETA_MINIMA}; la estructura de los segmentos es debil."
+        )
 
     evaluacion.to_csv(CARPETA / "eleccion_k.csv", index=False)
     graficar_eleccion(evaluacion, k_elegido, k_codo)
