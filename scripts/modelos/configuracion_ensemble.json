@@ -14,11 +14,16 @@
     "dias_desde_ultimo_viaje",
     "gasto_28d_q",
     "operadores_distintos_28d",
-    "abordajes_fin_semana_28d"
+    "abordajes_fin_semana_28d",
+    "viajes_7d",
+    "dias_activos_28d",
+    "gasto_promedio_viaje_q",
+    "proporcion_hora_pico_28d",
+    "tendencia_viajes_14d"
   ],
   "repeticiones_permutacion_por_fold": 10,
-  "segundos_entrenamiento_total": 3.667602200002875,
-  "segundos_prediccion_total": 1.1311794998473488,
-  "segundos_importancia_total": 12.8459351999918,
-  "segundos_total": 19.94533610000508
+  "segundos_entrenamiento_total": 2.1520279000978917,
+  "segundos_prediccion_total": 0.6792008999036625,
+  "segundos_importancia_total": 16.326503400108777,
+  "segundos_total": 20.820056000025943
 }

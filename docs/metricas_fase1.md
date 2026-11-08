@@ -1,194 +1,124 @@
-# Modelos supervisados de la Fase 1
+# Modelos supervisados de la Fase 1 con diez variables
+
+**Proyecto 2 · Red Metropolitana · Autor: Adrián**
+**Actualización:** 8 de noviembre de 2026.
 
 ## Datos y alcance
 
-Se utilizaron datos simulados de la Red Metropolitana de Transporte.
-La entrada fue la tabla features.features_corte, derivada de Silver,
-filtrada al corte A del 1 de julio de 2026.
+Esta actualización repite la comparación de la sección 1.4 con las diez variables del contrato v2. La entrada es `features.features_corte`, derivada de Silver, filtrada al corte A del 1 de julio de 2026 y ordenada por `unidad_id`. Los datos del proyecto son simulados.
 
-La población evaluada contiene 59,515 unidades: 7,098 con etiqueta 1
-y 52,417 con etiqueta 0. La tasa positiva es:
+La configuración entregada registra 59,515 unidades. La población de referencia de A contiene 7,098 positivos y 52,417 negativos: tasa positiva de 0.119264 (11.9264 %), consistente con el baseline de tasa. Las features corresponden a los 28 días anteriores al corte; la etiqueta identifica ausencia de abordajes válidos en los 30 días que comienzan en el corte.
 
-7,098 / 59,515 = 0.119264, aproximadamente 11.9264 %.
-
-Las verificaciones básicas encontraron cero identificadores nulos,
-cero claves duplicadas y cero valores nulos en las variables utilizadas.
-
-Las features corresponden a los 28 días anteriores al corte.
-La etiqueta indica ausencia de abordajes válidos durante los 30 días
-que comienzan en el corte. Los scripts de modelado utilizan únicamente A.
-
-Estas comprobaciones no sustituyen la auditoría temporal de población
-y features realizada por el responsable de datos.
+Los scripts revisados consultan exclusivamente A para el modelado. Validan columnas, ausencia de nulos, claves duplicadas, etiquetas binarias y valores finitos. Estas comprobaciones no sustituyen la prueba de recorte de las features ni permiten afirmar que otro integrante no haya evaluado B.
 
 ## Variables predictoras
 
-- viajes_28d
-- dias_desde_ultimo_viaje
-- gasto_28d_q
-- operadores_distintos_28d
-- abordajes_fin_semana_28d
+La fuente compartida es `scripts/modelos/variables.py`:
 
-unidad_id y fecha_corte se utilizan para identificar las filas.
-etiqueta es la respuesta y no forma parte de las variables predictoras.
+- `viajes_28d`
+- `dias_desde_ultimo_viaje`
+- `gasto_28d_q`
+- `operadores_distintos_28d`
+- `abordajes_fin_semana_28d`
+- `viajes_7d`
+- `dias_activos_28d`
+- `gasto_promedio_viaje_q`
+- `proporcion_hora_pico_28d`
+- `tendencia_viajes_14d`
 
-## Métrica elegida
+`unidad_id` y `fecha_corte` identifican filas; `etiqueta` es la respuesta. Ninguna de estas tres columnas entra como predictor. El baseline de ranking conserva únicamente la recencia.
 
-Se utilizó Average Precision, calculada con average_precision_score.
-La métrica resume la relación entre precisión y recall y permite comparar
-el orden de riesgo antes de elegir un umbral de contacto.
-Resulta apropiada ante el desbalance de clases, pues una accuracy alta
-podría obtenerse prediciendo siempre continuidad.
-AP no representa el porcentaje de clasificaciones correctas y no se
-calculó como área trapezoidal bajo la curva precisión-recall.
+## Métrica y validación
 
-## Validación y preprocesamiento
+Se utiliza `average_precision_score` (Average Precision, AP), que resume precisión y recall a distintos niveles del ranking. Con el desbalance de A, predecir siempre continuidad daría aproximadamente 88.07 % de accuracy sin identificar ningún abandono. AP permite comparar el orden de riesgo antes de elegir el umbral. No es accuracy, ganancia económica ni área trapezoidal bajo la curva precisión-recall.
 
-Se utilizó StratifiedKFold con cinco particiones, shuffle=True
-y random_state=42, definido en scripts/modelos/folds.py.
+`crear_folds()` define `StratifiedKFold(n_splits=5, shuffle=True, random_state=42)`. Los scripts ordenan las unidades y las logísticas verifican sus particiones contra `asignacion_folds.csv`. `Pipeline` y `ColumnTransformer` ajustan `StandardScaler` únicamente con el entrenamiento de cada fold. La media y la desviación estándar muestral (ddof=1) se calculan sobre cinco folds; la desviación no es un intervalo de confianza.
 
-Los datos se ordenaron por unidad_id antes de generar las particiones.
-La asignación se conserva en scripts/modelos/asignacion_folds.csv.
-La logística verificó que sus particiones coincidieran con las de
-los baselines.
-
-Las logísticas utilizaron ColumnTransformer y Pipeline con
-StandardScaler. El escalador y el clasificador se ajustaron únicamente
-con el entrenamiento de cada fold.
-
-Se reporta la media de AP de los cinco folds y su desviación estándar
-muestral, con ddof=1.
+Las métricas de A sirven para seleccionar hiperparámetros, por lo que pueden ser optimistas por selección. No son un test independiente ni sustituyen la evaluación temporal de B.
 
 ## Baselines
 
-baseline_tasa asigna a todas las unidades la tasa positiva de todo A,
-siguiendo la definición exigida por el enunciado.
-Esta referencia utiliza las etiquetas de todo A para calcular su constante;
-no debe describirse como una tasa estimada exclusivamente dentro del
-entrenamiento de cada fold.
+`baseline_tasa` asigna la tasa positiva de todo A, conforme a la definición adoptada en el proyecto. Usa etiquetas de todo A para esa constante: no se presenta como una estimación hecha únicamente con el entrenamiento de cada fold.
 
-baseline_ranking utiliza dias_desde_ultimo_viaje / 28.
-La hipótesis es que una mayor inactividad reciente puede anticipar abandono.
-Es un puntaje fijo, sin entrenamiento, y no una probabilidad calibrada.
-Aunque se publica en la columna contractual prob, sus valores no deben
-interpretarse directamente como probabilidades de abandono.
+`baseline_ranking` usa `dias_desde_ultimo_viaje / 28`, sin ajuste. Su columna contractual se llama `prob`, pero es un puntaje de ranking sin calibración probabilística.
 
-## Regularización
+## Regularización y selección
 
-Se compararon penalizaciones L1 y L2 con solver liblinear,
-max_iter=5000 y random_state=42.
+Se compararon L1 y L2 con `solver="liblinear"`, `max_iter=5000` y semilla 42. La grilla fue λ ∈ {0.001, 0.01, 0.1, 1, 10, 100}, con C = 1/λ: doce configuraciones y sesenta ajustes de validación. Se selecciona la mayor AP media de validación; los empates exactos se resuelven por mayor λ y después L1.
 
-Valores de lambda evaluados:
-0.001, 0.01, 0.1, 1, 10 y 100.
+| Penalización | Mejor λ evaluado | C | AP validación media | DE validación |
+|---|---:|---:|---:|---:|
+| L1 | 100 | 0.01 | 0.407921 | 0.004148 |
+| L2 | 100 | 0.01 | 0.406560 | 0.004248 |
 
-Se utilizó C = 1 / lambda.
-Se realizaron 60 ajustes de validación: dos penalizaciones,
-seis valores de lambda y cinco folds.
+La logística seleccionada es **L1, λ=100, C=0.01**. La ventaja sobre L2 es 0.001360 de AP, una comparación descriptiva que no demuestra significancia estadística.
 
-La selección utiliza la mayor AP media de validación.
-Los empates exactos se resuelven por mayor lambda y luego por L1.
+El mejor λ de ambas penalizaciones está en el extremo superior de la grilla. Se mantiene el espacio de búsqueda declarado y se reporta su mejor resultado; no se afirma haber encontrado el óptimo fuera de esa grilla. Esta limitación reduce el alcance de la comparación con la familia logística. Cualquier ampliación tendría que hacerse solo con A y antes de congelar el modelo y evaluar B.
 
-La mejor configuración de ambas penalizaciones fue lambda=1 y C=1.
-La gráfica está en ../scripts/modelos/regularizacion_logistica.png.
-Las barras representan una desviación estándar entre folds,
-no intervalos de confianza.
+![AP de validación frente a lambda](../scripts/modelos/regularizacion_logistica.png)
 
-## Resultados
+Las barras del gráfico representan una desviación estándar entre folds.
 
-| Modelo | AP entrenamiento media | AP validación media | Desviación validación |
-|---|---:|---:|---:|
-| Baseline tasa | 0.119264 | 0.119264 | 0.000046 |
-| Baseline ranking | 0.389339 | 0.389760 | 0.003588 |
-| Logística L1 | 0.408061 | 0.408296 | 0.004395 |
-| Logística L2 | 0.408062 | 0.408300 | 0.004403 |
+## Resultados y lectura de sesgo y varianza
 
-Se seleccionó L2 con lambda=1 y C=1 por obtener la mayor media.
-Su diferencia respecto a L1 es de solo 0.000004 de AP:
-ambas configuraciones presentan resultados prácticamente iguales.
+| Modelo | AP entrenamiento media | DE entrenamiento | AP validación media | DE validación | Brecha AP |
+|---|---:|---:|---:|---:|---:|
+| Baseline tasa | 0.119264 | 0.000012 | 0.119264 | 0.000046 | 0.000000 |
+| Baseline ranking | 0.389339 | 0.000887 | 0.389760 | 0.003588 | -0.000421 |
+| Logística L1 | 0.407812 | 0.001004 | 0.407921 | 0.004148 | -0.000108 |
+| Logística L2 | 0.407126 | 0.001070 | 0.406560 | 0.004248 | 0.000566 |
 
-L2 supera al baseline de ranking en 0.018540 de AP.
-La inactividad reciente ya explica una parte importante del orden de riesgo.
+La brecha es AP de entrenamiento menos AP de validación. L1 supera al ranking en 0.018161 de AP.
 
-La AP de entrenamiento y validación es similar.
-No se observa una brecha que sugiera sobreajuste fuerte en estas métricas.
-Esto no garantiza el mismo comportamiento en períodos futuros.
+- **Tasa:** no distingue unidades; su desempeño limitado y brecha nula reflejan una regla constante.
+- **Ranking:** aprovecha la recencia, pero queda limitado a una regla de una variable. La pequeña brecha negativa no es evidencia de fuga por sí sola.
+- **L1:** brecha −0.000108 y mejor AP entre las logísticas evaluadas. No muestra una brecha importante de sobreajuste en esta evaluación.
+- **L2:** brecha 0.000566, también pequeña, con menor AP que L1. Una brecha pequeña no garantiza capacidad suficiente ni buen desempeño futuro.
 
-Las métricas de A se utilizaron para seleccionar hiperparámetros y pueden
-ser optimistas por esa selección. No constituyen un test independiente.
+Estas interpretaciones son indicios; no constituyen una descomposición formal de sesgo y varianza.
 
-## Interpretación de coeficientes
+## Coeficientes del ajuste con todo A
 
-Los coeficientes corresponden a la logística L2 ajustada con todo A,
-después de seleccionar su configuración.
-Ese ajuste se utilizó para interpretación, no para reemplazar las
-predicciones de validación.
+Tras seleccionar L1 se ajustó el pipeline con todo A para interpretar sus coeficientes. Ese ajuste no reemplaza las predicciones fuera de fold.
 
-Cada efecto corresponde a una desviación estándar de la variable,
-manteniendo constantes las demás.
+| Variable | Coeficiente | Odds ratio por desviación estándar |
+|---|---:|---:|
+| dias_desde_ultimo_viaje | 0.715911 | 2.046049 |
+| viajes_28d | 0.000000 | 1.000000 |
+| gasto_28d_q | 0.000000 | 1.000000 |
+| abordajes_fin_semana_28d | 0.000000 | 1.000000 |
+| tendencia_viajes_14d | 0.000000 | 1.000000 |
+| proporcion_hora_pico_28d | -0.033848 | 0.966718 |
+| gasto_promedio_viaje_q | -0.046771 | 0.954306 |
+| operadores_distintos_28d | -0.052701 | 0.948663 |
+| viajes_7d | -0.331825 | 0.717613 |
+| dias_activos_28d | -0.504192 | 0.603994 |
 
-| Variable | Coeficiente | Odds ratio | Interpretación |
-|---|---:|---:|---|
-| dias_desde_ultimo_viaje | 0.844718 | 2.327321 | Mayor inactividad se asocia con mayores odds de abandono. |
-| abordajes_fin_semana_28d | 0.062727 | 1.064736 | Asociación positiva pequeña, condicionada a las otras variables. |
-| operadores_distintos_28d | -0.098626 | 0.906081 | Usar más operadores se asocia con menores odds de abandono. |
-| gasto_28d_q | -0.296883 | 0.743131 | Mayor gasto se asocia con menores odds de abandono. |
-| viajes_28d | -0.569543 | 0.565784 | Mayor frecuencia se asocia con menores odds de abandono. |
+Cada coeficiente se interpreta por un aumento de una desviación estándar de la variable, manteniendo constantes las demás. El odds ratio multiplica las odds, no la probabilidad.
 
-Intercepto: -2.531890.
+**Solo un coeficiente es positivo:** la recencia, con 0.715911 y odds ratio 2.046049. No existen cinco coeficientes positivos para presentar como impulsores del abandono. Para la defensa se pueden explicar los cinco de mayor magnitud: recencia, días activos, viajes en siete días, operadores distintos y gasto promedio; los cuatro últimos tienen asociación negativa.
 
-Solo dos coeficientes son positivos; los otros tres tienen asociación
-negativa con el abandono estimado.
-Las asociaciones no demuestran causalidad.
-Las variables relacionadas pueden afectar la estabilidad e interpretación
-de los coeficientes. Un odds ratio no es un multiplicador de probabilidad.
+Días activos y viajes recientes se asocian con menores odds de abandono. La regularización L1 deja exactamente en cero cuatro coeficientes: viajes en 28 días, gasto total, abordajes de fin de semana y tendencia. Un cero no implica ausencia de relación en los datos: puede reflejar penalización y redundancia con otras variables. Las asociaciones no son causales; algunas variables derivadas están relacionadas entre sí.
 
-## Predicciones de validación
+## Tiempos y predicciones
 
-Archivo: ../scripts/modelos/predicciones_cv.csv
+Los cinco ajustes de L1 con λ=100 sumaron **0.607734 segundos**. Los sesenta ajustes de la búsqueda sumaron **10.647622 segundos**. Estas cifras proceden de `logistica_por_fold.csv` y no incluyen toda la lectura, predicción, generación de gráficos o el ajuste interpretativo final. El ZIP no contiene un registro del tiempo total de esta ejecución ni de las versiones efectivas de paquetes; no se reutilizan los tiempos o versiones del informe anterior.
 
-Columnas:
-unidad_id, fecha_corte, modelo, prob.
+`predicciones_cv.csv` conserva las columnas `unidad_id,fecha_corte,modelo,prob`. Para esta sección se esperan 59,515 filas por baseline y por logística: 178,545 filas para esos tres modelos. Después del ensemble, el archivo compartido debe contener 238,060 filas de cuatro modelos. La etiqueta `logistica` corresponde ahora a L1 con λ=100.
 
-Se publicaron 59,515 filas por cada modelo:
+La verificación local confirmó 238,060 predicciones de cuatro modelos, con 59,515 unidades por modelo y únicamente la fecha 2026-07-01. No se encontraron nulos ni claves duplicadas; todos los puntajes son finitos y están entre 0 y 1. La asignación de folds coincide con la población, la semilla 42 y la versión anterior. Las medias y desviaciones de AP recalculadas desde las predicciones coinciden con las tablas publicadas.
 
-- baseline_tasa
-- baseline_ranking
-- logistica
+## Reproducción y evidencias
 
-Total: 178,545 filas.
-La logística publicada corresponde a L2, lambda=1 y C=1.
+Desde la raíz del repositorio, con el entorno acordado por el equipo:
 
-Las probabilidades de logística se obtuvieron cuando cada unidad
-perteneció al fold de validación.
-La selección de configuración se realizó con los resultados de A.
-
-La comprobación del archivo encontró cero claves duplicadas,
-cero puntajes nulos y todos los puntajes dentro de [0, 1].
-La única fecha publicada es 2026-07-01.
-
-## Entorno y reproducción
-
-- scikit-learn: 1.5.2
-- matplotlib: 3.9.2
-- joblib: 1.4.2
-
-Desde la raíz del repositorio, con el entorno virtual activo:
-
+```bash
 python -m scripts.modelos.baseline --corte A
 python -m scripts.modelos.logistica --corte A
+```
 
-Tiempo total reportado por logistica.py: 16.27 segundos.
-Incluye búsqueda, ajuste para interpretación y generación de salidas;
-no corresponde exclusivamente al entrenamiento de un modelo.
+Guardar una copia de `asignacion_folds.csv` antes del baseline y compararla después: el baseline vuelve a escribirla. Registrar las versiones reales del entorno utilizado para la entrega.
 
-## Límites y siguiente etapa
+Evidencias: `busqueda_logistica.csv`, `logistica_por_fold.csv`, `comparacion_fase1.csv`, `coeficientes_logistica.csv` y `regularizacion_logistica.png`, en `scripts/modelos/`. Las medias y desviaciones de las logísticas seleccionadas se contrastaron con los registros por fold del ZIP.
 
-No se evaluaron modelos con la etiqueta de B ni se eligió un umbral
-económico en estos scripts.
-
-La comparación L1/L2 no muestra una ventaja material entre penalizaciones.
-Las cinco variables disponibles pueden limitar la capacidad predictiva.
-
-El siguiente paso es comparar un ensemble con los mismos folds y la
-misma métrica. El modelo y el umbral se seleccionarán utilizando A,
-antes de realizar la evaluación única en B.
+La comparación con el ensemble está en [metricas_fase2_ensemble.md](metricas_fase2_ensemble.md) y la selección en [decision_modelo.md](decision_modelo.md).

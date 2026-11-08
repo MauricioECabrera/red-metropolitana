@@ -546,3 +546,80 @@ decisiones basadas en el estado del corte, solo `puntaje` y `contactar`.
 - **Autor:** Diego de Jesús Urbina Chávez (Rol 2)
 - **Decisión:** Se modificó `features.unidad_tarjetas` para que sea incremental por `(unidad_id, fecha_corte)` y filtre estrictamente `abordaje_ts < fecha_corte`.
 - **Justificación:** Corregir la fuga temporal detectada en D-016 donde 2,642 registros del Corte B incluían tarjetas observadas en agosto. Con este cambio, la prueba de invarianza y recorte es determinista y libre de fuga futura.
+
+
+---
+
+## D-018 · Selección del ensemble con diez variables
+
+**Fecha:** 2026-11-08
+
+**Responsable:** Adrián
+
+**Estado:** decisión de modelado registrada; pendiente de confirmación
+de Eduardo y Miguel para coordinar umbral y producción.
+
+**Contexto.** Después de ampliar el contrato a diez variables, se
+repitieron los baselines, las logísticas regularizadas y el ensemble
+sobre el corte A (2026-07-01), con las mismas 59,515 unidades,
+cinco folds estratificados y semilla 42. La selección utiliza
+Average Precision de validación.
+
+**Opciones.**
+
+1. Baseline de tasa: AP de validación 0.119264.
+2. Baseline de ranking: AP de validación 0.389760.
+3. Logística L1 con lambda=100 y C=0.01: AP de validación 0.407921.
+4. Logística L2 con lambda=100 y C=0.01: AP de validación 0.406560.
+5. Ensemble HistGradientBoostingClassifier: AP de validación 0.428920.
+
+**Decisión.** Se selecciona el ensemble con las diez variables del
+contrato v2. Se conserva la configuración evaluada, sin modificar
+hiperparámetros después de observar estos resultados.
+
+**Justificación.** El ensemble supera a la mejor logística en los cinco
+folds, con una mejora media de 0.021000 de AP. Su desviación entre folds
+es 0.002403, frente a 0.004148 de L1. El entrenamiento acumulado de los
+cinco folds requirió 2.152028 segundos, frente a 0.607734 de L1.
+Se considera que la mejora predictiva justifica el costo adicional
+en el equipo utilizado.
+
+**Consecuencias y límites.** Se acepta una mayor brecha entre
+entrenamiento y validación: 0.040822 para el ensemble frente a
+-0.000108 para L1, y menor facilidad de interpretación.
+La ventaja observada no demuestra significancia estadística ni
+garantiza mayor ganancia económica. El mejor lambda de las logísticas
+está en el extremo superior de la grilla; la comparación se limita
+a las configuraciones evaluadas.
+
+**Contrato de entrega.**
+
+- Variables: `VARIABLES` en `scripts/modelos/variables.py`.
+- Constructor: `construir_pipeline()` en `scripts/modelos/ensemble.py`,
+  sin argumentos.
+- Predicciones de A: `scripts/modelos/predicciones_cv.csv`.
+- Configuración: `scripts/modelos/configuracion_ensemble.json`.
+
+**Evidencia.** La verificación local confirmó 238,060 predicciones,
+cuatro modelos, las mismas unidades y folds, ausencia de nulos y
+duplicados, puntajes finitos entre 0 y 1 y únicamente la fecha
+2026-07-01. Las medias y desviaciones de AP recalculadas desde las
+predicciones coinciden con las tablas publicadas. Se entregan diez
+importancias por permutación en validación, con 500 mediciones.
+
+Documentación: `docs/metricas_fase1.md`,
+`docs/metricas_fase2_ensemble.md` y `docs/decision_modelo.md`.
+
+**Coordinación para producción.** Eduardo debe recalcular y congelar
+el umbral usando las nuevas predicciones fuera de fold de A.
+El umbral anterior de 0.33 no se traslada automáticamente.
+Mauricio debe preparar el modelo final con todo A, las diez variables
+y la configuración seleccionada.
+
+
+
+Las confirmaciones se registrarán con su fecha real. Antes de la
+evaluación única en B deben quedar congelados y versionados el modelo
+seleccionado y el umbral. Esta entrada no certifica si B fue evaluado
+previamente en otro equipo; ese estado debe comprobarse entre los
+responsables antes de ejecutarlo.

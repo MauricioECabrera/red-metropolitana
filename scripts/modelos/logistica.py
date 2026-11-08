@@ -31,7 +31,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import average_precision_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-
+from scripts.modelos.variables import VARIABLES
 from scripts.modelos.baseline import (
     ASIGNACION,
     FECHA_CORTE,
@@ -43,14 +43,6 @@ from scripts.modelos.baseline import (
 from scripts.modelos.folds import crear_folds
 
 
-VARIABLES = [
-    "viajes_28d",
-    "dias_desde_ultimo_viaje",
-    "gasto_28d_q",
-    "operadores_distintos_28d",
-    "abordajes_fin_semana_28d",
-]
-
 LAMBDAS = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
 CARPETA = RAIZ / "scripts" / "modelos"
 
@@ -59,6 +51,24 @@ def cargar_datos():
     columnas = ", ".join(VARIABLES)
 
     with duckdb.connect(str(WAREHOUSE), read_only=True) as conexion:
+        esquema = conexion.execute(
+            "describe features.features_corte"
+        ).df()
+
+        requeridas = ["unidad_id", "fecha_corte", *VARIABLES, "etiqueta"]
+        disponibles = set(esquema["column_name"])
+        faltantes = [
+            columna for columna in requeridas
+            if columna not in disponibles
+        ]
+
+        if faltantes:
+            raise ValueError(
+                "Faltan columnas en features.features_corte: "
+                + ", ".join(faltantes)
+                + ". Actualiza las features antes de entrenar."
+            )
+
         datos = conexion.execute(
             f"""
             select unidad_id, fecha_corte, {columnas}, etiqueta
@@ -160,13 +170,17 @@ def evaluar_configuraciones(datos, particiones):
                 particiones, start=1
             ):
                 modelo = construir_pipeline(penalizacion, lambda_valor)
-
+                inicio_entrenamiento = time.perf_counter()
                 with warnings.catch_warnings():
                     warnings.simplefilter("error", ConvergenceWarning)
                     modelo.fit(
                         variables.iloc[entrenamiento],
                         etiquetas[entrenamiento],
                     )
+
+                segundos_entrenamiento = (
+                    time.perf_counter() - inicio_entrenamiento
+                )
 
                 prob_entrenamiento = modelo.predict_proba(
                     variables.iloc[entrenamiento]
@@ -183,6 +197,7 @@ def evaluar_configuraciones(datos, particiones):
                     "lambda": lambda_valor,
                     "C": 1.0 / lambda_valor,
                     "fold": numero,
+                    "segundos_entrenamiento": segundos_entrenamiento,
                     "ap_entrenamiento": average_precision_score(
                         etiquetas[entrenamiento],
                         prob_entrenamiento,
@@ -212,6 +227,7 @@ def resumir(resultados):
         as_index=False,
     ).agg(
         ap_entrenamiento_media=("ap_entrenamiento", "mean"),
+        ap_entrenamiento_desviacion=("ap_entrenamiento", "std"),
         ap_validacion_media=("ap_validacion", "mean"),
         ap_validacion_desviacion=("ap_validacion", "std"),
     )
@@ -293,6 +309,7 @@ def main():
         "modelo", as_index=False
     ).agg(
         ap_entrenamiento_media=("ap_entrenamiento", "mean"),
+        ap_entrenamiento_desviacion=("ap_entrenamiento", "std"),
         ap_validacion_media=("ap_validacion", "mean"),
         ap_validacion_desviacion=("ap_validacion", "std"),
     )
