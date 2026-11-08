@@ -1,0 +1,27 @@
+{
+  "fecha_evaluacion": "2026-11-08 12:25:50",
+  "commit": "2ba297c903766f792e1aea29d872f2a8c2974d24",
+  "modelo": "ensemble",
+  "umbral": 0.31,
+  "unidades_entrenamiento_a": 59515,
+  "unidades_b": 58128,
+  "tasa_positiva_b": 0.10980938618221855,
+  "ap_b": 0.3712087019034176,
+  "precision_b": 0.4054831869130566,
+  "recall_b": 0.4193952686824377,
+  "matriz_confusion": {
+    "verdaderos_negativos": 47820,
+    "falsos_positivos": 3925,
+    "falsos_negativos": 3706,
+    "verdaderos_positivos": 2677
+  },
+  "contactados": 6602,
+  "ganancia_observada_q": 7145.0,
+  "ganancia_esperada_q": 12601.972090477762,
+  "ganancia_contactar_todos_q": -194895.0,
+  "referencia_cv": {
+    "ganancia_cv_q": 11510.0,
+    "contactados_cv": 6653,
+    "unidades_cv": 59515
+  }
+}
