@@ -24,6 +24,7 @@ import pandas as pd
 from sklearn.metrics import average_precision_score
 
 from scripts.modelos.folds import crear_folds
+from scripts.modelos.variables import VARIABLES
 
 
 RAIZ = Path(__file__).resolve().parents[2]
@@ -37,6 +38,25 @@ COLUMNAS_SALIDA = ["unidad_id", "fecha_corte", "modelo", "prob"]
 
 def cargar_datos():
     with duckdb.connect(str(WAREHOUSE), read_only=True) as conexion:
+
+        esquema = conexion.execute(
+            "describe features.features_corte"
+        ).df()
+
+        requeridas = ["unidad_id", "fecha_corte", *VARIABLES, "etiqueta"]
+        disponibles = set(esquema["column_name"])
+        faltantes = [
+            columna for columna in requeridas
+            if columna not in disponibles
+        ]
+
+        if faltantes:
+            raise ValueError(
+                "Faltan columnas en features.features_corte: "
+                + ", ".join(faltantes)
+                + ". Actualiza las features antes de entrenar."
+            )
+
         datos = conexion.execute(
             """
             select
@@ -187,6 +207,7 @@ def main():
 
     resumen = resultados.groupby("modelo", sort=False).agg(
         ap_entrenamiento_media=("ap_entrenamiento", "mean"),
+        ap_entrenamiento_desviacion=("ap_entrenamiento", "std"),
         ap_validacion_media=("ap_validacion", "mean"),
         ap_validacion_desviacion=("ap_validacion", "std"),
     )

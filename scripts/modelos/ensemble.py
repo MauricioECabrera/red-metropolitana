@@ -34,10 +34,10 @@ from scripts.modelos.baseline import guardar_predicciones
 from scripts.modelos.folds import crear_folds
 from scripts.modelos.logistica import (
     CARPETA,
-    VARIABLES,
     cargar_datos,
     verificar_folds,
 )
+from scripts.modelos.variables import VARIABLES
 
 
 PARAMETROS = {
@@ -204,6 +204,7 @@ def main():
 
     resumen = resultados.groupby("modelo", as_index=False).agg(
         ap_entrenamiento_media=("ap_entrenamiento", "mean"),
+        ap_entrenamiento_desviacion=("ap_entrenamiento", "std"),
         ap_validacion_media=("ap_validacion", "mean"),
         ap_validacion_desviacion=("ap_validacion", "std"),
     )
@@ -271,6 +272,7 @@ def main():
     columnas = [
         "modelo",
         "ap_entrenamiento_media",
+        "ap_entrenamiento_desviacion",
         "ap_validacion_media",
         "ap_validacion_desviacion",
         "brecha_ap",
