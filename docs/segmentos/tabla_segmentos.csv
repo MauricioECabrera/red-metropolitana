@@ -1,6 +1,7 @@
-segmento,nombre,tamano,porcentaje,mediana_viajes_28d,mediana_dias_desde_ultimo_viaje,mediana_gasto_28d_q,mediana_operadores_distintos_28d,mediana_abordajes_fin_semana_28d,tasa_abandono
-0,viajeros regulares,26128,43.9,8.0,2.0,13.0,1.0,1.0,0.0867
-1,viajeros intensivos multimodales,795,1.34,116.0,1.0,207.4,2.0,16.0,0.0252
-2,viajeros regulares multimodales,17498,29.4,12.0,2.0,17.6,2.0,2.0,0.0618
-3,viajeros frecuentes multimodales,6030,10.13,45.0,1.0,74.9,2.0,7.0,0.0227
-4,viajeros en enfriamiento,9064,15.23,4.0,16.0,6.9,1.0,0.0,0.3965
+segmento,nombre,tamano,porcentaje,mediana_viajes_28d,mediana_dias_desde_ultimo_viaje,mediana_gasto_28d_q,mediana_operadores_distintos_28d,mediana_abordajes_fin_semana_28d,mediana_viajes_7d,mediana_dias_activos_28d,mediana_gasto_promedio_viaje_q,mediana_proporcion_hora_pico_28d,mediana_tendencia_viajes_14d,tasa_abandono
+0,viajeros regulares,15832,26.6,8.0,2.0,8.0,1.0,1.0,2.0,6.0,1.3,0.6667,1.0,0.0916
+1,viajeros frecuentes multimodales,8286,13.92,38.0,1.0,55.9,2.0,5.0,10.0,18.0,1.3,0.5909,1.0,0.0181
+2,viajeros ocasionales de tarifa alta,10532,17.7,6.0,3.0,21.0,1.0,1.0,2.0,5.0,3.5,0.6429,0.0,0.1106
+3,viajeros intensivos multimodales,1128,1.9,102.0,1.0,177.9,2.0,14.0,27.0,25.0,1.43,0.513,2.0,0.0177
+4,viajeros en enfriamiento,8062,13.55,4.0,17.0,6.0,1.0,0.0,0.0,3.0,1.3,0.6,-3.0,0.4092
+5,viajeros regulares multimodales,15675,26.34,11.0,2.0,16.0,2.0,1.0,3.0,8.0,1.38,0.6667,1.0,0.0647
