@@ -2,7 +2,7 @@
 
 **Proyecto 2 · Red Metropolitana · Responsable de modelado: Adrián**
 **Fecha:** 8 de noviembre de 2026.
-**Estado:** modelo seleccionado por el responsable de modelado; coordinación de umbral y despliegue pendiente con Eduardo y Miguel.
+**Estado:** modelo seleccionado por el responsable de modelado; coordinación de umbral y despliegue pendiente con Eduardo y Mauricio.
 
 ## Decisión
 
@@ -10,7 +10,7 @@ Se selecciona el ensemble `HistGradientBoostingClassifier` con diez variables pa
 Su AP de validación en A es 0.428920 ± 0.002403, frente a 0.407921 ± 0.004148 de la mejor logística evaluada, y la supera en los cinco folds.
 La mejora de 0.021000 de AP justifica conservarlo, con 2.152028 segundos de entrenamiento acumulado frente a 0.607734 de L1.
 Se acepta una brecha mayor, 0.040822 frente a −0.000108, y menor interpretabilidad que una regresión con coeficientes.
-La elección usa únicamente A; Eduardo recalculará el umbral y Miguel guardará el modelo final antes de la evaluación única en B.
+La elección usa únicamente A; Eduardo recalculará el umbral y Mauricio guardará el modelo final antes de la evaluación única en B.
 
 ## Evidencia de la elección
 
